@@ -1,0 +1,16 @@
+.title {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 150%;
+  color: #1D1C2D;
+}
+
+.button {
+  background-color: #4B4B59;
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
