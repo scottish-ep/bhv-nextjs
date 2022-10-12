@@ -15,7 +15,7 @@ const CheckboxList = (props: CheckboxProps) => {
   const { options, disabled, defaultValue, onChange } = props;
 
   return (
-    <CheckboxAntd.Group
+      <CheckboxAntd.Group
       options={options}
       disabled={disabled}
       defaultValue={defaultValue}

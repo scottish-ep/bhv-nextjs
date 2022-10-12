@@ -15,7 +15,7 @@ import { ListDebtProps } from "./listdebt.type";
 import classNames from "classnames";
 import { list_Debt } from "../../const/constant";
 import styles from "../../styles/ListPayment.module.css";
-
+import ModalDebtDetail from "./Modal/ModalDebtDetail";
 const ListDebt = () => {
   const [listDebt, setListDebt] = useState<ListDebtProps[]>([...list_Debt]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -27,6 +27,7 @@ const ListDebt = () => {
     total: 0,
     pageSize: 6,
   });
+  const [isShowModalDebtDetail, setIsShowModalDebtDetail] = useState(true);
   const [loading, setLoading] = useState(false);
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);
@@ -190,9 +191,15 @@ const ListDebt = () => {
           <span className="font-medium text-[#F97316]"> 12.000.000 đ</span>
         </div>
       </div>
+      <ModalDebtDetail
+        title="Chi tiết công nợ"
+        isVisible={isShowModalDebtDetail}
+        onClose={() => setIsShowModalDebtDetail(false)}
+        onOpen={() => setIsShowModalDebtDetail(false)}
+      />
     </div>
   );
 };
 
-// ReactDOM.render(<ListDebt />, document.getElementById("root"));
 export default ListDebt;
+// ReactDOM.render(<ListDebt />, document.getElementById("root"));

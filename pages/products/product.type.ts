@@ -1,3 +1,4 @@
+import { productAttributes } from "../../const/constant";
 import { StatusEnum } from "../../types";
 
 export interface IsProduct {
@@ -36,4 +37,21 @@ export interface IProduct {
   weight_can_transfer: number;
   quantity: number;
   weight: number;
+}
+
+export interface ProductAttributeProps {
+  attribute_list?: any;
+  id?: string;
+  attribute: string;
+  typeAttribute: any;
+}
+
+export interface ProductDetailProps {
+  show?: boolean | number;
+  sku?: string;
+  inputNum?: number;
+  saleNum?: number;
+  type?: string;
+  weight?: number;
+  negative?: boolean;
 }
