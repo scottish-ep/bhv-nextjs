@@ -32,6 +32,24 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
     setIsShowModalConfirm(false);
   };
 
+  const tags = [
+    {
+      label: "Tất cả kho",
+      value: "Tất cả kho",
+    },
+    {
+      label: "Tổng kho Linh Dương",
+      value: "Tổng kho Linh Dương",
+    },
+    {
+      label: "Siêu thị tiện ích Linh Dương",
+      value: "Siêu thị tiện ích Linh Dương",
+    },
+    {
+      label: "LD Mart",
+      value: "LD Mart",
+    },
+  ];
 
   const content = (
     <div className="flex flex-col w-full">
@@ -51,11 +69,66 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
       />
       <div className="flex justify-between w-full">
         <Button variant="outlined" className="mt-[32px]" text="Huỷ bỏ" width={134} height={45}/>
-        <Button variant="secondary" className="mt-[32px] bg-[#384ADC] text-[#fff]" text="Thêm mới" width={134} height={45}/>
+        <div className="mt-[32px] bg-[#384ADC] text-[#fff] w-[134px] h-[45px] rounded-lg flex justify-center items-center cursor-pointer">Thêm mới</div>
       </div>
     </div>
   )
   
+  const content1 = (
+    <div className="flex flex-col w-full p-[12px]">
+      <div className="flex justify-between w-full items-center mb-[8px]">
+        <div className="text-medium font-medium mb-[4px]">
+          Giá nhập
+        </div>
+        <Input
+          className="rounded-lg"
+          placeholder="Nhập"
+        />
+      </div>
+      <div className="flex justify-between w-full items-center mb-[8px]">
+        <div className="text-medium font-medium mb-[4px]">
+          Giá bán
+        </div>
+        <Input
+          className="rounded-lg"
+          placeholder="Nhập"
+        />
+      </div>
+      <div className="flex justify-between w-full items-center ">
+        <div className="text-medium font-medium mb-[4px]">
+        Trọng lượng SP
+        </div>
+        <Input
+          className="rounded-lg"
+          placeholder="Nhập"
+        />
+      </div>
+        <div className="mt-[32px] bg-[#384ADC] text-[#fff] w-[297px] h-[39px] rounded-lg flex justify-center items-center cursor-pointer">Đồng bộ</div>
+    </div>
+  )
+
+  const content2 = (
+    <div className="flex flex-col w-full">
+      <div className="text-medium font-medium mb-[8px]">
+        Chọn kho chuyển
+      </div>
+      <Select
+        className="rounded-lg mb-[8px]
+        mb-[8px]"
+        options={tags}
+      />
+      <div className="text-medium font-medium mb-[8px]">
+        Chọn kho nhập
+      </div>
+      <Select
+        className="rounded-lg mb-[8px]
+        mb-[8px]"
+        options={tags}
+      />
+      <div className="mt-[16px] bg-[#384ADC] text-[#fff] w-full h-[39px] rounded-lg flex justify-center items-center cursor-pointer">Đồng bộ</div>
+    </div>
+  )
+
   const tagRender = (props: CustomTagProps) => {
     const { label, value, closable, onClose } = props;
     const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
@@ -75,24 +148,7 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
     );
   };
 
-  const tags = [
-    {
-      label: "Tất cả kho",
-      value: "Tất cả kho",
-    },
-    {
-      label: "Tổng kho Linh Dương",
-      value: "Tổng kho Linh Dương",
-    },
-    {
-      label: "Siêu thị tiện ích Linh Dương",
-      value: "Siêu thị tiện ích Linh Dương",
-    },
-    {
-      label: "LD Mart",
-      value: "LD Mart",
-    },
-  ];
+  
 
   const data = [
     {
@@ -160,7 +216,7 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
               <Button width={24} height={24} className="p-0">
                 <Icon icon="add-square-1" size={24}/>
               </Button>
-        </Popover>
+            </Popover>
         </span>
     
       )
@@ -218,7 +274,7 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
         align: "center",
         render: (_, record) => {
           return (
-            <div className="text-medium font-medium text-[#4B4B59] border-1 border-[#DADADD] ">
+            <div className="text-medium font-medium text-[#4B4B59]">
               {record.inputNum} đ
             </div>  
           )
@@ -453,7 +509,7 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
               <TextArea label="Ghi chú" placeholder="Nhập nội dung" />
             </div>
           </div>
-          <div className="p-[12px] bg-white rounded">
+          <div className="p-[12px] bg-white rounded h-[554px]">
             <div className={styles.row}>
               <div className="text-[#384ADC] font-semibold">
                 Danh sách thuộc tính
@@ -481,18 +537,28 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
       </div>
       {/* Filter */}
       <div className="flex gap-x-2 mt-4 mb-3">
-          <Select
-            prefix={<Icon icon="repeat" size={24}/>}
-            style={{ width: 200 }}
-            placeholder="Đồng bộ"
-            options={productAttributes}
-            />
-            <Select
-              prefix={<Icon icon="arrow-swap" size={24}/>}
-              style={{ width: 200 }}
-              placeholder="Chuyển kho nhanh"
-              options={productAttributes}
-            />
+              <Popover placement="bottomRight" content={content1} trigger="click" overlayStyle={{width: "354px"}} className="relative">
+                <Button width={195} height={45} className="p-0">
+                  <div className="w-[200px] flex justify-between p-[10px] items-center">
+                    <div className="flex justify-left">
+                    <Icon icon="repeat" size={24} className="mr-[10px]"/>
+                    Đồng bộ
+                    </div>
+                    <Icon icon="arrow-down-1" size={14}/>
+                  </div>
+                </Button>
+            </Popover>
+            <Popover placement="bottomRight" content={content2} trigger="click" overlayStyle={{width: "354px"}} className="relative">
+                <Button width={195} height={45} className="p-0">
+                  <div className="w-[200px] flex justify-between p-[10px] items-center">
+                    <div className="flex justify-left">
+                    <Icon icon="arrow-swap" size={24} className="mr-[10px]"/>
+                    Chuyển kho nhanh
+                    </div>
+                    <Icon icon="arrow-down-1" size={14}/>
+                  </div>
+                </Button>
+            </Popover>
           <Button variant="outlined" text="Thêm sản phẩm mặc định" icon={<Icon icon="add-1" size={24}/>}>
           </Button>
       </div>

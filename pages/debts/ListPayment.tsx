@@ -20,11 +20,13 @@ import {
   paymentList
 } from "../../const/constant"
 import styles from "../../styles/ListPayment.module.css"
+import ModalPayDetail from "./Modal/ModalPayDetail"
 
 const ListPayment = () => {
   const [listPayment, setListPayment] = useState<ListPaymentProps[]>([
     ...paymentList,
   ]);
+  const [isShowModalPayDetail, setIsShowModalPayDetail] = useState(true)
   const [isShowModalRemoveExport, setIsShowModalRemoveExport] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const TabStatus = [
@@ -231,7 +233,7 @@ const ListPayment = () => {
         onRow={() => {
           return {
             onClick: () => {
-              window.location.href = "/warehouse/export-commands/update/1";
+              setIsShowModalPayDetail(true)
             },
           };
         }}
@@ -256,8 +258,16 @@ const ListPayment = () => {
             <span className="font-medium pd-[9px] text-[#EF4444]"> 16.500.000 đ</span>
           </div>
         </div>
+        <ModalPayDetail 
+          isEdit={true}
+          title="Chi tiết hoá đơn thu chi"
+          isVisible={isShowModalPayDetail}
+          onClose={() => setIsShowModalPayDetail(false)}
+          onOpen={() => setIsShowModalPayDetail(false)}
+        />
     </div>
   );
 };
 
-ReactDOM.render(<ListPayment />, document.getElementById("root"));
+export default ListPayment;
+// ReactDOM.render(<ListPayment />, document.getElementById("root"));
