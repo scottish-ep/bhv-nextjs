@@ -15,7 +15,9 @@ import { ListDebtProps } from "./listdebt.type";
 import classNames from "classnames";
 import { list_Debt } from "../../const/constant";
 import styles from "../../styles/ListPayment.module.css";
-
+import ModalDebtDetail from "./Modal/ModalDebtDetail";
+import ModalPayDebt from "./Modal/ModalPayDebt";
+import ModalAddDebt from "./Modal/ModalAddDebt"
 const ListDebt = () => {
   const [listDebt, setListDebt] = useState<ListDebtProps[]>([...list_Debt]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -27,6 +29,8 @@ const ListDebt = () => {
     total: 0,
     pageSize: 6,
   });
+  const [isShowModalDebtDetail, setIsShowModalDebtDetail] = useState(false);
+  const [isShowModalPayDebt, setIsShowModalPayDebt] = useState(false);
   const [loading, setLoading] = useState(false);
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);
@@ -45,7 +49,7 @@ const ListDebt = () => {
       fixed: "left",
       align: "center",
       render: (_, record) => (
-        <span className="text-medium text-[#2E2D3D] font-medium">
+        <span className="text-medium text-[#2E2D3D] font-medium" onClick={() => setIsShowModalDebtDetail(true)}>
           {record.id}
         </span>
       ),
@@ -57,7 +61,7 @@ const ListDebt = () => {
       key: "export_name",
       align: "left",
       render: (_, record) => (
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center cursor-pointer" onClick={() => setIsShowModalDebtDetail(true)}>
           <span className="text-medium font-medium text-[#384ADC]">
             {record.name}
           </span>
@@ -74,7 +78,7 @@ const ListDebt = () => {
       key: "note",
       align: "center",
       render: (_, record) => (
-        <span className="text-medium text-[#4B4B59]">{record.phone}</span>
+        <span className="text-medium text-[#4B4B59] cursor-pointer" onClick={() => setIsShowModalDebtDetail(true)}>{record.phone}</span>
       ),
     },
     {
@@ -84,7 +88,7 @@ const ListDebt = () => {
       key: "quantity",
       align: "center",
       render: (_, record) => (
-        <span className="text-medium font-medium text-[#F97316]">
+        <span className="cursor-pointer text-medium font-medium text-[#F97316]" onClick={() => setIsShowModalDebtDetail(true)}>
           {record.debt} đ
         </span>
       ),
@@ -96,7 +100,7 @@ const ListDebt = () => {
       key: "weight",
       align: "left",
       render: (_, record) => (
-        <span className="text-medium font-medium text-[#1D1C2D]">
+        <span className="cursor-pointer text-medium font-medium text-[#1D1C2D]" onClick={() => setIsShowModalDebtDetail(true)}>
           {record.note}
         </span>
       ),
@@ -109,7 +113,7 @@ const ListDebt = () => {
       align: "center",
       render: (_, record) => (
         <span
-          className={`font-semibold text-[${StatusColorEnum[record.status]}]`}
+          className={`cursor-pointer font-semibold text-[${StatusColorEnum[record.status]}]`} onClick={() => setIsShowModalDebtDetail(true)}
         >
           {StatusList.find((status) => status.value === record.status)?.name}
         </span>
@@ -123,7 +127,7 @@ const ListDebt = () => {
       align: "center",
       fixed: "right",
       render: (_, record) => (
-        <span className={`text-medium font-semibold text-[]`}>
+        <span className={`cursor-pointer text-medium font-semibold text-[]`} onClick={() => setIsShowModalDebtDetail(true)}>
           {record.update_time}
         </span>
       ),
@@ -145,10 +149,8 @@ const ListDebt = () => {
             variant="primary"
             width={151}
             color="white"
-            suffixIcon={<Icon icon="add" size={24} />}
-            onClick={() =>
-              (window.location.href = "/warehouse/export-commands/update/1")
-            }
+            suffixIcon={<Icon icon="Pay" size={24}/>}
+            onClick = {() => setIsShowModalPayDebt(true)}
           >
             Thêm mới
           </Button>
@@ -190,9 +192,27 @@ const ListDebt = () => {
           <span className="font-medium text-[#F97316]"> 12.000.000 đ</span>
         </div>
       </div>
+      <ModalDebtDetail
+        title="Chi tiết công nợ"
+        isVisible={isShowModalDebtDetail}
+        onClose={() => setIsShowModalDebtDetail(false)}
+        onOpen={() => setIsShowModalDebtDetail(false)}
+      />
+      <ModalPayDebt
+        title="Thanh toán công nợ"
+        isVisible={isShowModalPayDebt}
+        onClose={() => setIsShowModalPayDebt(false)}
+        onOpen={() => setIsShowModalPayDebt(false)}
+      />
+      <ModalAddDebt
+        title="Thêm công nợ mới"
+        isVisible={isShowModalPayDebt}
+        onClose={() => setIsShowModalPayDebt(false)}
+        onOpen={() => setIsShowModalPayDebt(false)}
+      />
     </div>
   );
 };
 
-// ReactDOM.render(<ListDebt />, document.getElementById("root"));
 export default ListDebt;
+// ReactDOM.render(<ListDebt />, document.getElementById("root"));

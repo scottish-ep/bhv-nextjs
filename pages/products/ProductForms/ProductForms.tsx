@@ -4,18 +4,21 @@ import Button from "../../../components/Button/Button";
 import Icon from "../../../components/Icon/Icon";
 import Input from "../../../components/Input/Input";
 import ModalConfirm from "../../../components/Modal/ModalConfirm/ModalConfirm";
+import { Popover } from 'antd';
 import Select from "../../../components/Select/Select";
 import TextArea from "../../../components/TextArea";
 import DatePicker from "../../../components/DatePicker/DatePicker";
 import TitlePage from "../../../components/TitlePage/Titlepage";
 import Upload from "../../../components/Upload/Upload";
-import { productTypeList, productAttributes } from "../../../const/constant";
-import styles from "../../../styles/DetailProduct.module.css";
+import { productTypeList, productAttributes,  } from "../../../const/constant";
+import type { ColumnsType } from "antd/es/table";
+import styles from "../../../styles/DetailCustomer.module.css"
+import type { ProductAttributeProps, ProductDetailProps } from "../product.type";
 import type { CustomTagProps } from "rc-select/lib/BaseSelect";
 import { Checkbox, Switch, Tag } from "antd";
 import CheckboxList from "../../../components/CheckboxList/CheckboxList";
 import classNames from "classnames";
-
+import { Table } from "antd";
 interface ProductFormProps {
   detail?: any;
 }
@@ -27,25 +30,6 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
   const handleConfirmDelete = () => {
     console.log("delete");
     setIsShowModalConfirm(false);
-  };
-
-  const tagRender = (props: CustomTagProps) => {
-    const { label, value, closable, onClose } = props;
-    const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
-      event.preventDefault();
-      event.stopPropagation();
-    };
-    return (
-      <Tag
-        color={value}
-        onMouseDown={onPreventMouseDown}
-        closable={closable}
-        onClose={onClose}
-        style={{ marginRight: 3 }}
-      >
-        {label}
-      </Tag>
-    );
   };
 
   const tags = [
@@ -66,6 +50,300 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
       value: "LD Mart",
     },
   ];
+
+  const content = (
+    <div className="flex flex-col w-full">
+      <div className="text-medium font-medium mb-[4px]">
+        Mã
+      </div>
+      <Input
+        className="rounded-lg"
+        placeholder="nhập"
+      />
+      <div className="text-medium font-medium mb-[4px]">
+        Thuộc tính
+      </div>
+      <Input
+        className="rounded-lg"
+        placeholder="nhập"
+      />
+      <div className="flex justify-between w-full">
+        <Button variant="outlined" className="mt-[32px]" text="Huỷ bỏ" width={134} height={45}/>
+        <div className="mt-[32px] bg-[#384ADC] text-[#fff] w-[134px] h-[45px] rounded-lg flex justify-center items-center cursor-pointer">Thêm mới</div>
+      </div>
+    </div>
+  )
+  
+  const content1 = (
+    <div className="flex flex-col w-full p-[12px]">
+      <div className="flex justify-between w-full items-center mb-[8px]">
+        <div className="text-medium font-medium mb-[4px]">
+          Giá nhập
+        </div>
+        <Input
+          className="rounded-lg"
+          placeholder="Nhập"
+        />
+      </div>
+      <div className="flex justify-between w-full items-center mb-[8px]">
+        <div className="text-medium font-medium mb-[4px]">
+          Giá bán
+        </div>
+        <Input
+          className="rounded-lg"
+          placeholder="Nhập"
+        />
+      </div>
+      <div className="flex justify-between w-full items-center ">
+        <div className="text-medium font-medium mb-[4px]">
+        Trọng lượng SP
+        </div>
+        <Input
+          className="rounded-lg"
+          placeholder="Nhập"
+        />
+      </div>
+        <div className="mt-[32px] bg-[#384ADC] text-[#fff] w-[297px] h-[39px] rounded-lg flex justify-center items-center cursor-pointer">Đồng bộ</div>
+    </div>
+  )
+
+  const content2 = (
+    <div className="flex flex-col w-full">
+      <div className="text-medium font-medium mb-[8px]">
+        Chọn kho chuyển
+      </div>
+      <Select
+        className="rounded-lg mb-[8px]
+        mb-[8px]"
+        options={tags}
+      />
+      <div className="text-medium font-medium mb-[8px]">
+        Chọn kho nhập
+      </div>
+      <Select
+        className="rounded-lg mb-[8px]
+        mb-[8px]"
+        options={tags}
+      />
+      <div className="mt-[16px] bg-[#384ADC] text-[#fff] w-full h-[39px] rounded-lg flex justify-center items-center cursor-pointer">Đồng bộ</div>
+    </div>
+  )
+
+  const tagRender = (props: CustomTagProps) => {
+    const { label, value, closable, onClose } = props;
+    const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
+      event.preventDefault();
+      event.stopPropagation();
+    };
+    return (
+      <Tag
+        color={value}
+        onMouseDown={onPreventMouseDown}
+        closable={closable}
+        onClose={onClose}
+        style={{ marginRight: 3 }}
+      >
+        {label}
+      </Tag>
+    );
+  };
+
+  
+
+  const data = [
+    {
+      attribute: "Màu sắc",
+      typeAttribute : [
+       {
+        label: "TRANG",
+        value: "TRANG",
+       },
+       {
+        label: "TRANG",
+        value: "TRANG",
+       },
+      ]
+    }
+  ]
+
+  const data2 = [
+    {
+      show: true,
+      sku: "555501S",
+      inputNum: 55.000,
+      saleNum: 150.000,
+      type: "Trắng - S",
+      weight: 1,
+      negative: true,
+    }
+  ]
+  const columns : ColumnsType<ProductAttributeProps> = [
+    {
+      title: "Thuộc tính",
+      width: 148,
+      dataIndex: "attribute",
+      align: "center",
+      render: (_, record) => (
+        <div className="flex justify-left w-48">
+          <div className="mr-[20px] cursor-pointer">
+            <Icon icon="cancel" size={24} />
+          </div>
+          <span className="text-sm text-[#4B4B59] font-medium pd-[9px]">
+            {record.attribute}
+          </span>
+        </div>
+      )
+    },
+    {
+      title: "Kiểu thuộc tính",
+      width: 551,
+      dataIndex: "typeAttribute",
+      align: "left",
+      render: (_, record) => (
+        <span className="w-[551px] flex items-center justify-between text-sm text-[#4B4B59] font-medium pd-[9px]">
+          <span className="w-11/12">
+            <Select
+                mode="multiple"
+                showArrow
+                defaultValue={["TRẮNG", "ĐEN"]}
+                style={{ width: "100%" }}
+                options={record.typeAttribute}
+              />  
+            </span>
+            <Popover placement="bottomRight" content={content} title="Thêm kiểu thuộc tính mới" trigger="click" overlayStyle={{
+            width: "309px" 
+            }}>
+              <Button width={24} height={24} className="p-0">
+                <Icon icon="add-square-1" size={24}/>
+              </Button>
+            </Popover>
+        </span>
+    
+      )
+    }
+  ]
+
+  const columns2: ColumnsType<ProductDetailProps> = [
+    {
+      title: "",
+      width: 82,
+      fixed: "left",
+      align: "center",
+      render: (_, record) => {
+        return (
+          <Checkbox />
+        );
+      },
+    },
+      {
+        title: "Hiện",
+        width: 82,
+        key: "id",
+        dataIndex: "show",
+        fixed: "left",
+        align: "center",
+        render: (_, record) => {
+          return (
+            <Switch
+              className="button-switch"
+              defaultChecked={
+                record.show ? (record.show === 1 ? true : false) : false
+              }
+              onChange={() => console.log("check")}
+            />
+          );
+        },
+      },
+      {
+        title: "Mã SKU",
+        width: 145,
+        dataIndex: "sku",
+        align: "center",
+        render: (_, record) => {
+          return (
+            <div className="text-medium font-medium text-[#4B4B59]">
+              {record.sku}
+            </div>
+          )
+        }
+      },
+      {
+        title: "Giá nhập",
+        width: 145,
+        dataIndex: "sku",
+        align: "center",
+        render: (_, record) => {
+          return (
+            <div className="text-medium font-medium text-[#4B4B59]">
+              {record.inputNum} đ
+            </div>  
+          )
+        }
+      },
+      {
+        title: "Giá bán",
+        width: 145,
+        dataIndex: "sku",
+        align: "center",
+        render: (_, record) => {
+          return (
+            <div className="text-medium font-medium text-[#4B4B59] border-1 border-[#DADADD] ">
+              {record.saleNum} đ
+            </div>  
+          )
+        }
+      },
+      {
+        title: "Mẫu mã",
+        width: 500,
+        dataIndex: "sku",
+        align: "center",
+        render: (_, record) => {
+          return (
+            <div className="text-medium font-medium text-[#4B4B59] border-1 border-[#DADADD] ">
+              {record.type}
+            </div>  
+          )
+        }
+      },
+      {
+        title: "Trọng lượng SP",
+        width: 180,
+        dataIndex: "weight",
+        align: "center",
+        render: (_, record) => {
+          return (
+            <div className="text-medium font-medium text-[#4B4B59] border-1 border-[#DADADD] ">
+              {record.weight} kg
+            </div>  
+          )
+        }
+      },
+      {
+        title: "Bán âm",
+        width: 80,
+        dataIndex: "negative",
+        align: "center",
+        render: (_, record) => {
+          return (
+            <Checkbox   />
+          )
+        }
+      },
+      {
+        title: "",
+        width: 20,
+        align: "center",
+        render: (_, record) => {
+          return (
+            <div className="cursor-pointer">
+             <Icon icon="cancel" size={24}/>
+            </div>
+          )
+        }
+      },
+
+  ]
 
   const checkboxSettings: {
     label: string;
@@ -112,6 +390,7 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
         </div>
       </div>
       {/* Info */}
+      
       <div className="flex gap-x-3">
         <div
           className="flex flex-col justify-between gap-[4px]"
@@ -230,7 +509,7 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
               <TextArea label="Ghi chú" placeholder="Nhập nội dung" />
             </div>
           </div>
-          <div className="p-[12px] bg-white rounded">
+          <div className="p-[12px] bg-white rounded h-[554px]">
             <div className={styles.row}>
               <div className="text-[#384ADC] font-semibold">
                 Danh sách thuộc tính
@@ -246,28 +525,55 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
                 />
               </div>
             </div>
+            <Table 
+              columns= {columns}
+              dataSource={data}
+              />
+          </div>
+          <div className="w-full flex justify-end mt-[16px]">
+            <Button variant="secondary" text="Tạo mẫu mã" width={155} height={44}/>
           </div>
         </div>
       </div>
       {/* Filter */}
       <div className="flex gap-x-2 mt-4 mb-3">
-        <Input
-          width={306}
-          prefix={<Icon icon="cart" color="#FF970D" size={24} />}
-          placeholder="Nhập mã đơn hàng và enter"
+              <Popover placement="bottomRight" content={content1} trigger="click" overlayStyle={{width: "354px"}} className="relative">
+                <Button width={195} height={45} className="p-0">
+                  <div className="w-[200px] flex justify-between p-[10px] items-center">
+                    <div className="flex justify-left">
+                    <Icon icon="repeat" size={24} className="mr-[10px]"/>
+                    Đồng bộ
+                    </div>
+                    <Icon icon="arrow-down-1" size={14}/>
+                  </div>
+                </Button>
+            </Popover>
+            <Popover placement="bottomRight" content={content2} trigger="click" overlayStyle={{width: "354px"}} className="relative">
+                <Button width={195} height={45} className="p-0">
+                  <div className="w-[200px] flex justify-between p-[10px] items-center">
+                    <div className="flex justify-left">
+                    <Icon icon="arrow-swap" size={24} className="mr-[10px]"/>
+                    Chuyển kho nhanh
+                    </div>
+                    <Icon icon="arrow-down-1" size={14}/>
+                  </div>
+                </Button>
+            </Popover>
+          <Button variant="outlined" text="Thêm sản phẩm mặc định" icon={<Icon icon="add-1" size={24}/>}>
+          </Button>
+      </div>
+      <div className="w-full">
+        <Table 
+            columns= {columns2}
+            dataSource={data2}
+            pagination={false}
         />
-        <Input
-          className="flex-1"
-          prefix={<Icon icon="search" color="#FF970D" size={24} />}
-          placeholder="Nhập mã sản phẩm / tên sản phẩm"
-        />
-        <Button
-          variant="neural_200"
-          width={196}
-          icon={<Icon icon="barcode" size={24} />}
-        >
-          Quét mã vạch (F1)
-        </Button>
+      </div>
+      <div className="w-full flex justify-left mt-[20px] items-center">
+        <div className="mr-[14px]">
+          <Icon icon="add-1" color="#384ADC" size={24} />
+        </div>
+        <p className="text-medium text-[#384ADC] font-medium">Thêm mới</p>
       </div>
       <ModalConfirm
         titleBody="Xoá thông tin khách hàng?"

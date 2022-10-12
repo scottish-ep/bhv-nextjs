@@ -319,3 +319,14 @@ export const productAttributes = [
     value: "Vị",
   },
 ];
+
+export const listDebtDetail = Array(50)
+.fill({
+  id: "123",
+  time: "19/09/2022 - 13:05",
+  deal: 150.000,
+  method: "Đơn hàng",
+  content: "Đơn hoàn #madonhang",
+  status: StatusEnum.PENDING
+})
+.map((item, index) => ({ ...item, id: index + 1 }))
