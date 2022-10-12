@@ -79,7 +79,7 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
   const columns: ColumnsType<ModalDebtDetailProps> = [
     {
       title: "Thời gian",
-      width: 180,
+      width: 150,
       dataIndex: "time",
       key: "dataIndex",
       fixed: "left",
@@ -133,7 +133,7 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
       key: "dataIndex",
       align: "left",
       render: (_, record) => (
-        <span className={`font-semibold text-[]`}>
+        <span className={`font-semibold text-[${StatusColorEnum[record.status]}]`}>
           {StatusList.find((status) => status.value === record.status)?.name}
         </span>
       ),
@@ -199,14 +199,14 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
             <div className="flex w-full">
                 <div className="text-medium font-medium w-[60%] mr-[12px]">
                     Ghi chú
-                    <TextArea/>
+                    <TextArea className="bg-slate-100 !h-[104px]" placeholder="Công nợ theo đơn hoàn"/>
                 </div>
                 <p className="text-meium font-medium w-[30%]">Hình ảnh</p>
             </div>
         </div>
         <div className="w-full flex justify-end mt-[32px]">
-            <Button variant="outlined" className="mr-[12px]" width={305} height={44} text="TRỞ LẠI"/>
-            <Button variant="secondary"  width={305} height={44} text="TRỞ LẠI"/>
+            <Button variant="outlined" className="mr-[12px]" width={305} height={44} text="HUỶ BỎ"/>
+            <Button variant="secondary"  width={305} height={44} text="XÁC NHẬN"/>
         </div>
       </div>
     </Modal>

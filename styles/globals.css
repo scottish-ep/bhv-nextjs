@@ -438,3 +438,18 @@
     background-color: #ff970d;
   }
   
+  .ant-table-thead > tr > th {
+    background: #fff;
+}
+
+.ant-table-row {
+  background-color: #fff;
+}
+
+.ant-table-cell {
+  background-color: #fff !important;
+}
+
+.ant-table-tbody>tr>td, .ant-table-thead>tr>th, .ant-table tfoot>tr>td, .ant-table tfoot>tr>th {
+  padding: 8px;
+}
