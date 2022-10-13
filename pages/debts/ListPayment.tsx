@@ -26,7 +26,7 @@ const ListPayment = () => {
   const [listPayment, setListPayment] = useState<ListPaymentProps[]>([
     ...paymentList,
   ]);
-  const [isShowModalPayDetail, setIsShowModalPayDetail] = useState(true)
+  const [isShowModalPayDetail, setIsShowModalPayDetail] = useState(false)
   const [isShowModalRemoveExport, setIsShowModalRemoveExport] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const TabStatus = [

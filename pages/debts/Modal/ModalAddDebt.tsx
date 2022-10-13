@@ -135,7 +135,7 @@ const ModalAddDebt = (props: ModalAddDebtProps) => {
 								<p className="text-medium font-medium text-[#2E2D3D]">BHV0021</p>
 							</div>
 							<div className="flex justify-between mb-[16px]">
-								<p className="text-medium font-medium text-[#2E2D3D]">Ngày tạoợ</p>
+								<p className="text-medium font-medium text-[#2E2D3D]">Ngày tạo nợ</p>
 								<p className="text-medium font-medium text-[#2E2D3D]">16:36 - 21/09/2022</p>
 							</div>
 							<div className="mb-[16px]">

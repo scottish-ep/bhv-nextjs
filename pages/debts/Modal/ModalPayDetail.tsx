@@ -93,7 +93,7 @@ const ModalPayDetail = (props: ModalPayDetailProps) => {
 						</div>
 						<div className="flex justify-between mb-[12px] items-center mb-[24px]">
 							<p className="text-medium font-medium text-[#2E2D3D]">Mã giao dịch</p>
-							{isEdit ? <Input width={460} placeholder="--" /> : 
+							{isEdit ? <div className="w-[460px] flex justify-end" >--</div> : 
 								<div className="w-[420px]">{pay.code}</div> 
 							}
 						</div>

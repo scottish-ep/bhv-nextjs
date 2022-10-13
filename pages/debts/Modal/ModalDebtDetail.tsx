@@ -17,6 +17,7 @@ interface ModalDebtDetailProps {
   onClose?: (event?: any) => void;
   onOpen?: (event?: any) => void;
   content?: string | ReactNode;
+  isPayDebt?: boolean;
   titleBody?: string;
   time?: string;
   deal?: string;

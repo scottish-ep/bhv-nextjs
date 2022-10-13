@@ -150,8 +150,8 @@ const ListDebt = () => {
             variant="primary"
             width={151}
             color="white"
-            suffixIcon={<Icon icon="add-1" size={24}/>}
-            onClick = {() => setIsShowModalPayDebt(true)}
+            suffixIcon={<Icon icon="add-1" size={24} color="white"/>}
+            onClick = {() => setIsShowModalAddDebt(true)}
           >
             Thêm mới
           </Button>
@@ -205,12 +205,12 @@ const ListDebt = () => {
         onClose={() => setIsShowModalPayDebt(false)}
         onOpen={() => setIsShowModalPayDebt(false)}
       />
-      {/* <ModalAddDebt
+      <ModalAddDebt
         title="Thêm công nợ mới"
-        isVisible={isShowModalPayDebt}
+        isVisible={isShowModalAddDebt}
         onClose={() => setIsShowModalAddDebt(false)}
         onOpen={() => setIsShowModalAddDebt(false)}
-      /> */}
+      />
     </div>
   );
 };
