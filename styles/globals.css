@@ -437,19 +437,79 @@
   .ant-checkbox.ant-checkbox-indeterminate .ant-checkbox-inner::after {
     background-color: #ff970d;
   }
+
+  .modal-debt-detail .ant-table-cell {
+    background-color: #fff !important;
+  }
+
+  .modal-debt-detail .ant-table-tbody>tr>td, .ant-table-thead>tr>th, .ant-table tfoot>tr>td, .ant-table tfoot>tr>th {
+    padding: 8px;
+  }
+
+  .modal-debt-detail .ant-modal-header {
+    background-color: #F5F5F6;
+  }
+  .modal-debt-detail .ant-modal-content {
+    background-color: #F5F5F6 ;
+  }
+
+  .modal-debt-detail .ant-table {
+    border: 0.5px solid #DADADD;
+    border-radius: 4px;
+  }
+
+ .ant-modal.modal-debt-detail .ant-table tbody>tr>td {
+    border-bottom: 0.5px solid #DADADD;
+  }
+  .modal-debt-detail .ant-table-content .ant-table-thead .ant-table-cell {
+    background-color: #F0F0F1 !important;
+  }
+
+  .ant-modal.modal-debt-detail .ant-table thead>tr>th {
+    border-bottom: 0.5px solid #DADADD;
+  }
+
+  .modal-pay-detail .ant-modal-header {
+    background-color: #F5F5F6;
+  }
+
+  .modal-pay-detail .ant-modal-content {
+    background-color: #F5F5F6 ;
+  }
+
+  .modal-pay-detail .ant-modal-body {
+    padding: 16px;
+  }
+
+  .modal-add-debt .ant-table-cell {
+    background-color: #fff !important;
+  }
+
+  .modal-add-debt .ant-table-tbody>tr>td, .ant-table-thead>tr>th, .ant-table tfoot>tr>td, .ant-table tfoot>tr>th {
+    padding: 8px;
+  }
+
+  .modal-add-debt .ant-modal-header {
+    background-color: #F5F5F6;
+  }
+  .modal-add-debt .ant-modal-content {
+    background-color: #F5F5F6 ;
+  }
+
+  .modal-add-debt .ant-table {
+    border: 0.5px solid #DADADD;
+    border-radius: 4px;
+  }
+
+ .ant-modal.modal-add-debt .ant-table tbody>tr>td {
+    border-bottom: 0.5px solid #DADADD;
+  }
+  .modal-add-debt .ant-table-content .ant-table-thead .ant-table-cell {
+    background-color: #F0F0F1 !important;
+  }
+
+  .ant-modal.modal-add-debt .ant-table thead>tr>th {
+    border-bottom: 0.5px solid #DADADD;
+  }
+
   
-  .ant-table-thead > tr > th {
-    background: #fff;
-}
-
-.ant-table-row {
-  background-color: #fff;
-}
-
-.ant-table-cell {
-  background-color: #fff !important;
-}
-
-.ant-table-tbody>tr>td, .ant-table-thead>tr>th, .ant-table tfoot>tr>td, .ant-table tfoot>tr>th {
-  padding: 8px;
-}

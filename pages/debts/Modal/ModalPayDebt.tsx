@@ -46,7 +46,7 @@ const ModalPayDebt = (props: ModalPayDebtProps) => {
           iconClose={iconClose}
           width={836}
           footer={false}
-					className="p-[16px] "
+					className="p-[16px] modal-pay-debt"
         >
 					<div>
 						<div className="flex justify-between w-full mb-[16px] items-center">

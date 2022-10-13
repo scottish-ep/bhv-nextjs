@@ -41,7 +41,7 @@ export interface IProduct {
 
 export interface ProductAttributeProps {
   attribute_list?: any;
-  id?: string;
+  id: string;
   attribute: string;
   typeAttribute: any;
 }

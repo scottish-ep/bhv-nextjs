@@ -30,7 +30,8 @@ const ListDebt = () => {
     pageSize: 6,
   });
   const [isShowModalDebtDetail, setIsShowModalDebtDetail] = useState(false);
-  const [isShowModalPayDebt, setIsShowModalPayDebt] = useState(false);
+  const [isShowModalAddDebt, setIsShowModalAddDebt] = useState(false);
+  const [isShowModalPayDebt, setIsShowModalPayDebt] = useState(true);
   const [loading, setLoading] = useState(false);
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);
@@ -149,7 +150,7 @@ const ListDebt = () => {
             variant="primary"
             width={151}
             color="white"
-            suffixIcon={<Icon icon="Pay" size={24}/>}
+            suffixIcon={<Icon icon="add-1" size={24}/>}
             onClick = {() => setIsShowModalPayDebt(true)}
           >
             Thêm mới
@@ -204,12 +205,12 @@ const ListDebt = () => {
         onClose={() => setIsShowModalPayDebt(false)}
         onOpen={() => setIsShowModalPayDebt(false)}
       />
-      <ModalAddDebt
+      {/* <ModalAddDebt
         title="Thêm công nợ mới"
         isVisible={isShowModalPayDebt}
-        onClose={() => setIsShowModalPayDebt(false)}
-        onOpen={() => setIsShowModalPayDebt(false)}
-      />
+        onClose={() => setIsShowModalAddDebt(false)}
+        onOpen={() => setIsShowModalAddDebt(false)}
+      /> */}
     </div>
   );
 };
