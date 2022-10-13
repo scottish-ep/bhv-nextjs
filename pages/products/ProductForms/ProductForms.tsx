@@ -10,7 +10,7 @@ import TextArea from "../../../components/TextArea";
 import DatePicker from "../../../components/DatePicker/DatePicker";
 import TitlePage from "../../../components/TitlePage/Titlepage";
 import Upload from "../../../components/Upload/Upload";
-import { productTypeList, productAttributes,  } from "../../../const/constant";
+import { productTypeList , productAttributes,  } from "../../../const/constant";
 import type { ColumnsType } from "antd/es/table";
 import styles from "../../../styles/DetailCustomer.module.css"
 import type { ProductAttributeProps, ProductDetailProps } from "../product.type";
@@ -21,9 +21,47 @@ import classNames from "classnames";
 import { Table } from "antd";
 interface ProductFormProps {
   detail?: any;
+  type_attr_list?: ProductAttributeProps[];
 }
 
-const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
+const ProductForms: React.FC<ProductFormProps> = ({ detail, type_attr_list = [] }) => {
+  const data = [
+    {
+      id:"1",
+      attribute: "Màu sắc",
+      typeAttribute : [
+       {
+        label: "TRANG",
+        value: "TRANG",
+       },
+       {
+        label: "TRANG",
+        value: "TRANG",
+       },
+      ]
+    },
+    {
+      id: "2",
+      attribute: "Màu sắc",
+      typeAttribute : [
+       {
+        label: "TRANG1",
+        value: "TRANG",
+       },
+       {
+        label: "TRANG1",
+        value: "TRANG1",
+       },
+      ]
+    }
+  ]
+  const [typeAttributeList, setTypeAttributeList] = useState([...data]);
+
+  const handleDeleteProduct = (id: string) => {
+    setTypeAttributeList((prevTypeAttributeList) => 
+      prevTypeAttributeList.filter((product) => product.id !== id)
+    )
+  }
   const [isShowModalConfirm, setIsShowModalConfirm] = useState(false);
   const [fileList, setFileList] = useState([]);
 
@@ -150,21 +188,7 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
 
   
 
-  const data = [
-    {
-      attribute: "Màu sắc",
-      typeAttribute : [
-       {
-        label: "TRANG",
-        value: "TRANG",
-       },
-       {
-        label: "TRANG",
-        value: "TRANG",
-       },
-      ]
-    }
-  ]
+  
 
   const data2 = [
     {
@@ -185,7 +209,7 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
       align: "center",
       render: (_, record) => (
         <div className="flex justify-left w-48">
-          <div className="mr-[20px] cursor-pointer">
+          <div className="mr-[20px] cursor-pointer" onClick = {() => handleDeleteProduct(record.id)}>
             <Icon icon="cancel" size={24} />
           </div>
           <span className="text-sm text-[#4B4B59] font-medium pd-[9px]">
@@ -274,9 +298,12 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
         align: "center",
         render: (_, record) => {
           return (
-            <div className="text-medium font-medium text-[#4B4B59]">
-              {record.inputNum} đ
-            </div>  
+            <div className="flex justify-between items-center px-[12px] py-[7px] rounded-lg" style={{border: "1px solid #DADADD"}}>
+              <div className="text-medium font-medium text-[#4B4B59]">
+                {record.inputNum} 
+              </div>  
+              <span>đ</span>
+            </div>
           )
         }
       },
@@ -287,9 +314,12 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
         align: "center",
         render: (_, record) => {
           return (
-            <div className="text-medium font-medium text-[#4B4B59] border-1 border-[#DADADD] ">
-              {record.saleNum} đ
-            </div>  
+            <div className="flex justify-between items-center px-[12px] py-[7px] rounded-lg" style={{border: "1px solid #DADADD"}}>
+              <div className="text-medium font-medium text-[#4B4B59]">
+                {record.saleNum} 
+              </div>  
+              <span>đ</span>
+            </div>
           )
         }
       },
@@ -300,9 +330,11 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
         align: "center",
         render: (_, record) => {
           return (
-            <div className="text-medium font-medium text-[#4B4B59] border-1 border-[#DADADD] ">
-              {record.type}
-            </div>  
+            <div className="flex justify-center items-center px-[12px] py-[7px] rounded-lg" style={{border: "1px solid #DADADD"}}>
+              <div className="text-medium font-medium text-[#4B4B59]">
+                {record.type} 
+              </div>  
+            </div>
           )
         }
       },
@@ -313,9 +345,12 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
         align: "center",
         render: (_, record) => {
           return (
-            <div className="text-medium font-medium text-[#4B4B59] border-1 border-[#DADADD] ">
-              {record.weight} kg
-            </div>  
+            <div className="flex items-center justify-between px-[12px] py-[7px] rounded-lg" style={{border: "1px solid #DADADD"}}>
+              <div className="text-medium font-medium text-[#4B4B59]">
+                {record.weight} 
+              </div>  
+              <span>kg</span>
+            </div> 
           )
         }
       },
@@ -527,7 +562,14 @@ const ProductForms: React.FC<ProductFormProps> = ({ detail }) => {
             </div>
             <Table 
               columns= {columns}
-              dataSource={data}
+              dataSource={typeAttributeList.length ? [
+                ...typeAttributeList,
+                {
+                  id: '1',
+                  attribute: '',
+                  typeAttribute: '',
+                }
+              ] : [] }
               />
           </div>
           <div className="w-full flex justify-end mt-[16px]">

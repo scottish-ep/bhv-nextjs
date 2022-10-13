@@ -17,6 +17,7 @@ interface ModalDebtDetailProps {
   onClose?: (event?: any) => void;
   onOpen?: (event?: any) => void;
   content?: string | ReactNode;
+  isPayDebt?: boolean;
   titleBody?: string;
   time?: string;
   deal?: string;
@@ -97,7 +98,8 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
       key: "dataIndex",
       align: "left",
       render: (_, record) => (
-        <span className="text-medium text-[#2E2D3D] font-medium">
+        <span className="text-medium text-[#F97316] flex  font-medium">
+          <Icon icon="debt-arrow" size={24} className="mr-[10px]"/>
           {record.deal}
         </span>
       ),
@@ -149,10 +151,11 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
       iconClose={iconClose}
       width={908}
       footer={false}
+      className="modal-debt-detail"
     >
       <div>
         <div className="flex justify-between w-full mb-[12px]">
-          <div className="w-[48%] border-1 border-black" style={{border: "1px solid black", padding: "12px"}}>
+          <div className="w-[48%] bg-white rounded-lg" style={{ padding: "12px"}}>
             <div className="flex items-center justify-between mb-[16px]">
               <div className="text-medium font-medium">Mã công nợ</div>
               <div className="text-medium font-medium">BHV0021</div>
@@ -161,7 +164,8 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
               <div className="text-medium font-medium">Ngày tạo</div>
               <div className="text-medium font-medium">16:36 - 21/09/2022</div>
             </div>
-            <div className="flex items-center justify-left mb-[16px]">
+            <div className="flex flex-col  justify-left mb-[16px]">
+            <div className="text-medium font-medium mb-[8px]">Nhân viên xử lý</div>
               <Select
                 placeholder="Chọn nguồn"
                 style={{ width: 395 }}
@@ -169,7 +173,7 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
               />
             </div>
           </div>
-          <div className="w-[48%] " style={{border: "1px solid black", padding: "12px"}}>
+          <div className="w-[48%] bg-white rounded-lg" style={{ padding: "12px"}}>
             <div className="flex items-center justify-between mb-[16px]">
               <div className="text-medium font-medium">
                 Họ và tên khách hàng
@@ -188,14 +192,14 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
               <div className="text-medium font-medium">
                 Tiền công nợ hiện tại
               </div>
-              <div className="text-medium font-medium">150.000 đ</div>
+              <div className="text-medium font-medium" style={{color: "#F97316"}}>150.000 đ</div>
             </div>
           </div>
         </div>
-        <div className="w-full">
+        <div className="w-full rounded-lg">
           <Table columns={columns} dataSource={listDebt}/>
         </div>
-        <div className="w-full flex flex-col p-[12px]">
+        <div className="w-full flex flex-col p-[12px] bg-white rounded-lg">
             <div className="flex w-full">
                 <div className="text-medium font-medium w-[60%] mr-[12px]">
                     Ghi chú
@@ -205,8 +209,8 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
             </div>
         </div>
         <div className="w-full flex justify-end mt-[32px]">
-            <Button variant="outlined" className="mr-[12px]" width={305} height={44} text="HUỶ BỎ"/>
-            <Button variant="secondary"  width={305} height={44} text="XÁC NHẬN"/>
+            <Button variant="outlined" className="mr-[12px]" width={305} height={44} text="TRỞ LẠI"/>
+            <Button variant="secondary"  width={305} height={44} text="THANH TOÁN" onClick={onOpen}/>
         </div>
       </div>
     </Modal>

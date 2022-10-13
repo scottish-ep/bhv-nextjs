@@ -30,6 +30,7 @@ const ListDebt = () => {
     pageSize: 6,
   });
   const [isShowModalDebtDetail, setIsShowModalDebtDetail] = useState(false);
+  const [isShowModalAddDebt, setIsShowModalAddDebt] = useState(false);
   const [isShowModalPayDebt, setIsShowModalPayDebt] = useState(false);
   const [loading, setLoading] = useState(false);
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
@@ -149,8 +150,8 @@ const ListDebt = () => {
             variant="primary"
             width={151}
             color="white"
-            suffixIcon={<Icon icon="Pay" size={24}/>}
-            onClick = {() => setIsShowModalPayDebt(true)}
+            suffixIcon={<Icon icon="add-1" size={24} color="white"/>}
+            onClick = {() => setIsShowModalAddDebt(true)}
           >
             Thêm mới
           </Button>
@@ -196,7 +197,7 @@ const ListDebt = () => {
         title="Chi tiết công nợ"
         isVisible={isShowModalDebtDetail}
         onClose={() => setIsShowModalDebtDetail(false)}
-        onOpen={() => setIsShowModalDebtDetail(false)}
+        onOpen={() => {setIsShowModalPayDebt(true); setIsShowModalDebtDetail(false)}}
       />
       <ModalPayDebt
         title="Thanh toán công nợ"
@@ -206,9 +207,9 @@ const ListDebt = () => {
       />
       <ModalAddDebt
         title="Thêm công nợ mới"
-        isVisible={isShowModalPayDebt}
-        onClose={() => setIsShowModalPayDebt(false)}
-        onOpen={() => setIsShowModalPayDebt(false)}
+        isVisible={isShowModalAddDebt}
+        onClose={() => setIsShowModalAddDebt(false)}
+        onOpen={() => setIsShowModalAddDebt(false)}
       />
     </div>
   );

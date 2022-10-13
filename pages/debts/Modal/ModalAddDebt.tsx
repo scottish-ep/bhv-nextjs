@@ -118,9 +118,9 @@ const ModalAddDebt = (props: ModalAddDebtProps) => {
 					iconClose={iconClose}
 					width={836}
 					footer={false}
-					className="p-[16px] "
+					className="p-[16px] modal-add-debt"
 				>
-        <div>
+        <div className="modal-add-debt">
 					<div className="w-full">
 						<Input
 							className="flex-1"
@@ -129,17 +129,17 @@ const ModalAddDebt = (props: ModalAddDebtProps) => {
 						/>
 					</div>
 					<div className="w-full flex justify-between">
-						<div className="w-[48%] flex flex-col p-[12px]">
+						<div className="w-[48%] flex flex-col p-[12px] bg-white rounded-lg mt-[12px]">
 							<div className="flex justify-between mb-[16px]">
 								<p className="text-medium font-medium text-[#2E2D3D]">Mã công nợ</p>
 								<p className="text-medium font-medium text-[#2E2D3D]">BHV0021</p>
 							</div>
 							<div className="flex justify-between mb-[16px]">
-								<p className="text-medium font-medium text-[#2E2D3D]">Mã công nợ</p>
-								<p className="text-medium font-medium text-[#2E2D3D]">BHV0021</p>
+								<p className="text-medium font-medium text-[#2E2D3D]">Ngày tạo nợ</p>
+								<p className="text-medium font-medium text-[#2E2D3D]">16:36 - 21/09/2022</p>
 							</div>
 							<div className="mb-[16px]">
-								<p className="text-medium font-medium text-[#2E2D3D] mb-[8px]">Mã công nợ</p>
+								<p className="text-medium font-medium text-[#2E2D3D] mb-[8px]">Nhân viên xử lý</p>
 								<Select 
 									className="w-[100%]"
 									placeholder="Nguyễn Văn A"
@@ -147,7 +147,7 @@ const ModalAddDebt = (props: ModalAddDebtProps) => {
 								/>
 							</div>
 						</div>
-						<div className="w-[48%] flex flex-col p-[12px]">
+						<div className="w-[48%] flex flex-col p-[12px] bg-white rounded-lg mt-[12px]">
 							<div className="flex justify-between mb-[16px]">
 								<p className="text-medium font-medium text-[#2E2D3D]">Họ và tên khách hàng</p>
 								<p className="text-medium font-medium text-[#2E2D3D]">--</p>
@@ -162,18 +162,18 @@ const ModalAddDebt = (props: ModalAddDebtProps) => {
 							</div>
 							<div className="mb-[16px] flex justify-between">
 								<p className="text-medium font-medium text-[#2E2D3D]">Tiền công nợ hiện tại</p>
-								<p className="text-medium font-medium text-[#2E2D3D]">0 đ</p>
+								<p className="text-medium font-medium text-[#F97316]">0 đ</p>
 							</div>
 						</div>
 					</div>
-					<div className="w-full">
+					<div className="w-full mt-[12px]">
 						<Table columns={columns} dataSource={listDebt}/>
 					</div>
 					<div className="mb-[24px] w-[409px] flex justify-between items-center">
 						<p className="mr-[24px] text-medium font-medium text-[#2E2D3D]">Số tiền công nợ</p>
 						<Input width={267} placeholder="0 đ"/>
 					</div>
-					<div className="flex w-full">
+					<div className="flex w-full rounded-lg bg-white p-[12px]">
 						<div className="text-medium font-medium w-[60%] mr-[12px] mb-[8px]">
 								<p className="mb-[8px]">Ghi chú</p>
 								<TextArea className="bg-slate-100 !h-[104px]" placeholder="Công nợ theo đơn hoàn"/>
@@ -181,8 +181,8 @@ const ModalAddDebt = (props: ModalAddDebtProps) => {
 						<p className="text-meium font-medium w-[30%] mb-[8px]">Hình ảnh</p>
 					</div>
 					<div className="w-full flex justify-end mt-[32px]">
-						<Button variant="outlined" className="mr-[12px]" width={246} height={44} text="HUỶ BỎ"/>
-						<Button variant="secondary"  width={246} height={44} text="XÁC NHẬN"/>
+						<Button variant="outlined" className="mr-[12px] bg-white" width={246} height={44} text="TRỞ LẠI"/>
+						<Button variant="secondary"  width={246} height={44} text="CẬP NHẬT"/>
 					</div>
 				</div>
 				</Modal>
