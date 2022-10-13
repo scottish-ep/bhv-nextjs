@@ -31,7 +31,7 @@ const ListDebt = () => {
   });
   const [isShowModalDebtDetail, setIsShowModalDebtDetail] = useState(false);
   const [isShowModalAddDebt, setIsShowModalAddDebt] = useState(false);
-  const [isShowModalPayDebt, setIsShowModalPayDebt] = useState(true);
+  const [isShowModalPayDebt, setIsShowModalPayDebt] = useState(false);
   const [loading, setLoading] = useState(false);
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);
@@ -197,7 +197,7 @@ const ListDebt = () => {
         title="Chi tiết công nợ"
         isVisible={isShowModalDebtDetail}
         onClose={() => setIsShowModalDebtDetail(false)}
-        onOpen={() => setIsShowModalDebtDetail(false)}
+        onOpen={() => {setIsShowModalPayDebt(true); setIsShowModalDebtDetail(false)}}
       />
       <ModalPayDebt
         title="Thanh toán công nợ"

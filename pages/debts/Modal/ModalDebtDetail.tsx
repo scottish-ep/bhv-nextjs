@@ -210,7 +210,7 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
         </div>
         <div className="w-full flex justify-end mt-[32px]">
             <Button variant="outlined" className="mr-[12px]" width={305} height={44} text="TRỞ LẠI"/>
-            <Button variant="secondary"  width={305} height={44} text="THANH TOÁN"/>
+            <Button variant="secondary"  width={305} height={44} text="THANH TOÁN" onClick={onOpen}/>
         </div>
       </div>
     </Modal>
