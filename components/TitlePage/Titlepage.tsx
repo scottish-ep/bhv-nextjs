@@ -23,7 +23,6 @@ const TitlePage = (props: TitlePageProps) => {
           <Icon icon="back" size={24} color="#DADADD" />
         </button>
       )}
-      <div className={classNames(styles.title, className)}>{title}</div>
       <div className="flex flex-col gap-y-2">
         <div className={styles.title}>{title}</div>
         {description && <div className={styles.description}>{description}</div>}

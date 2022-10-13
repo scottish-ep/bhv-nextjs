@@ -241,4 +241,4 @@ const ListDebt = () => {
   );
 };
 
-ReactDOM.render(<ListDebt />, document.getElementById("root"));
+export default ListDebt;  

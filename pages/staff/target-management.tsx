@@ -4,7 +4,8 @@ import { Switch, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import get from "lodash/get";
 import { format } from "date-fns";
-
+import Image from "next/image"
+import {Checkbox} from "antd"
 import Tabs from "../../components/Tabs";
 import TitlePage from "../../components/TitlePage/Titlepage";
 import Select from "../../components/Select/Select";
@@ -13,22 +14,24 @@ import Icon from "../../components/Icon/Icon";
 import Input from "../../components/Input/Input";
 import DatePicker from "../../components/DatePicker/DatePicker";
 import DropdownStatus from "../../components/DropdownStatus";
+import ModalSettingTarget from "./Modal/modal-setting-target";
 import { StatusColorEnum, StatusEnum, StatusList } from "../../types";
 
 import classNames from "classnames";
 
 import styles from "../../styles/ListProduct.module.css";
 
-import { IsProduct } from "../products/product.type";
+import { ITartgetManageProps } from "./staff.type";
 import { productTypeList, groupStaff } from "../../const/constant";
 
 const TargetManagement = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [loading, setLoading] = useState(false);
-  const [pagination, setPagination] = useState({
-    total: 0,
-    pageSize: 10,
-  });
+  // const [pagination, setPagination] = useState({
+  //   order: 150    pageSize: 10,
+  // });
+
+  const [isShowModalSettingTarget, setIsShowModalSettingTarget] = useState(false);
 
   useEffect(() => {
     const element = document.getElementById("loading__animation");
@@ -47,330 +50,261 @@ const TargetManagement = () => {
     onChange: onSelectChange,
   };
 
-  const columns: ColumnsType<IsProduct> = [
+  const columns: ColumnsType<ITartgetManageProps> = [
     {
-      title: "Hiện",
-      width: 82,
+      title: "",
+      width: 50,
       key: "id",
       fixed: "left",
       align: "center",
       render: (_, record) => {
         return (
-          <Switch
-            className="button-switch"
-            defaultChecked={
-              record.show ? (record.show === 1 ? true : false) : false
-            }
-            onChange={() => console.log("check")}
-          />
+          <Checkbox className="ml-[4px]"/>
         );
       },
     },
     {
-      title: "Mã sản phẩm",
-      width: 150,
+      title: "Tên nhân viên / ID",
+      width: 184,
       dataIndex: "id",
       key: "name",
       fixed: "left",
-      align: "center",
+      align: "left",
       render: (_, record) => (
-        <span className="text-[#384ADC] font-semibold">
-          {record.id || get(record, "user.id")}
-        </span>
-      ),
-    },
-    {
-      title: "Tên sản phẩm",
-      width: 200,
-      dataIndex: "name",
-      key: "name",
-      fixed: "left",
-      render: (_, record) => (
-        <div>
-          <span className="font-medium">{record.name}</span>
+        <div className="w-full flex justify-start">
+          <div className="w-[36px] relative mr-[8px]">
+            <Image src={record.img} layout="fill"/>
+          </div>
+          <div className="flex flex-col justify-start">
+            <p className="text-medium font-medium text-[#384ADC]">{record.name}</p>
+            <p className="text-medium font-medium text-[#5F5E6B]">{record.id}</p>
+          </div>
         </div>
       ),
     },
     {
-      title: "Danh mục",
+      title: "Chức vụ",
+      width: 130,
+      dataIndex: "role",
+      key: "name",
+      align: "center",
+      render: (_, record) => (
+        <div>
+          <span className="font-medium text-medium">{record.role}</span>
+        </div>
+      ),
+    },
+    {
+      title: "Tổng số lượng đơn hàng",
       width: 132,
-      dataIndex: "category",
-      key: "category",
+      dataIndex: "order",
+      key: "order",
+      sorter: (a, b) => a.orderSum - b.orderSum,
       align: "center",
       render: (_, record) => (
-        <span className="font-medium text-[#1D1C2D]">{record.category}</span>
+        <span className="font-medium text-[#1D1C2D]">{record.order}</span>
       ),
     },
     {
-      title: "Tổng nhập",
-      width: 200,
-      dataIndex: "total",
-      key: "total",
+      title: "Doanh thu",
+      width: 150,
+      dataIndex: "profit",
+      sorter: (a, b) => a.orderProfit - b.orderProfit,
+      key: "profit" ,
       align: "center",
       render: (_, record) => (
-        <span className="font-medium text-[#1D1C2D]">{record.total}</span>
+        <span className="font-medium text-[#1D1C2D]">{record.profit} đ</span>
       ),
     },
     {
-      title: "Mẫu mã",
-      width: 100,
-      dataIndex: "models",
-      key: "models",
+      title: "KPI đơn hàng",
+      width: 315,
+      sorter: (a, b) => a.orderKpiOrder - b.orderKpiOrder,
+      dataIndex: "kpiorder",
+      key: "kpiorder",
       align: "center",
       render: (_, record) => (
-        <span className="font-medium text-[#1D1C2D]">{record.models}</span>
+        <div className="flex flex-col w-full justify-center items-center">
+          <div className="w-[55%] flex items-center justify-between">
+            <div className="w-[135px] h-[6px] rounded-lg relative bg-slate-200">
+              <div className="h-[6px] rounded-lg absolute bg-sky-500" style={{width: `${Math.round(record.order/record.kpiorder *1000)/10 }%`}}></div>
+            </div>
+            <div className="text-medium font-medium text-[#0EA5E9]">{Math.round(record.order/record.kpiorder *1000)/10 }%</div>
+          </div>
+          <div className="w-[28%] flex justify-around text-[#909098]">
+            <span className="font-medium text-[#FF970D]">{record.order}</span>
+            <span className="text-medium font-medium text-[#F0F0F1]">/</span>
+            <span className="font-medium text-[#909098]">{record.kpiorder}</span>
+          </div>
+        </div>
       ),
     },
     {
-      title: "Có thể bán",
-      width: 132,
-      dataIndex: "numberSale",
-      key: "numberSale",
+      title: "KPI doanh thu",
+      width: 315,
+      dataIndex: "kpiprofit",
+      sorter: (a, b) => a.orderKpiProfit - b.orderKpiProfit,
+      key: "kpiprofit",
       align: "center",
       render: (_, record) => (
-        <span className="font-medium text-[#1D1C2D]">
-          {record.numberSale} kg
-        </span>
+        <div className="flex flex-col w-full justify-center items-center">
+          <div className="w-[55%] flex items-center justify-between">
+            <div className="w-[135px] h-[6px] rounded-lg relative bg-slate-200">
+              <div className="h-[6px] rounded-lg absolute bg-green-500" style={{width: `${Math.round(record.profit/record.kpiprofit *1000)/10 }%`}}></div>
+            </div>
+            <div className="text-medium font-medium text-[#10B981]">{Math.round(record.profit/record.kpiprofit *1000)/10 }%</div>
+          </div>
+          <div className="w-[50%] flex justify-around text-[#909098]">
+            <span className="font-medium text-[#FF970D]">{record.profit}</span>
+            <span className="text-medium font-medium text-[#F0F0F1]">/</span>
+            <span className="font-medium text-[#909098]">{record.kpiprofit}</span>
+          </div>
+        </div>
       ),
-    },
-    {
-      title: "Giá bán",
-      width: 140,
-      dataIndex: "price",
-      key: "price",
-      align: "center",
-      render: (_, record) => (
-        <span className="font-medium text-[#1D1C2D]">{record.price}</span>
-      ),
-    },
-    {
-      title: "Tổng tiền sản phẩm",
-      width: 185,
-      dataIndex: "totalPrice",
-      key: "totalPrice",
-      align: "center",
-      render: (_, record) => (
-        <div className="font-medium text-[#1D1C2D]">{record.totalPrice}</div>
-      ),
-    },
-    {
-      title: "Ngày nhập",
-      width: 132,
-      dataIndex: "createdAt",
-      key: "createdAt",
-      align: "center",
-      render: (_, record) => (
-        <div className="font-medium text-[#1D1C2D]">{record.createdAt}</div>
-      ),
-    },
-    {
-      title: "Ngày hết hạn",
-      width: 185,
-      dataIndex: "outOfDate",
-      key: "outOfDate",
-      align: "center",
-      render: (_, record) => (
-        <div className="font-medium text-[#1D1C2D]">{record.outOfDate}</div>
-      ),
-    },
-    {
-      title: "Trạng thái",
-      width: 185,
-      dataIndex: "status",
-      key: "status",
-      align: "center",
-      fixed: "right",
-      render: (_, record) =>
-        record?.status && (
-          <span
-            className={`font-semibold text-[${StatusColorEnum[record.status]}]`}
-          >
-            {StatusList.find((status) => status.value === record.status)?.name}
-          </span>
-        ),
     },
   ];
 
-  const data: IsProduct[] = [
+  const data = [
     {
       show: true,
-      id: "KH0001",
-      name: "Áo thun basic cotton ",
-      image: "",
+      id: "NV0001",
+      name: "Yến Nhi",
+      img: require("../../assets/staff.svg"),
+      role: "Sale cấp 1",
+      order: 150,
+      profit: 13500000, 
+      kpiorder: 270,
+      kpiprofit: 30000000,
+    },
+    {
+      show: true,
+      id: "NV0001",
+      name: "Yến Nhi",
+      role: "Sale cấp 1",
+      img: require("../../assets/staff.svg"),
       category: "Áo",
-      total: 500,
-      models: 4,
-      numberSale: 500,
-      price: "60.000.000 đ",
-      totalPrice: "60.000.000 đ",
-      createdAt: "19/09/2022",
-      outOfDate: "19/09/2022",
-      status: StatusEnum.CAN_SALES,
+      order: 150,
+      profit: 13500000, 
+      kpiorder: 270,
+      kpiprofit: 30000000,  },
+    {
+      show: true,
+      id: "NV0001",
+      name: "Yến Nhi",
+      role: "Sale cấp 1",
+      img: require("../../assets/staff.svg"),
+      category: "Áo",
+      order: 150,
+      profit: 13500000, 
+      kpiorder: 270,
+      kpiprofit: 30000000,
+    },
+    {
+      show: true,
+      id: "NV0001",
+      name: "Yến Nhi",
+      role: "Sale cấp 1",
+      img: require("../../assets/staff.svg"),
+      category: "Áo",
+      order: 150,
+      profit: 13500000, 
+      kpiorder: 270,
+      kpiprofit: 30000000,  },
+    {
+      show: true,
+      id: "NV0001",
+      name: "Yến Nhi",
+      role: "Sale cấp 1",
+      img: require("../../assets/staff.svg"),
+      category: "Áo",
+      order: 150,
+      profit: 13500000, 
+      kpiorder: 270,
+      kpiprofit: 30000000,
+    },
+    {
+      show: true,
+      id: "NV0001",
+      name: "Yến Nhi",
+      role: "Sale cấp 1",
+      img: require("../../assets/staff.svg"),
+      category: "Áo",
+      order: 150,
+      profit: 13500000, 
+      kpiorder: 270,
+      kpiprofit: 30000000,
+    },
+    {
+      show: true,
+      id: "NV0001",
+      name: "Yến Nhi",
+      role: "Sale cấp 1",
+      img: require("../../assets/staff.svg"),
+      category: "Áo",
+      order: 150,
+      profit: 13500000, 
+      kpiorder: 270,
+      kpiprofit: 30000000,
+    },
+    {
+      show: true,
+      id: "NV0001",
+      name: "Yến Nhi",
+      role: "Sale cấp 1",
+      img: require("../../assets/staff.svg"),
+      category: "Áo",
+      order: 150,
+      profit: 13500000, 
+      kpiorder: 270,
+      kpiprofit: 30000000,
+    },
+    {
+      show: true,
+      id: "NV0001",
+      name: "Yến Nhi",
+      role: "Sale cấp 1",
+      img: require("../../assets/staff.svg"),
+      category: "Áo",
+      order: 150,
+      profit: 13500000, 
+      kpiorder: 270,
+      kpiprofit: 30000000,
+    },
+    {
+      show: true,
+      id: "NV0001",
+      name: "Yến Nhi",
+      role: "Sale cấp 1",
+      img: require("../../assets/staff.svg"),
+      category: "Áo",
+      order: 150,
+      profit: 13500000, 
+      kpiorder: 270,
+      kpiprofit: 30000000,
     },
     {
       show: true,
       id: "KH0001",
-      name: "Áo thun basic cotton ",
-      image: "",
+      name: "Yến Nhi",
+      role: "Sale cấp 1",
+      img: require("../../assets/staff.svg"),
       category: "Áo",
-      total: 500,
-      models: 4,
-      numberSale: 500,
-      price: "60.000.000 đ",
-      totalPrice: "60.000.000 đ",
-      createdAt: "19/09/2022",
-      outOfDate: "19/09/2022",
-      status: StatusEnum.HIDDEN,
+      order: 150,
+      profit: 13500000, 
+      kpiorder: 270,
+      kpiprofit: 30000000,
     },
     {
       show: true,
       id: "KH0001",
-      name: "Áo thun basic cotton ",
-      image: "",
+      name: "Yến Nhi",
+      role: "Sale cấp 1",
+      img: require("../../assets/staff.svg"),
       category: "Áo",
-      total: 500,
-      models: 4,
-      numberSale: 500,
-      price: "60.000.000 đ",
-      totalPrice: "60.000.000 đ",
-      createdAt: "19/09/2022",
-      outOfDate: "19/09/2022",
-      status: StatusEnum.NEAR_EXPIRE,
-    },
-    {
-      show: true,
-      id: "KH0001",
-      name: "Áo thun basic cotton ",
-      image: "",
-      category: "Áo",
-      total: 500,
-      models: 4,
-      numberSale: 500,
-      price: "60.000.000 đ",
-      totalPrice: "60.000.000 đ",
-      createdAt: "19/09/2022",
-      outOfDate: "19/09/2022",
-      status: StatusEnum.EXPIRE,
-    },
-    {
-      show: true,
-      id: "KH0001",
-      name: "Áo thun basic cotton ",
-      image: "",
-      category: "Áo",
-      total: 500,
-      models: 4,
-      numberSale: 500,
-      price: "60.000.000 đ",
-      totalPrice: "60.000.000 đ",
-      createdAt: "19/09/2022",
-      outOfDate: "19/09/2022",
-      status: StatusEnum.CAN_SALES,
-    },
-    {
-      show: true,
-      id: "KH0001",
-      name: "Áo thun basic cotton ",
-      image: "",
-      category: "Áo",
-      total: 500,
-      models: 4,
-      numberSale: 500,
-      price: "60.000.000 đ",
-      totalPrice: "60.000.000 đ",
-      createdAt: "19/09/2022",
-      outOfDate: "19/09/2022",
-      status: StatusEnum.CAN_SALES,
-    },
-    {
-      show: true,
-      id: "KH0001",
-      name: "Áo thun basic cotton ",
-      image: "",
-      category: "Áo",
-      total: 500,
-      models: 4,
-      numberSale: 500,
-      price: "60.000.000 đ",
-      totalPrice: "60.000.000 đ",
-      createdAt: "19/09/2022",
-      outOfDate: "19/09/2022",
-      status: StatusEnum.CAN_SALES,
-    },
-    {
-      show: true,
-      id: "KH0001",
-      name: "Áo thun basic cotton ",
-      image: "",
-      category: "Áo",
-      total: 500,
-      models: 4,
-      numberSale: 500,
-      price: "60.000.000 đ",
-      totalPrice: "60.000.000 đ",
-      createdAt: "19/09/2022",
-      outOfDate: "19/09/2022",
-      status: StatusEnum.CAN_SALES,
-    },
-    {
-      show: true,
-      id: "KH0001",
-      name: "Áo thun basic cotton ",
-      image: "",
-      category: "Áo",
-      total: 500,
-      models: 4,
-      numberSale: 500,
-      price: "60.000.000 đ",
-      totalPrice: "60.000.000 đ",
-      createdAt: "19/09/2022",
-      outOfDate: "19/09/2022",
-      status: StatusEnum.CAN_SALES,
-    },
-    {
-      show: true,
-      id: "KH0001",
-      name: "Áo thun basic cotton ",
-      image: "",
-      category: "Áo",
-      total: 500,
-      models: 4,
-      numberSale: 500,
-      price: "60.000.000 đ",
-      totalPrice: "60.000.000 đ",
-      createdAt: "19/09/2022",
-      outOfDate: "19/09/2022",
-      status: StatusEnum.CAN_SALES,
-    },
-    {
-      show: true,
-      id: "KH0001",
-      name: "Áo thun basic cotton ",
-      image: "",
-      category: "Áo",
-      total: 500,
-      models: 4,
-      numberSale: 500,
-      price: "60.000.000 đ",
-      totalPrice: "60.000.000 đ",
-      createdAt: "19/09/2022",
-      outOfDate: "19/09/2022",
-      status: StatusEnum.CAN_SALES,
-    },
-    {
-      show: true,
-      id: "KH0001",
-      name: "Áo thun basic cotton ",
-      image: "",
-      category: "Áo",
-      total: 500,
-      models: 4,
-      numberSale: 500,
-      price: "60.000.000 đ",
-      totalPrice: "60.000.000 đ",
-      createdAt: "19/09/2022",
-      outOfDate: "19/09/2022",
-      status: StatusEnum.CAN_SALES,
+      order: 150,
+      profit: 13500000, 
+      kpiorder: 270,
+      kpiprofit: 30000000,
     },
   ];
 
@@ -393,9 +327,16 @@ const TargetManagement = () => {
   ];
 
   return (
-    <div className="w-full">
+    <div className="w-full target-management">
       <div className="flex items-center justify-between mb-[12px] flex-wrap">
+        <div className="flex flex-col justify-start">
         <TitlePage title="Quản lý chỉ tiêu" href="/user-goal" />
+        <div className="flex mt-[8px]">
+          <p className="text-medium font-medium mr-[5px]">Quản lý nhân viên</p>
+          <p>/</p>
+          <p className="text-medium font-medium text-[#384ADC] ml-[5px]">Quản lý chỉ tiêu</p>
+        </div>
+        </div>
         <div className="flex gap-[8px] flex-wrap">
           <div className="flex items-center">
             <div className="mr-[12px]">Chọn kho</div>
@@ -417,6 +358,7 @@ const TargetManagement = () => {
             width={158}
             color="white"
             icon={<Icon icon="settings-1" size={24} />}
+            onClick= {() => setIsShowModalSettingTarget(true)}
           >
             Cài đặt chỉ tiêu
           </Button>
@@ -428,6 +370,16 @@ const TargetManagement = () => {
           >
             Hỗ trợ
           </Button>
+        </div>
+      </div>
+      <div className="flex flex-col bg-white rounded-lg mt-[12px] mb-[12px] p-[12px]">
+        <div className="flex justify-between mb-[16px]">
+          <p className="text-medium font-medium">Tên chỉ tiêu</p>
+          <p className="text-medium font-medium">Chỉ tiêu tháng 9</p>
+        </div>
+        <div className="flex justify-between">
+          <p className="text-medium font-medium">Thời gian áp dụng</p>
+          <p className="text-medium font-medium">01/09/2022 - 30/09/2022</p>
         </div>
       </div>
       <div className="flex items-center flex-wrap gap-[8px] mb-[12px]">
@@ -445,34 +397,19 @@ const TargetManagement = () => {
       </div>
       <div className="relative">
         <Table
-          loading={loading}
-          rowSelection={rowSelection}
           columns={columns}
           dataSource={data}
-          pagination={{
-            defaultPageSize: pagination.pageSize,
-            showSizeChanger: true,
-            pageSizeOptions: [10, 20, 50, 100],
-          }}
           scroll={{ x: 50, y: 450 }}
         />
-        <div className={classNames("flex items-center", styles.total_wrapper)}>
-          <div className={styles.row}>
-            Có thể bán:
-            <span className="font-medium text-[#384ADC]"> 5000</span>
-          </div>
-          <div className={styles.row}>
-            Tổng tiền đã bán:
-            <span className="font-medium text-[#384ADC]"> 353.000.000 đ</span>
-          </div>
-          <div className={styles.row}>
-            Tiền hàng còn lại:
-            <span className="font-medium text-[#384ADC]"> 150.000.000 </span>
-          </div>
-        </div>
       </div>
+      <ModalSettingTarget
+        title="Cài đặt chỉ tiêu"
+        isVisible={isShowModalSettingTarget}
+        onClose={() => setIsShowModalSettingTarget(false)}
+        onOpen={() => setIsShowModalSettingTarget(false)}
+      />
     </div>
   );
 };
 
-ReactDOM.render(<TargetManagement />, document.getElementById("root"));
+export default TargetManagement;
