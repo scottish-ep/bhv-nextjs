@@ -1,5 +1,92 @@
 import { StatusEnum, StatusList } from "../types";
 
+export const listDayCompare = [
+  {
+    label: "7 ngày qua",
+    value: "7 ngày qua",
+  },
+  {
+    label: "14 ngày qua",
+    value: "14 ngày qua",
+  },
+  {
+    label: "30 ngày qua",
+    value: "30 ngày qua",
+  },
+  {
+    label: "3 tháng trước",
+    value: "3 tháng trước",
+  },
+  {
+    label: "6 tháng trước",
+    value: "6 tháng trước",
+  },
+];
+export const comboList = Array(50)
+  .fill({
+    name: "Combo 3 áo thun basic cotton",
+    price: 250000,
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+    productList: Array(5)
+      .fill({
+        name: "Nước rửa chén sunlight trà xanh",
+        quantity: 1,
+      })
+      .map((item, index) => ({
+        ...item,
+        id: index + 1,
+        sku: "SKu" + (index + 1),
+        price: index % 2 === 0 ? 50000 : 15000,
+        category_id: index % 2 === 0 ? "Gia dụng" : "Cá nhân",
+      })),
+  })
+  .map((item, index) => ({
+    ...item,
+    id: "CB000" + (index + 1),
+    apply: index % 2 === 0 ? true : false,
+    quantity: index % 2 === 0 ? 1 : 3,
+    channel: index % 2 === 0 ? "Tại quầy" : "Online",
+  }));
+
+export const liveStreamAppList = Array(50)
+  .fill({
+    name: "Sale hot đầu tháng 10",
+    quantity: 10,
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+  })
+  .map((item, index) => ({
+    ...item,
+    id: index + 1,
+    status: index % 2 === 0 ? StatusEnum.COMPLETED : StatusEnum.NOT_HAPPENDED,
+  }));
+
+export const liveStreamAppDetail = {
+  id: "1",
+  name: "Hàng sale 10.10",
+  createdAt: Date.now(),
+  updatedAt: Date.now(),
+  commentList: Array(20)
+    .fill({
+      name: "Nguyen Hien",
+      comment: "039.625.1023 em 1 chiếc nhé",
+      phone: "0396251023",
+      netWorkProviders: "Viettel",
+      createdAt: Date.now(),
+      updatedAt: Date.now(),
+    })
+    .map((item, index) => ({ ...item, id: index + 1 })),
+  productList: Array(10)
+    .fill({
+      name: "Áo thun basic cotton",
+      category_id: "Áo",
+      price: 120000,
+      discount: 99000,
+    })
+    .map((item, index) => ({ ...item, id: index + 1 })),
+};
+
 export const productList = Array(50)
   .fill({
     name: "Áo thun basic cotton - Trắng - S",
@@ -31,6 +118,21 @@ export const returnWareHouseList = Array(50)
     status: index % 2 === 0 ? StatusEnum.NEW : StatusEnum.COMPLETED,
   }));
 
+export const listDebtDetail = Array(50).fill({
+  id: "123",
+  time: "19/09/2022 - 13:05",
+  deal: 150.0,
+  method: "Đơn hàng",
+  content: "Đơn hoàn #madonhang",
+  status: StatusEnum.PENDING,
+});
+
+export const listTarget = Array(50).fill({
+  name: "Chỉ tiêu tháng 9",
+  time: "01/09/2022 - 30/09/2022",
+  status: StatusEnum.HAPPENING,
+});
+
 export const list_Debt = Array(50)
   .fill({
     id: "CN0001",
@@ -40,9 +142,9 @@ export const list_Debt = Array(50)
     debt: 1200000,
     note: "Công thợ theo đơn hoàn",
     status: StatusEnum.PENDING,
-    update_time: "19/09/2022 - 13:05"
+    update_time: "19/09/2022 - 13:05",
   })
-  .map((item, index) => ({...item, id: `KH${index+1}`}))
+  .map((item, index) => ({ ...item, id: `KH${index + 1}` }));
 
 export const wareHouseList = Array(50)
   .fill({
@@ -65,19 +167,19 @@ export const wareHouseList = Array(50)
   .map((item, index) => ({ ...item, id: `KH${index + 1}` }));
 
 export const paymentList = Array(50)
- .fill({
+  .fill({
     code: "C004",
     deal_name: "Tiền điện",
     employee: "Yến Nhi",
     date: "09:23 - 21/09/2022",
-    money: 500.000,
+    money: 500.0,
     method: "Tiền mặt",
     receive_name: "Anh Ước",
     phone: "0922.562.888",
     status: StatusEnum.PENDING,
-    note: "Có hoá đơn"
- })
- .map((item, index) => ({...item, id: `KH${index+1}`}));
+    note: "Có hoá đơn",
+  })
+  .map((item, index) => ({ ...item, id: `KH${index + 1}` }));
 
 export const wareHouseDetail = {
   id: "EP01",
@@ -320,13 +422,45 @@ export const productAttributes = [
   },
 ];
 
-export const listDebtDetail = Array(50)
-.fill({
-  id: "123",
-  time: "19/09/2022 - 13:05",
-  deal: 150.000,
-  method: "Đơn hàng",
-  content: "Đơn hoàn #madonhang",
-  status: StatusEnum.PENDING
-})
-.map((item, index) => ({ ...item, id: index + 1 }))
+export const groupStaff = [
+  {
+    label: "Nhóm nhân viên 1",
+    value: "Nhóm nhân viên 1",
+  },
+  {
+    label: "Nhóm nhân viên 2",
+    value: "Nhóm nhân viên 2",
+  },
+  {
+    label: "Nhóm nhân viên 3",
+    value: "Nhóm nhân viên 3",
+  },
+];
+
+export const filterCommentList: {
+  label: string;
+  value: string;
+}[] = [
+  {
+    label: "Tất cả bình luận",
+    value: "",
+  },
+  {
+    label: "Bình luận chứa số điện thoại",
+    value: "phone",
+  },
+];
+
+export const searchTypeList: {
+  label: string;
+  value: string;
+}[] = [
+  {
+    label: "Sản phẩm",
+    value: "product",
+  },
+  {
+    label: "Mẫu mã",
+    value: "sku",
+  },
+];

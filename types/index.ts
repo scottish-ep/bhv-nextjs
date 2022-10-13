@@ -14,6 +14,8 @@ export enum StatusEnum {
   PAY = "PAY",
   RECEIVE = "RECEIVE",
   LOCK = "LOCK",
+  HAPPENING = "HAPPENING",
+  NOT_HAPPENDED = "NOT_HAPPENDED",
 }
 
 export enum StatusColorEnum {
@@ -29,10 +31,11 @@ export enum StatusColorEnum {
   COMPLETED = "#6366F1",
   SELLING = "#384ADC",
   PENDING = "#8B5CF6",
-  PAY = "#8B5CF6",
-  RECEIVE = "#EAB308",
+  PAY = "#EF4444",
+  RECEIVE = "#384ADC",
   LOCK = "#384ADC",
-    
+  HAPPENING = "#10B981",
+  NOT_HAPPENDED = "#4B4B59",
 }
 
 export const StatusList = [
@@ -82,18 +85,26 @@ export const StatusList = [
   },
   {
     value: StatusEnum.PENDING,
-    name: "Chờ duyệt"
+    name: "Chờ duyệt",
   },
   {
     value: StatusEnum.PAY,
-    name: "Đã chi"
+    name: "Đã chi",
   },
   {
     value: StatusEnum.RECEIVE,
-    name: "Đã thu"
+    name: "Đã thu",
   },
   {
     value: StatusEnum.LOCK,
-    name: "Đã khoá"
-  }
+    name: "Đã khoá",
+  },
+  {
+    value: StatusEnum.HAPPENING,
+    name: "Đang diễn ra",
+  },
+  {
+    value: StatusEnum.NOT_HAPPENDED,
+    name: "Chưa diễn ra",
+  },
 ];

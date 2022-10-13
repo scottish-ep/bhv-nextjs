@@ -19,12 +19,10 @@ import classNames from "classnames";
 
 import styles from "../../styles/ListProduct.module.css";
 
-import { IsProduct } from "./product.type";
-import { productTypeList } from "../../const/constant";
+import { IsProduct } from "../products/product.type";
+import { productTypeList, groupStaff } from "../../const/constant";
 
-// import Image from "next/image";
-
-const ListProduct = () => {
+const TargetManagement = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [loading, setLoading] = useState(false);
   const [pagination, setPagination] = useState({
@@ -376,16 +374,37 @@ const ListProduct = () => {
     },
   ];
 
+  const warehouseData = [
+    {
+      label: "Tổng kho Linh Dương",
+      value: "Tổng kho Linh Dương",
+      totalPrice: "21.000.000 đ",
+    },
+    {
+      label: "Cửa hàng LD Mart",
+      value: "Cửa hàng LD Mart",
+      totalPrice: "21.000.000 đ",
+    },
+    {
+      label: "Siêu thị tiện ích LD",
+      value: "Siêu thị tiện ích LD",
+      totalPrice: "21.000.000 đ",
+    },
+  ];
+
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-[12px] flex-wrap">
-        {/* <Image
-          src={require("../../assets/no-data.svg")}
-          width={100}
-          height={100}
-        /> */}
-        <TitlePage title="Quản lý sản phẩm" />
+        <TitlePage title="Quản lý chỉ tiêu" href="/user-goal" />
         <div className="flex gap-[8px] flex-wrap">
+          <div className="flex items-center">
+            <div className="mr-[12px]">Chọn kho</div>
+            <Select
+              defaultValue={warehouseData[0]}
+              options={warehouseData}
+              style={{ width: 248 }}
+            />
+          </div>
           <Button
             variant="outlined"
             width={109}
@@ -394,13 +413,12 @@ const ListProduct = () => {
             Xuất file
           </Button>
           <Button
-            variant="primary"
-            width={151}
+            variant="outlined"
+            width={158}
             color="white"
-            suffixIcon={<Icon icon="add" size={24} />}
-            onClick={() => (window.location.href = "/product/items/create")}
+            icon={<Icon icon="settings-1" size={24} />}
           >
-            Thêm mới
+            Cài đặt chỉ tiêu
           </Button>
           <Button
             variant="no-outlined"
@@ -416,18 +434,14 @@ const ListProduct = () => {
         <Input
           className="flex-1"
           prefix={<Icon icon="search" color="#FF970D" size={24} />}
-          placeholder="Nhập mã xuất kho"
+          placeholder="Nhập ID/ Tên nhân viên"
         />
-        <Button variant="outlined" width={148}>
-          Ghim tìm kiếm
-        </Button>
         <Select
           prefix={<Icon icon="category" size={24} color="#5F5E6B" />}
-          placeholder="Tìm theo danh mục sản phẩm"
+          placeholder="Tìm theo nhóm nhân viên"
           style={{ width: 306 }}
-          options={productTypeList}
+          options={groupStaff}
         />
-        <DatePicker width={306} />
       </div>
       <div className="relative">
         <Table
@@ -461,4 +475,4 @@ const ListProduct = () => {
   );
 };
 
-ReactDOM.render(<ListProduct />, document.getElementById("root"));
+ReactDOM.render(<TargetManagement />, document.getElementById("root"));

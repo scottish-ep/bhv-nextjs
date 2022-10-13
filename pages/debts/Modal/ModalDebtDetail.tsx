@@ -10,6 +10,7 @@ import { ColumnsType } from "antd/es/table";
 import { StatusColorEnum, StatusEnum, StatusList } from "../../../types";
 import { listDebtDetail } from "../../../const/constant";
 import TextArea from "antd/lib/input/TextArea";
+import Upload from "../../../components/Upload/Upload";
 interface ModalDebtDetailProps {
   isVisible: boolean;
   title?: string;
@@ -99,7 +100,7 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
       align: "left",
       render: (_, record) => (
         <span className="text-medium text-[#F97316] flex  font-medium">
-          <Icon icon="debt-arrow" size={24} className="mr-[10px]"/>
+          <Icon icon="debt-arrow" size={24} className="mr-[10px]" />
           {record.deal}
         </span>
       ),
@@ -135,7 +136,11 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
       key: "dataIndex",
       align: "left",
       render: (_, record) => (
-        <span className={`font-semibold text-[${StatusColorEnum[record.status]}]`}>
+        <span
+          className={`font-semibold text-[${
+            record?.status && StatusColorEnum[record.status]
+          }]`}
+        >
           {StatusList.find((status) => status.value === record.status)?.name}
         </span>
       ),
@@ -155,7 +160,10 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
     >
       <div>
         <div className="flex justify-between w-full mb-[12px]">
-          <div className="w-[48%] bg-white rounded-lg" style={{ padding: "12px"}}>
+          <div
+            className="w-[48%] bg-white rounded-lg"
+            style={{ padding: "12px" }}
+          >
             <div className="flex items-center justify-between mb-[16px]">
               <div className="text-medium font-medium">Mã công nợ</div>
               <div className="text-medium font-medium">BHV0021</div>
@@ -165,7 +173,9 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
               <div className="text-medium font-medium">16:36 - 21/09/2022</div>
             </div>
             <div className="flex flex-col  justify-left mb-[16px]">
-            <div className="text-medium font-medium mb-[8px]">Nhân viên xử lý</div>
+              <div className="text-medium font-medium mb-[8px]">
+                Nhân viên xử lý
+              </div>
               <Select
                 placeholder="Chọn nguồn"
                 style={{ width: 395 }}
@@ -173,7 +183,10 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
               />
             </div>
           </div>
-          <div className="w-[48%] bg-white rounded-lg" style={{ padding: "12px"}}>
+          <div
+            className="w-[48%] bg-white rounded-lg"
+            style={{ padding: "12px" }}
+          >
             <div className="flex items-center justify-between mb-[16px]">
               <div className="text-medium font-medium">
                 Họ và tên khách hàng
@@ -192,25 +205,56 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
               <div className="text-medium font-medium">
                 Tiền công nợ hiện tại
               </div>
-              <div className="text-medium font-medium" style={{color: "#F97316"}}>150.000 đ</div>
+              <div
+                className="text-medium font-medium"
+                style={{ color: "#F97316" }}
+              >
+                150.000 đ
+              </div>
             </div>
           </div>
         </div>
         <div className="w-full rounded-lg">
-          <Table columns={columns} dataSource={listDebt}/>
+          <Table columns={columns} dataSource={listDebt} />
         </div>
         <div className="w-full flex flex-col p-[12px] bg-white rounded-lg">
-            <div className="flex w-full">
-                <div className="text-medium font-medium w-[60%] mr-[12px]">
-                    Ghi chú
-                    <TextArea className="bg-slate-100 !h-[104px]" placeholder="Công nợ theo đơn hoàn"/>
-                </div>
-                <p className="text-meium font-medium w-[30%]">Hình ảnh</p>
+          <div className="flex w-full">
+            <div className="text-medium font-medium w-[60%] mr-[12px]">
+              <div className="mb-[12px]">Ghi chú</div>
+              <TextArea
+                className="bg-slate-100 !h-[104px]"
+                placeholder="Công nợ theo đơn hoàn"
+              />
             </div>
+            <div className="mb-[16px]">
+              <div className="text-medium font-medium mb-[12px]">
+                Hình ảnh sản phẩm
+              </div>
+              <Upload
+                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                listType="picture-card"
+                fileList={[]}
+                onChange={() => console.log("check")}
+              />
+            </div>
+          </div>
         </div>
         <div className="w-full flex justify-end mt-[32px]">
-            <Button variant="outlined" className="mr-[12px]" width={305} height={44} text="TRỞ LẠI"/>
-            <Button variant="secondary"  width={305} height={44} text="THANH TOÁN" onClick={onOpen}/>
+          <Button
+            variant="outlined"
+            className="mr-[12px]"
+            width={305}
+            height={44}
+            text="TRỞ LẠI"
+            onClick={onClose}
+          />
+          <Button
+            variant="secondary"
+            width={305}
+            height={44}
+            text="THANH TOÁN"
+            onClick={onOpen}
+          />
         </div>
       </div>
     </Modal>

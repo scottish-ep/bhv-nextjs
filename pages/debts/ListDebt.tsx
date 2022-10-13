@@ -17,7 +17,7 @@ import { list_Debt } from "../../const/constant";
 import styles from "../../styles/ListPayment.module.css";
 import ModalDebtDetail from "./Modal/ModalDebtDetail";
 import ModalPayDebt from "./Modal/ModalPayDebt";
-import ModalAddDebt from "./Modal/ModalAddDebt"
+import ModalAddDebt from "./Modal/ModalAddDebt";
 const ListDebt = () => {
   const [listDebt, setListDebt] = useState<ListDebtProps[]>([...list_Debt]);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -50,7 +50,10 @@ const ListDebt = () => {
       fixed: "left",
       align: "center",
       render: (_, record) => (
-        <span className="text-medium text-[#2E2D3D] font-medium" onClick={() => setIsShowModalDebtDetail(true)}>
+        <span
+          className="text-medium text-[#2E2D3D] font-medium"
+          onClick={() => setIsShowModalDebtDetail(true)}
+        >
           {record.id}
         </span>
       ),
@@ -62,7 +65,10 @@ const ListDebt = () => {
       key: "export_name",
       align: "left",
       render: (_, record) => (
-        <div className="flex flex-col justify-center cursor-pointer" onClick={() => setIsShowModalDebtDetail(true)}>
+        <div
+          className="flex flex-col justify-center cursor-pointer"
+          onClick={() => setIsShowModalDebtDetail(true)}
+        >
           <span className="text-medium font-medium text-[#384ADC]">
             {record.name}
           </span>
@@ -79,7 +85,12 @@ const ListDebt = () => {
       key: "note",
       align: "center",
       render: (_, record) => (
-        <span className="text-medium text-[#4B4B59] cursor-pointer" onClick={() => setIsShowModalDebtDetail(true)}>{record.phone}</span>
+        <span
+          className="text-medium text-[#4B4B59] cursor-pointer"
+          onClick={() => setIsShowModalDebtDetail(true)}
+        >
+          {record.phone}
+        </span>
       ),
     },
     {
@@ -89,7 +100,10 @@ const ListDebt = () => {
       key: "quantity",
       align: "center",
       render: (_, record) => (
-        <span className="cursor-pointer text-medium font-medium text-[#F97316]" onClick={() => setIsShowModalDebtDetail(true)}>
+        <span
+          className="cursor-pointer text-medium font-medium text-[#F97316]"
+          onClick={() => setIsShowModalDebtDetail(true)}
+        >
           {record.debt} đ
         </span>
       ),
@@ -101,7 +115,10 @@ const ListDebt = () => {
       key: "weight",
       align: "left",
       render: (_, record) => (
-        <span className="cursor-pointer text-medium font-medium text-[#1D1C2D]" onClick={() => setIsShowModalDebtDetail(true)}>
+        <span
+          className="cursor-pointer text-medium font-medium text-[#1D1C2D]"
+          onClick={() => setIsShowModalDebtDetail(true)}
+        >
           {record.note}
         </span>
       ),
@@ -114,7 +131,10 @@ const ListDebt = () => {
       align: "center",
       render: (_, record) => (
         <span
-          className={`cursor-pointer font-semibold text-[${StatusColorEnum[record.status]}]`} onClick={() => setIsShowModalDebtDetail(true)}
+          className={`cursor-pointer font-semibold text-[${
+            StatusColorEnum[record.status]
+          }]`}
+          onClick={() => setIsShowModalDebtDetail(true)}
         >
           {StatusList.find((status) => status.value === record.status)?.name}
         </span>
@@ -128,7 +148,10 @@ const ListDebt = () => {
       align: "center",
       fixed: "right",
       render: (_, record) => (
-        <span className={`cursor-pointer text-medium font-semibold text-[]`} onClick={() => setIsShowModalDebtDetail(true)}>
+        <span
+          className={`cursor-pointer text-medium font-semibold text-[]`}
+          onClick={() => setIsShowModalDebtDetail(true)}
+        >
           {record.update_time}
         </span>
       ),
@@ -150,8 +173,8 @@ const ListDebt = () => {
             variant="primary"
             width={151}
             color="white"
-            suffixIcon={<Icon icon="add-1" size={24} color="white"/>}
-            onClick = {() => setIsShowModalAddDebt(true)}
+            suffixIcon={<Icon icon="add-1" size={24} color="white" />}
+            onClick={() => setIsShowModalAddDebt(true)}
           >
             Thêm mới
           </Button>
@@ -197,7 +220,10 @@ const ListDebt = () => {
         title="Chi tiết công nợ"
         isVisible={isShowModalDebtDetail}
         onClose={() => setIsShowModalDebtDetail(false)}
-        onOpen={() => {setIsShowModalPayDebt(true); setIsShowModalDebtDetail(false)}}
+        onOpen={() => {
+          setIsShowModalPayDebt(true);
+          setIsShowModalDebtDetail(false);
+        }}
       />
       <ModalPayDebt
         title="Thanh toán công nợ"
@@ -215,5 +241,4 @@ const ListDebt = () => {
   );
 };
 
-export default ListDebt;
-// ReactDOM.render(<ListDebt />, document.getElementById("root"));
+ReactDOM.render(<ListDebt />, document.getElementById("root"));

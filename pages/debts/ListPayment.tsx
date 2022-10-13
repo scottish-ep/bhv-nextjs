@@ -1,4 +1,4 @@
-  import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import TitlePage from "../../components/TitlePage/Titlepage";
 import Button from "../../components/Button/Button";
@@ -12,21 +12,18 @@ import type { ColumnsType } from "antd/es/table";
 import { Table } from "antd";
 import { StatusColorEnum, StatusEnum, StatusList } from "../../types";
 import { ListDebtProps, ListPaymentProps } from "./listdebt.type";
-import classNames from "classnames"
+import classNames from "classnames";
 import DropdownStatus from "../../components/DropdownStatus";
-import {
-  warehouses,
-  statusOptions,
-  paymentList
-} from "../../const/constant"
-import styles from "../../styles/ListPayment.module.css"
-import ModalPayDetail from "./Modal/ModalPayDetail"
+import { warehouses, statusOptions, paymentList } from "../../const/constant";
+import styles from "../../styles/ListPayment.module.css";
+import ModalPayDetail from "./Modal/ModalPayDetail";
 
 const ListPayment = () => {
   const [listPayment, setListPayment] = useState<ListPaymentProps[]>([
     ...paymentList,
   ]);
-  const [isShowModalPayDetail, setIsShowModalPayDetail] = useState(false)
+  const [isShowModalPayDetail, setIsShowModalPayDetail] = useState(false);
+  const [isShowModalAddPayDetail, setIsShowModalAddPayDetail] = useState(false);
   const [isShowModalRemoveExport, setIsShowModalRemoveExport] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const TabStatus = [
@@ -86,7 +83,7 @@ const ListPayment = () => {
             {record.employee}
           </span>
           <span className="text-sm font-medium text-[#1D1C2D]">
-            {record.date  }
+            {record.date}
           </span>
         </div>
       ),
@@ -111,7 +108,7 @@ const ListPayment = () => {
       align: "center",
       render: (_, record) => (
         <span className="text-sm font-medium text-[#1D1C2D]">
-          {record.method} 
+          {record.method}
         </span>
       ),
     },
@@ -140,9 +137,7 @@ const ListPayment = () => {
       align: "center",
       fixed: "right",
       render: (_, record) => (
-        <span
-          className={`text-sm font-medium pd-[9px] text-[]`}
-        >
+        <span className={`text-sm font-medium pd-[9px] text-[]`}>
           {StatusList.find((status) => status.value === record.status)?.name}
         </span>
       ),
@@ -163,10 +158,12 @@ const ListPayment = () => {
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-[12px] flex-wrap">
-      <TitlePage title="Quản lý thu chi" />
+        <TitlePage title="Quản lý thu chi" />
         <div className="flex gap-[8px] flex-wrap">
           <div className="flex items-center">
-            <div className="font-medium pd-[9px] mr-[12px] text-sm">Chọn kho</div>
+            <div className="font-medium pd-[9px] mr-[12px] text-sm">
+              Chọn kho
+            </div>
             <Select
               placeholder="Chọn kho"
               style={{ width: 248 }}
@@ -198,9 +195,7 @@ const ListPayment = () => {
             width={151}
             color="white"
             suffixIcon={<Icon icon="add" size={24} />}
-            onClick={() =>
-              (window.location.href = "/warehouse/balance-commands/create")
-            }
+            onClick={() => setIsShowModalAddPayDetail(true)}
           >
             Thêm mới
           </Button>
@@ -233,7 +228,7 @@ const ListPayment = () => {
         onRow={() => {
           return {
             onClick: () => {
-              setIsShowModalPayDetail(true)
+              setIsShowModalPayDetail(true);
             },
           };
         }}
@@ -249,25 +244,35 @@ const ListPayment = () => {
         scroll={{ x: 50 }}
       />
       <div className={classNames("flex items-center", styles.total_wrapper)}>
-          <div className={styles.row}>
-          Tổng thu: 
-            <span className="font-medium pd-[9px] text-[#384ADC]"> 1.000.000 đ</span>
-          </div>
-          <div className={styles.row}>
-          Tổng chi:
-            <span className="font-medium pd-[9px] text-[#EF4444]"> 16.500.000 đ</span>
-          </div>
+        <div className={styles.row}>
+          Tổng thu:
+          <span className="font-medium pd-[9px] text-[#384ADC]">
+            1.000.000 đ
+          </span>
         </div>
-        <ModalPayDetail 
-          isEdit={true}
-          title="Chi tiết hoá đơn thu chi"
-          isVisible={isShowModalPayDetail}
-          onClose={() => setIsShowModalPayDetail(false)}
-          onOpen={() => setIsShowModalPayDetail(false)}
-        />
+        <div className={styles.row}>
+          Tổng chi:
+          <span className="font-medium pd-[9px] text-[#EF4444]">
+            16.500.000 đ
+          </span>
+        </div>
+      </div>
+      <ModalPayDetail
+        isEdit={true}
+        title="Chi tiết hoá đơn thu chi"
+        isVisible={isShowModalPayDetail}
+        onClose={() => setIsShowModalPayDetail(false)}
+        onOpen={() => setIsShowModalPayDetail(false)}
+      />
+      <ModalPayDetail
+        isEdit={false}
+        title="Theem hoá đơn thu chi"
+        isVisible={isShowModalAddPayDetail}
+        onClose={() => setIsShowModalAddPayDetail(false)}
+        onOpen={() => setIsShowModalAddPayDetail(false)}
+      />
     </div>
   );
 };
 
-export default ListPayment;
-// ReactDOM.render(<ListPayment />, document.getElementById("root"));
+ReactDOM.render(<ListPayment />, document.getElementById("root"));

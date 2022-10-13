@@ -60,7 +60,10 @@ const DropdownStatus: React.FC<DropdownStatusProps> = (props) => {
         {children || text}
       </div>
 
-      <div className="absolute top-full mt-[6px] w-full p-2 bg-white hidden group-hover:flex flex-col shadow-sm z-[2] rounded before:absolute before:bottom-full before:left-0 before:w-full before:h-[6px]">
+      <div
+        style={{ zIndex: 4 }}
+        className="absolute top-full mt-[6px] w-full p-2 bg-white hidden group-hover:flex flex-col shadow-sm z-[4] rounded before:absolute before:bottom-full before:left-0 before:w-full before:h-[6px]"
+      >
         {isArray(options) &&
           options?.map((option) => (
             <div

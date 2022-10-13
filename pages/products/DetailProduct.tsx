@@ -9,5 +9,4 @@ const ProductDetails: React.FC = () => {
   return <ProductForms detail={detail} />;
 };
 
-// ReactDOM.render(<ProductDetails />, document.getElementById("root"));
-export default ProductDetails;
+ReactDOM.render(<ProductDetails />, document.getElementById("root"));
