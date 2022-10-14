@@ -94,7 +94,7 @@ const {
           </div>
         </div>
         <div className="w-full mt-[32px] flex justify-between items-center mb-[12px]">
-          <Button variant="outlined" text="HUỶ BỎ" onClick={onClose} width={210} height={44} className="font-semibold" />
+          <Button variant="outlined" text="HUỶ BỎ" onClick={onClose} width={210} height={44} />
           <Button variant="secondary" text="LƯU (F12)" width={210} height={44}/>
         </div>
       </div>
