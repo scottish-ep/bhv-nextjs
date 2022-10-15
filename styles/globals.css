@@ -559,3 +559,52 @@ textarea {
 .ant-select-selection-search-input {
   height: 43px !important;
 }
+
+.modal-setting-target .ant-modal-header {
+  background-color: #f5f5f6;
+}
+
+.modal-setting-target .ant-modal-content {
+  background-color: #f5f5f6;
+}
+
+.modal-setting-target .ant-modal-body {
+  padding: 16px;
+}
+
+.modal-setting-group .ant-modal-header {
+  background-color: #f5f5f6;
+}
+
+.modal-setting-group .ant-modal-content {
+  background-color: #f5f5f6;
+}
+
+.modal-setting-group .ant-modal-body {
+  padding: 16px;
+}
+
+.modal-setting-fault .ant-modal-header {
+  background-color: #f5f5f6;
+}
+
+.modal-setting-fault .ant-modal-content {
+  background-color: #f5f5f6;
+}
+
+.modal-setting-fault .ant-modal-body {
+  padding: 16px;
+}
+
+.modal-edit-fault .ant-modal-header {
+  background-color: #f5f5f6;
+}
+
+.modal-edit-fault .ant-modal-content {
+  background-color: #f5f5f6;
+}
+
+.modal-edit-fault .ant-modal-body {
+  padding: 16px;
+}
+
