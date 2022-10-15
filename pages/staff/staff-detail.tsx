@@ -260,7 +260,6 @@ const StaffDetail = () => {
             <p className="text-medium font-medium">Sinh nhật</p>
             <Input
               width={285}
-              defaultValue={detail.birthday}
               placeholder="ngày/tháng/năm"
             />
           </div>
@@ -310,6 +309,7 @@ const StaffDetail = () => {
                   height={45}
                   icon={<Icon icon="add-1" size={24} />}
                   text="Thêm lỗi"
+                  onClick={() => setIsShowEditFault(true)}
                 />
               </div>
               <Table

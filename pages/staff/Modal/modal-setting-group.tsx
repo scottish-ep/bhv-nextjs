@@ -55,7 +55,15 @@ const ModalSettingGroup = (props: ModalSettingGroupProps) => {
     },
   ];
 
-  const [itemList, setItemList] = useState([...data]);
+  const [itemList, setItemList] = useState([{id: '1', name: 'Nhom 1'}]);
+  const [name, setName] = useState('');
+
+  const onNameChange = (event) => {
+    setName(event.target.value);
+  };
+  const handleAdd = (e) => {
+    setItemList((current) => [...current, {id: toString(Math.random()), name: name}]);
+  };
   const handleDelete = (id: string) => {
     setItemList((prevItemList) =>
       prevItemList.filter((product) => product.id !== id)
@@ -75,19 +83,30 @@ const ModalSettingGroup = (props: ModalSettingGroupProps) => {
     >
       <div>
         <div className="w-full flex flex-col rounded-lg bg-white p-[12px] mb-[32px]">
-          {Array.isArray(itemList) && itemList.map((item) => (
-            <div className="flex justify-between items-center mb-[12px]">
-            <Input width={380} defaultValue={item.name}/>
-            <div onClick={() => handleDelete(item.id)} className="cursor-pointer">
-              <Icon icon="trash" size={24} />
-            </div>
-          </div>
-          ))}
+          {Array.isArray(itemList) &&
+            itemList.map((item) => (
+              <div className="flex justify-between items-center mb-[12px]">
+                <Input width={380} defaultValue={item.name} />
+                <div
+                  onClick={() => handleDelete(item.id)}
+                  className="cursor-pointer"
+                >
+                  <Icon icon="trash" size={24} />
+                </div>
+              </div>
+            ))}
           <div className="w-full bg-slate-100"></div>
           <Input
             className="w-full"
             placeholder="Thêm mới và nhấn Enter.."
-            prefix={<Icon icon="add-1" size={24} />}
+            value={name}
+            onChange={onNameChange}
+            
+            prefix={
+              <div onClick={ handleAdd} >
+                <Icon icon="add-1" size={24} />
+              </div>
+            }
           />
         </div>
         <div className="w-full flex justify-between">

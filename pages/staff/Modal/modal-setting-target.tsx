@@ -60,7 +60,7 @@ const {
         <div className="w-full flex flex-col rounded-lg bg-white p-[12px]">
           <div className="flex justify-between items-center mb-[12px]">
             <p className="text-medium font-medium">Tên KPI</p>
-            <Input width={241}/>
+            <Input suffix="đ" width={241} defaultValue="Chỉ tiêu tháng 9"/>
           </div>
           <div className="flex justify-between items-center ">
             <p className="text-medium font-medium">Thời gian áp dụng</p>
@@ -71,26 +71,26 @@ const {
           <p className="font-semibold text-medium">Sale cấp 1</p>
           <div className="flex justify-between items-center mb-[12px]">
             <p className="text-medium font-medium">Chỉ tiêu đơn hàng</p>
-            <Input width={241}/>
+            <Input suffix="đ" width={241} defaultValue="270"/>
           </div>
           <div className="flex items-center justify-between">
             <p className="text-medium font-medium">
               Chỉ tiêu doanh thu
             </p>
-            <Input width={241}/>
+            <Input suffix="đ" width={241} defaultValue="30.000.000"/>
           </div>
         </div>
         <div className="bg-white p-[12px] w-full flex flex-col rounded-lg mt-[8px]">
           <p className="font-semibold text-medium">Sale cấp 2</p>
           <div className="flex justify-between items-center mb-[12px]">
             <p className="text-medium font-medium">Chỉ tiêu đơn hàng</p>
-            <Input width={241}/>
+            <Input suffix="đ" width={241} defaultValue="270"/>
           </div>
           <div className="flex items-center justify-between">
             <p className="text-medium font-medium">
               Chỉ tiêu doanh thu
             </p>
-            <Input width={241}/>
+            <Input suffix="đ" width={241} defaultValue="30.000.000"/>
           </div>
         </div>
         <div className="w-full mt-[32px] flex justify-between items-center mb-[12px]">

@@ -61,6 +61,7 @@ const ModalSettingFault = (props: ModalSettingFaultProps) => {
       prevItemList.filter((product) => product.id !== id)
     );
   };
+  
   return (
     <Modal
       isCenterModal
@@ -87,7 +88,7 @@ const ModalSettingFault = (props: ModalSettingFaultProps) => {
           <Input
             className="w-full"
             placeholder="Thêm mới và nhấn Enter.."
-            prefix={<Icon icon="add-1" size={24} />}
+            prefix={<Icon icon="add-1" size={24} color="#384ADC"/>}
           />
         </div>
         <div className="w-full flex justify-between">
@@ -95,7 +96,6 @@ const ModalSettingFault = (props: ModalSettingFaultProps) => {
             width={210}
             height={44}
             text="HUỶ BỎ"
-            className="font-medium"
             variant="outlined"
             onClick={onClose}
           />

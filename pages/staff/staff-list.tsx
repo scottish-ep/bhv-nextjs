@@ -90,7 +90,7 @@ const StaffList = () => {
       },
     },
     {
-      title: 'Tên nhân viên / ID',
+      title: 'Tên / mã nhân viên',
       width: 149,
       dataIndex: 'id',
       key: 'name',
