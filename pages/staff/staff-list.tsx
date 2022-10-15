@@ -1,46 +1,47 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import { Switch, Table } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import get from "lodash/get";
-import { format } from "date-fns";
-import Image from "next/image"
-import {Checkbox} from "antd"
-import Tabs from "../../components/Tabs";
-import TitlePage from "../../components/TitlePage/Titlepage";
-import { Popover } from "antd";
-import Select from "../../components/Select/Select";
-import Button from "../../components/Button/Button";
-import Icon from "../../components/Icon/Icon";
-import Input from "../../components/Input/Input";
-import DatePicker from "../../components/DatePicker/DatePicker";
-import DropdownStatus from "../../components/DropdownStatus";
-import { StatusColorEnum, StatusEnum, StatusList } from "../../types";
-import ModalSettingGroup from "./Modal/modal-setting-group";
-import ModalEditFault from "./Modal/modal-edit-fault";
-import ModalSettingFault from "./Modal/modal-setting-fault";
-import classNames from "classnames";
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { Switch, Table } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
+import get from 'lodash/get';
+import { format } from 'date-fns';
+import Image from 'next/image';
+import { Checkbox } from 'antd';
+import Tabs from '../../components/Tabs';
+import TitlePage from '../../components/TitlePage/Titlepage';
+import { Popover } from 'antd';
+import Select from '../../components/Select/Select';
+import Button from '../../components/Button/Button';
+import Icon from '../../components/Icon/Icon';
+import Input from '../../components/Input/Input';
+import DatePicker from '../../components/DatePicker/DatePicker';
+import DropdownStatus from '../../components/DropdownStatus';
+import { StatusColorEnum, StatusEnum, StatusList } from '../../types';
+import ModalSettingGroup from './Modal/modal-setting-group';
+import ModalSettingFault from './Modal/modal-setting-fault';
+import ModalSettingStaff from './Modal/modal-setting-staff';
+import classNames from 'classnames';
 
-import styles from "../../styles/ListProduct.module.css";
+import styles from '../../styles/ListProduct.module.css';
 
-import { IStaffListProps } from "./staff.type";
-import { productTypeList, groupStaff } from "../../const/constant";
+import { IStaffListProps } from './staff.type';
+import { productTypeList, groupStaff } from '../../const/constant';
 
 const StaffList = () => {
-    const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [loading, setLoading] = useState(false);
   const [isShowModalSettingGroup, setIsShowModalSettingGroup] = useState(false);
   const [isShowModalSettingFault, setIsShowModalSettingFault] = useState(false);
+  const [isShowModalSettingStaff, setIsShowModalSettingStaff] = useState(false);
 
   useEffect(() => {
-    const element = document.getElementById("loading__animation");
+    const element = document.getElementById('loading__animation');
     if (element) {
       element.remove();
     }
   }, []);
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -51,84 +52,84 @@ const StaffList = () => {
 
   const warehouseData = [
     {
-      label: "Tổng kho Linh Dương",
-      value: "Tổng kho Linh Dương",
-      totalPrice: "21.000.000 đ",
+      label: 'Tổng kho Linh Dương',
+      value: 'Tổng kho Linh Dương',
+      totalPrice: '21.000.000 đ',
     },
     {
-      label: "Cửa hàng LD Mart",
-      value: "Cửa hàng LD Mart",
-      totalPrice: "21.000.000 đ",
+      label: 'Cửa hàng LD Mart',
+      value: 'Cửa hàng LD Mart',
+      totalPrice: '21.000.000 đ',
     },
     {
-      label: "Siêu thị tiện ích LD",
-      value: "Siêu thị tiện ích LD",
-      totalPrice: "21.000.000 đ",
+      label: 'Siêu thị tiện ích LD',
+      value: 'Siêu thị tiện ích LD',
+      totalPrice: '21.000.000 đ',
     },
   ];
 
   const columns: ColumnsType<IStaffListProps> = [
     {
-        title: "",
-        width: 50,
-        key: "id",
-        fixed: "left",
-        align: "center",
-        render: (_, record) => {
-          return (
-            <Checkbox className="ml-[4px]"/>
-          );
-        },
-    },
-    {
-        title: "Chặn",
-        width: 70,
-        key: "id",
-        fixed: "left",
-        align: "center",
-        render: (_, record) => {
-          return (
-            <Switch/>
-          );
-        },
-    },
-    {
-        title: "Tên nhân viên / ID",
-        width: 149,
-        dataIndex: "id",
-        key: "name",
-        fixed: "left",
-        align: "left",
-        render: (_, record) => (
-          <div className="w-full flex justify-start">
-            <div className="w-[36px] relative mr-[8px]">
-              <Image src={record.img} layout="fill"/>
-            </div>
-            <div className="flex flex-col justify-start">
-              <p className="text-medium font-medium text-[#384ADC]">{record.name}</p>
-              <p className="text-medium font-medium text-[#5F5E6B]">{record.id}</p>
-            </div>
-          </div>
-        ),
+      title: '',
+      width: 50,
+      key: 'id',
+      fixed: 'left',
+      align: 'center',
+      render: (_, record) => {
+        return <Checkbox className="ml-[4px]" />;
       },
+    },
     {
-      title: "SĐT",
-      width: 105,
-      dataIndex: "phone",
-      key: "name",
-      align: "center",
+      title: 'Chặn',
+      width: 70,
+      key: 'id',
+      fixed: 'left',
+      align: 'center',
+      render: (_, record) => {
+        return <Switch />;
+      },
+    },
+    {
+      title: 'Tên nhân viên / ID',
+      width: 149,
+      dataIndex: 'id',
+      key: 'name',
+      fixed: 'left',
+      align: 'left',
       render: (_, record) => (
-          <div>
-          <span className="font-medium text-medium">{record.phone}</span>
+        <div className="w-full flex justify-start">
+          <div className="w-[36px] relative mr-[8px]">
+            <Image src={record.img} layout="fill" />
           </div>
+          <div className="flex flex-col justify-start">
+            <p className="text-medium font-medium text-[#384ADC]">
+              {record.name}
+            </p>
+            <p className="text-medium font-medium text-[#5F5E6B]">
+              {record.id}
+            </p>
+          </div>
+        </div>
       ),
-    },  
+    },
     {
-      title: "Chức vụ",
+      title: 'SĐT',
+      width: 105,
+      dataIndex: 'phone',
+      key: 'name',
+      align: 'center',
+      render: (_, record) => (
+        <div>
+          <span className="font-medium text-medium">{record.phone}</span>
+        </div>
+      ),
+    },
+    {
+      title: 'Chức vụ',
       width: 175,
-      dataIndex: "role",
-      key: "name",
-      align: "center",
+      dataIndex: 'role',
+      key: 'name',
+      align: 'center',
       render: (_, record) => (
         <div>
           <span className="font-medium text-medium">{record.role}</span>
@@ -136,11 +137,11 @@ const StaffList = () => {
       ),
     },
     {
-      title: "Nhóm",
+      title: 'Nhóm',
       width: 110,
-      dataIndex: "Fault",
-      key: "name",
-      align: "center",
+      dataIndex: 'Fault',
+      key: 'name',
+      align: 'center',
       render: (_, record) => (
         <div>
           <span className="font-medium text-medium">{record.group}</span>
@@ -148,11 +149,11 @@ const StaffList = () => {
       ),
     },
     {
-      title: "Trực thuộc",
+      title: 'Trực thuộc',
       width: 213,
-      dataIndex: "store",
-      key: "name",
-      align: "center",
+      dataIndex: 'store',
+      key: 'name',
+      align: 'center',
       render: (_, record) => (
         <div>
           <span className="font-medium text-medium">{record.store}</span>
@@ -160,12 +161,12 @@ const StaffList = () => {
       ),
     },
     {
-      title: "Số lỗi",
+      title: 'Số lỗi',
       width: 70,
-      dataIndex: "role",
-      key: "name",
+      dataIndex: 'role',
+      key: 'name',
       sorter: (a, b) => a.orderError - b.orderError,
-      align: "center",
+      align: 'center',
       render: (_, record) => (
         <div>
           <span className="font-medium text-medium">{record.error}</span>
@@ -173,97 +174,111 @@ const StaffList = () => {
       ),
     },
     {
-      title: "",
+      title: '',
       width: 250,
-    }
-  ]
+    },
+  ];
 
   const data = [
     {
       show: true,
-      img: require("../../assets/staff.svg"),
-      name: "Yến Nhi",
-      id: "NV0001",
-      phone: "0987.654.321",
-      role: "Nhân viên bán hàng",
-      group: "Sale cấp 1",
-      store: "Tổng kho Linh Dương",
-      error: 0
+      img: require('../../assets/staff.svg'),
+      name: 'Yến Nhi',
+      id: 'NV0001',
+      phone: '0987.654.321',
+      role: 'Nhân viên bán hàng',
+      group: 'Sale cấp 1',
+      store: 'Tổng kho Linh Dương',
+      error: 0,
     },
     {
       show: true,
-      img: require("../../assets/staff.svg"),
-      name: "Yến Nhi",
-      id: "NV0001",
-      phone: "0987.654.321",
-      role: "Nhân viên bán hàng",
-      group: "Sale cấp 1",
-      store: "Tổng kho Linh Dương",
-      error: 0
+      img: require('../../assets/staff.svg'),
+      name: 'Yến Nhi',
+      id: 'NV0001',
+      phone: '0987.654.321',
+      role: 'Nhân viên bán hàng',
+      group: 'Sale cấp 1',
+      store: 'Tổng kho Linh Dương',
+      error: 0,
     },
     {
       show: true,
-      img: require("../../assets/staff.svg"),
-      name: "Yến Nhi",
-      id: "NV0001",
-      phone: "0987.654.321",
-      role: "Nhân viên bán hàng",
-      group: "Sale cấp 1",
-      store: "Tổng kho Linh Dương",
-      error: 0
+      img: require('../../assets/staff.svg'),
+      name: 'Yến Nhi',
+      id: 'NV0001',
+      phone: '0987.654.321',
+      role: 'Nhân viên bán hàng',
+      group: 'Sale cấp 1',
+      store: 'Tổng kho Linh Dương',
+      error: 0,
     },
     {
       show: true,
-      img: require("../../assets/staff.svg"),
-      name: "Yến Nhi",
-      id: "NV0001",
-      phone: "0987.654.321",
-      role: "Nhân viên bán hàng",
-      group: "Sale cấp 1",
-      store: "Tổng kho Linh Dương",
-      error: 0
+      img: require('../../assets/staff.svg'),
+      name: 'Yến Nhi',
+      id: 'NV0001',
+      phone: '0987.654.321',
+      role: 'Nhân viên bán hàng',
+      group: 'Sale cấp 1',
+      store: 'Tổng kho Linh Dương',
+      error: 0,
     },
     {
       show: true,
-      img: require("../../assets/staff.svg"),
-      name: "Yến Nhi",
-      id: "NV0001",
-      phone: "0987.654.321",
-      role: "Nhân viên bán hàng",
-      group: "Sale cấp 1",
-      store: "Tổng kho Linh Dương",
-      error: 0
+      img: require('../../assets/staff.svg'),
+      name: 'Yến Nhi',
+      id: 'NV0001',
+      phone: '0987.654.321',
+      role: 'Nhân viên bán hàng',
+      group: 'Sale cấp 1',
+      store: 'Tổng kho Linh Dương',
+      error: 0,
     },
     {
       show: true,
-      img: require("../../assets/staff.svg"),
-      name: "Yến Nhi",
-      id: "NV0001",
-      phone: "0987.654.321",
-      role: "Nhân viên bán hàng",
-      group: "Sale cấp 1",
-      store: "Tổng kho Linh Dương",
-      error: 0
+      img: require('../../assets/staff.svg'),
+      name: 'Yến Nhi',
+      id: 'NV0001',
+      phone: '0987.654.321',
+      role: 'Nhân viên bán hàng',
+      group: 'Sale cấp 1',
+      store: 'Tổng kho Linh Dương',
+      error: 0,
     },
-  ]
+  ];
 
   const content = (
     <div className="w-[180px] flex flex-col justify-start">
-      <p className="text-medium font-normal cursor-pointer mb-[16px]" onClick={() => setIsShowModalSettingGroup(true)}>Cài đặt nhóm NVBH</p>
-      <p className="text-medium font-normal cursor-pointer" onClick={() => setIsShowModalSettingFault(true)}>Cài đặt lỗi</p>
+      <p
+        className="text-medium font-normal cursor-pointer mb-[16px]"
+        onClick={() => setIsShowModalSettingGroup(true)}
+      >
+        Cài đặt nhóm NVBH
+      </p>
+      <p
+        className="text-medium font-normal cursor-pointer"
+        onClick={() => setIsShowModalSettingFault(true)}
+      >
+        Cài đặt lỗi
+      </p>
     </div>
-  )
+  );
 
   return (
-<div className="w-full target-management">
+    <div className="w-full target-management">
       <div className="flex items-center justify-between mb-[12px] flex-wrap">
         <div className="flex flex-col justify-start">
-        <TitlePage title="Quản lý chỉ tiêu" href="/user-goal" />
-        <div className="flex mt-[8px]">
-          <p className="text-medium font-medium mr-[5px]">Quản lý nhân viên</p>
-          <p>/</p>
-          <p className="text-medium font-medium text-[#384ADC] ml-[5px]">Danh sách nhân viên bán hàng</p>
-        </div>
+          <TitlePage title="Quản lý chỉ tiêu" href="/user-goal" />
+          <div className="flex mt-[8px]">
+            <p className="text-medium font-medium mr-[5px]">
+              Quản lý nhân viên
+            </p>
+            <p>/</p>
+            <p className="text-medium font-medium text-[#384ADC] ml-[5px]">
+              Danh sách nhân viên bán hàng
+            </p>
+          </div>
         </div>
         <div className="flex gap-[8px] flex-wrap">
           <div className="flex items-center">
@@ -282,12 +297,13 @@ const StaffList = () => {
             Xuất file
           </Button>
           <Button
-            variant="outlined"
-            width={158}
+            variant="primary"
+            width={143}
             color="white"
-            icon={<Icon icon="settings-1" size={24} />}
+            icon={<Icon icon="add-1" size={24} color="white"/>}
+            onClick={() => setIsShowModalSettingStaff(true)}
           >
-            Cài đặt chỉ tiêu
+            Thêm mới
           </Button>
           <Button
             variant="no-outlined"
@@ -315,7 +331,7 @@ const StaffList = () => {
           placement="bottomRight"
           content={content}
           trigger="click"
-          overlayStyle={{ width: "180px" }}
+          overlayStyle={{ width: '180px' }}
           className="relative"
         >
           <Button width={129} height={45} className="p-0">
@@ -330,11 +346,7 @@ const StaffList = () => {
         </Popover>
       </div>
       <div className="relative">
-        <Table
-          columns={columns}
-          dataSource={data}
-          scroll={{ x: 50, y: 450 }}
-        />
+        <Table columns={columns} dataSource={data} scroll={{ x: 50, y: 450 }} />
       </div>
       <ModalSettingGroup
         title="Cài đặt nhóm nhân viên bán hàng"
@@ -343,19 +355,19 @@ const StaffList = () => {
         onOpen={() => setIsShowModalSettingGroup(false)}
       />
       <ModalSettingFault
-        title="Cài đặt nhóm nhân viên bán hàng"
+        title="Cài đặt lỗi nhân viên hay mắc"
         isVisible={isShowModalSettingFault}
         onClose={() => setIsShowModalSettingFault(false)}
         onOpen={() => setIsShowModalSettingFault(false)}
       />
-      <ModalEditFault
-        title="Thêm lỗi"
-        isVisible={isShowModalSettingFault}
-        onClose={() => setIsShowModalSettingFault(false)}
-        onOpen={() => setIsShowModalSettingFault(false)}
+      <ModalSettingStaff
+        title="Thêm nhân viên bán hàng"
+        isVisible={isShowModalSettingStaff}
+        onClose={() => setIsShowModalSettingStaff(false)}
+        onOpen={() => setIsShowModalSettingStaff(false)}
       />
     </div>
-  )
-}
+  );
+};
 
 export default StaffList;

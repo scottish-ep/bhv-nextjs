@@ -37,6 +37,7 @@ export interface IStaffListProps {
 }
 
 export interface IFaultDetailProps {
+  id: string;
   name?: string;
   fault?: number;
   update?: string;
