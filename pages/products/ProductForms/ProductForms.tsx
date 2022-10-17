@@ -76,13 +76,12 @@ const ProductForms: React.FC<ProductFormProps> = ({
     );
   };
 
-  const handleChange = (e) => {
-    if (e.target.checked) {
-      setIsOnApp(true);
-    }
-    else {
-      setIsOnApp(false);
-    }
+  const handleChange = (value: string) => {
+    const list = checkboxSettings.map((item) => {
+      if (item.value === 'App') {
+        setIsOnApp(true);
+      }
+    });
   };
 
   const rowSelection = {
@@ -251,7 +250,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
       dataIndex: 'typeAttribute',
       align: 'left',
       render: (_, record) => (
-        <span className="w-[551px] flex items-center justify-between text-sm text-[#4B4B59] font-medium pd-[9px]">
+        <span className="w-full flex items-center justify-between text-sm text-[#4B4B59] font-medium pd-[9px]">
           <span className="w-11/12">
             <Select
               mode="multiple"
@@ -411,10 +410,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
     },
   ];
 
-  const checkboxSettings: {
-    label: string;
-    value: string;
-  }[] = [
+  const checkboxSettings = [
     {
       label: 'Tại quầy',
       value: 'Tại quầy',
@@ -428,6 +424,23 @@ const ProductForms: React.FC<ProductFormProps> = ({
       value: 'App',
     },
   ];
+  // const checkboxSettings: {
+  //   label: string;
+  //   value: string;
+  // }[] = [
+  //   {
+  //     label: 'Tại quầy',
+  //     value: 'Tại quầy',
+  //   },
+  //   {
+  //     label: 'Online',
+  //     value: 'Online',
+  //   },
+  //   {
+  //     label: 'App',
+  //     value: 'App',
+  //   },
+  // ];
 
   return (
     <div className="w-full">
@@ -517,7 +530,10 @@ const ProductForms: React.FC<ProductFormProps> = ({
             <div className={styles.row}>
               <div className="text-medium font-medium mb-[30px]">Kênh bán</div>
               <div style={{ width: 285 }}>
-                <CheckboxList options={checkboxSettings} />
+                <CheckboxList
+                  options={checkboxSettings}
+                  onChange={() => handleChange(checkboxSettings.value)}
+                />
                 <div className="flex items-center gap-[5px] ml-[25px] mt-[15px]">
                   <Switch />
                   <span>Đồng giá trên tất cả kênh bán</span>
@@ -564,7 +580,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
             </div>
           </div>
         </div>
-        <div className="flex flex-col flex-1 gap-[4px]">
+        <div className="flex flex-col flex-1 gap-[4px] w-[795px]">
           <div className="w-full flex gap-[16px] bg-white rounded p-3 mb-[12px]">
             <div className="w-1/2">
               <div className="mb-[16px]">
@@ -620,7 +636,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
         </div>
       </div>
       {/* Filter */}
-      <div className="flex gap-x-2 mt-4 mb-3">
+      <div className="flex gap-x-2 mt-4 mb-3 w-[795px]">
         <Popover
           placement="bottomRight"
           content={content1}
