@@ -203,7 +203,7 @@ const ListPayment = () => {
             variant="no-outlined"
             width={62}
             color="white"
-            icon={<Icon icon="upload" size={16} />}
+            icon={<Icon icon="question" size={16} />}
           >
             Hỗ trợ
           </Button>

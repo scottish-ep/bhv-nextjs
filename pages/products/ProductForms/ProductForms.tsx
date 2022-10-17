@@ -31,6 +31,8 @@ const ProductForms: React.FC<ProductFormProps> = ({
   detail,
   type_attr_list = [],
 }) => {
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [isOnApp, setIsOnApp] = useState(false);
   const data = [
     {
       id: '1',
@@ -63,11 +65,31 @@ const ProductForms: React.FC<ProductFormProps> = ({
   ];
   const [typeAttributeList, setTypeAttributeList] = useState([...data]);
 
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
+
   const handleDeleteProduct = (id: string) => {
     setTypeAttributeList((prevTypeAttributeList) =>
       prevTypeAttributeList.filter((product) => product.id !== id)
     );
   };
+
+  const handleChange = (e) => {
+    if (e.target.checked) {
+      setIsOnApp(true);
+    }
+    else {
+      setIsOnApp(false);
+    }
+  };
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+
   const [isShowModalConfirm, setIsShowModalConfirm] = useState(false);
   const [fileList, setFileList] = useState([]);
 
@@ -117,20 +139,35 @@ const ProductForms: React.FC<ProductFormProps> = ({
   );
 
   const content1 = (
-    <div className="flex flex-col w-full p-[12px]">
+    <div className="flex flex-col w-full">
       <div className="flex justify-between w-full items-center mb-[8px]">
         <div className="text-medium font-medium mb-[4px]">Giá nhập</div>
-        <Input className="rounded-lg" placeholder="Nhập" />
+        <Input
+          width={154}
+          className="rounded-lg"
+          placeholder="Nhập"
+          suffix={<p className="text-medium font-normal text-[#DADADD]">đ</p>}
+        />
       </div>
       <div className="flex justify-between w-full items-center mb-[8px]">
         <div className="text-medium font-medium mb-[4px]">Giá bán</div>
-        <Input className="rounded-lg" placeholder="Nhập" />
+        <Input
+          width={154}
+          className="rounded-lg"
+          placeholder="Nhập"
+          suffix={<p className="text-medium font-normal text-[#DADADD]">đ</p>}
+        />
       </div>
       <div className="flex justify-between w-full items-center ">
         <div className="text-medium font-medium mb-[4px]">Trọng lượng SP</div>
-        <Input className="rounded-lg" placeholder="Nhập" />
+        <Input
+          width={154}
+          className="rounded-lg"
+          placeholder="Nhập"
+          suffix={<p className="text-medium font-normal text-[#DADADD]">kg</p>}
+        />
       </div>
-      <div className="mt-[32px] bg-[#384ADC] text-[#fff] w-[297px] h-[39px] rounded-lg flex justify-center items-center cursor-pointer">
+      <div className="mt-[16px] bg-[#384ADC] text-[#fff] w-[297px] h-[39px] rounded-lg flex justify-center items-center cursor-pointer">
         Đồng bộ
       </div>
     </div>
@@ -142,12 +179,14 @@ const ProductForms: React.FC<ProductFormProps> = ({
       <Select
         className="rounded-lg mb-[8px]
         mb-[8px]"
+        defaultValue={tags[0]}
         options={tags}
       />
       <div className="text-medium font-medium mb-[8px]">Chọn kho nhập</div>
       <Select
         className="rounded-lg mb-[8px]
         mb-[8px]"
+        defaultValue={tags[0]}
         options={tags}
       />
       <div className="mt-[16px] bg-[#384ADC] text-[#fff] w-full h-[39px] rounded-lg flex justify-center items-center cursor-pointer">
@@ -242,15 +281,6 @@ const ProductForms: React.FC<ProductFormProps> = ({
 
   const columns2: ColumnsType<ProductDetailProps> = [
     {
-      title: '',
-      width: 82,
-      fixed: 'left',
-      align: 'center',
-      render: (_, record) => {
-        return <Checkbox />;
-      },
-    },
-    {
       title: 'Hiện',
       width: 82,
       key: 'id',
@@ -260,6 +290,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
       render: (_, record) => {
         return (
           <Switch
+            checked={true}
             className="button-switch"
             defaultChecked={
               record.show ? (record.show === 1 ? true : false) : false
@@ -484,7 +515,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
               />
             </div>
             <div className={styles.row}>
-              <div className="text-medium font-medium">Kênh bán</div>
+              <div className="text-medium font-medium mb-[30px]">Kênh bán</div>
               <div style={{ width: 285 }}>
                 <CheckboxList options={checkboxSettings} />
                 <div className="flex items-center gap-[5px] ml-[25px] mt-[15px]">
@@ -512,23 +543,29 @@ const ProductForms: React.FC<ProductFormProps> = ({
             </div>
           </div>
           <div className="w-full bg-white rounded p-3">
-            <div className={styles.row}>
+            <div className="flex justify-start mb-[24px]">
               <Switch />
-              <span className="ml-[4px]">Tính tiền theo cân nặng</span>
+              <span className="ml-[8px] text-medium font-medium">
+                Tính tiền theo cân nặng
+              </span>
             </div>
             <div className={styles.row}>
               <div>
-                <Checkbox className="ml-[4px]">Thông báo khi hết hàng</Checkbox>
+                <Checkbox className="text-medium font-medium">
+                  Thông báo khi hết hàng
+                </Checkbox>
               </div>
               <Input width={285} placeholder="Số lượng: Nhập" />
             </div>
             <div className={styles.row}>
-              <Checkbox>Bán âm (vẫn bán khi hết hàng)</Checkbox>
+              <Checkbox className="text-medium font-medium">
+                Bán âm (vẫn bán khi hết hàng)
+              </Checkbox>
             </div>
           </div>
         </div>
         <div className="flex flex-col flex-1 gap-[4px]">
-          <div className="w-full flex gap-[16px] bg-white rounded p-3">
+          <div className="w-full flex gap-[16px] bg-white rounded p-3 mb-[12px]">
             <div className="w-1/2">
               <div className="mb-[16px]">
                 <div className="text-medium font-medium mb-[4px]">
@@ -541,12 +578,16 @@ const ProductForms: React.FC<ProductFormProps> = ({
               <Input label="Nguồn hàng" placeholder="nhập" />
             </div>
             <div className="w-1/2">
-              <TextArea label="Ghi chú" placeholder="Nhập nội dung" />
+              <TextArea
+                label="Ghi chú"
+                placeholder="Nhập nội dung"
+                className="!h-[110px]"
+              />
             </div>
           </div>
           <div className="p-[12px] bg-white rounded h-[554px]">
             <div className={styles.row}>
-              <div className="text-[#384ADC] font-semibold">
+              <div className="text-[#384ADC] font-semibold text-medium">
                 Danh sách thuộc tính
               </div>
               <div className="w-1/2 flex justify-end items-center">
@@ -562,6 +603,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
             </div>
             <Table
               columns={columns}
+              rowSelection={rowSelection}
               dataSource={
                 typeAttributeList.length ? [...typeAttributeList] : []
               }
@@ -620,7 +662,13 @@ const ProductForms: React.FC<ProductFormProps> = ({
         ></Button>
       </div>
       <div className="w-full">
-        <Table columns={columns2} dataSource={data2} pagination={false} />
+        <Table
+          // rowKey={(record)⇒ record.sku}
+          rowSelection={rowSelection}
+          columns={columns2}
+          dataSource={data2}
+          pagination={false}
+        />
       </div>
       <div className="w-full flex justify-left mt-[20px] items-center">
         <div className="mr-[14px]">

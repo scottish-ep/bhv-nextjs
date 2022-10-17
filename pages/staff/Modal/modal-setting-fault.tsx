@@ -55,13 +55,30 @@ const ModalSettingFault = (props: ModalSettingFaultProps) => {
     },
   ];
 
-  const [itemList, setItemList] = useState([...data]);
+  const [itemList, setItemList] = useState([{ id: '1', name: 'Nhom 1' }]);
+  const [name, setName] = useState('');
   const handleDelete = (id: string) => {
     setItemList((prevItemList) =>
       prevItemList.filter((product) => product.id !== id)
     );
   };
-  
+  const onNameChange = (event) => {
+    setName(event.target.value);
+  };
+  const handleAdd = (e) => {
+    setItemList((current) => [
+      ...current,
+      { id: Math.floor(Math.random() * 10000000).toString(), name: name },
+    ]);
+  };
+  const handleClear = () => {
+    setName('');
+  };
+  const addInput = (e) => {
+    handleAdd(e);
+    handleClear();
+  };
+
   return (
     <Modal
       isCenterModal
@@ -76,19 +93,29 @@ const ModalSettingFault = (props: ModalSettingFaultProps) => {
     >
       <div>
         <div className="w-full flex flex-col rounded-lg bg-white p-[12px] mb-[32px]">
-          {Array.isArray(itemList) && itemList.map((item) => (
-            <div className="flex justify-between items-center mb-[12px]">
-            <Input width={380} defaultValue={item.name}/>
-            <div onClick={() => handleDelete(item.id)} className="cursor-pointer">
-              <Icon icon="trash" size={24} />
-            </div>
-          </div>
-          ))}
+          {Array.isArray(itemList) &&
+            itemList.map((item) => (
+              <div className="flex justify-between items-center mb-[12px]">
+                <Input width={380} value={item.name} />
+                <div
+                  onClick={() => handleDelete(item.id)}
+                  className="cursor-pointer"
+                >
+                  <Icon icon="trash" size={24} />
+                </div>
+              </div>
+            ))}
           <div className="w-full bg-slate-100"></div>
           <Input
             className="w-full"
             placeholder="Thêm mới và nhấn Enter.."
-            prefix={<Icon icon="add-1" size={24} color="#384ADC"/>}
+            value={name}
+            onChange={onNameChange}
+            prefix={
+              <div onClick={addInput}>
+                <Icon icon="add-1" size={24} />
+              </div>
+            }
           />
         </div>
         <div className="w-full flex justify-between">

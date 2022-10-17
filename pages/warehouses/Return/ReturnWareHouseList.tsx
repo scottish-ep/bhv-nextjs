@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import { Table } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import get from "lodash/get";
-import { format } from "date-fns";
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { Table } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
+import get from 'lodash/get';
+import { format } from 'date-fns';
 
 import {
   statusOptions,
   warehouses,
   returnWareHouseList,
-} from "../../../const/constant";
-import { StatusColorEnum, StatusEnum, StatusList } from "../../../types";
-import Tabs from "../../../components/Tabs";
-import TitlePage from "../../../components/TitlePage/Titlepage";
-import Select from "../../../components/Select/Select";
-import Button from "../../../components/Button/Button";
-import Icon from "../../../components/Icon/Icon";
-import Input from "../../../components/Input/Input";
-import DatePicker from "../../../components/DateRangePicker/DateRangePicker";
-import DropdownStatus from "../../../components/DropdownStatus";
-import ModalRemove from "../components/ModalRemove/ModalRemove";
-import { IReturnWareHouses } from "../warehouse.type";
+} from '../../../const/constant';
+import { StatusColorEnum, StatusEnum, StatusList } from '../../../types';
+import Tabs from '../../../components/Tabs';
+import TitlePage from '../../../components/TitlePage/Titlepage';
+import Select from '../../../components/Select/Select';
+import Button from '../../../components/Button/Button';
+import Icon from '../../../components/Icon/Icon';
+import Input from '../../../components/Input/Input';
+import DatePicker from '../../../components/DateRangePicker/DateRangePicker';
+import DropdownStatus from '../../../components/DropdownStatus';
+import ModalRemove from '../components/ModalRemove/ModalRemove';
+import { IReturnWareHouses } from '../warehouse.type';
 
 const ReturnWareHouseList = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -40,7 +40,7 @@ const ReturnWareHouseList = () => {
   ];
 
   useEffect(() => {
-    const element = document.getElementById("loading__animation");
+    const element = document.getElementById('loading__animation');
     if (element) {
       element.remove();
     }
@@ -69,7 +69,7 @@ const ReturnWareHouseList = () => {
   // }, []);
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -80,12 +80,12 @@ const ReturnWareHouseList = () => {
 
   const columns: ColumnsType<IReturnWareHouses> = [
     {
-      title: "Mã trả hàng",
+      title: 'Mã trả hàng',
       width: 150,
-      dataIndex: "id",
-      key: "id",
-      fixed: "left",
-      align: "center",
+      dataIndex: 'id',
+      key: 'id',
+      fixed: 'left',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium text-[#384ADC] font-semibold">
           {record.id}
@@ -93,11 +93,11 @@ const ReturnWareHouseList = () => {
       ),
     },
     {
-      title: "Loại phiếu",
+      title: 'Loại phiếu',
       width: 150,
-      dataIndex: "type",
-      key: "type",
-      align: "center",
+      dataIndex: 'type',
+      key: 'type',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium text-[#384ADC] font-medium">
           {record.type}
@@ -105,21 +105,21 @@ const ReturnWareHouseList = () => {
       ),
     },
     {
-      title: "Lý do trả hàng",
+      title: 'Lý do trả hàng',
       width: 200,
-      dataIndex: "reason",
-      key: "reason",
-      align: "center",
+      dataIndex: 'reason',
+      key: 'reason',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium text-[#4B4B59]">{record.reason}</span>
       ),
     },
     {
-      title: "Kho nhập",
+      title: 'Kho nhập',
       width: 200,
-      dataIndex: "import_name",
-      key: "import_name",
-      align: "center",
+      dataIndex: 'import_name',
+      key: 'import_name',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium ont-medium text-[#2E2D3D]">
           {record.import_name}
@@ -127,11 +127,11 @@ const ReturnWareHouseList = () => {
       ),
     },
     {
-      title: "Số SP",
+      title: 'Số SP',
       width: 150,
-      dataIndex: "quantity",
-      key: "quantity",
-      align: "center",
+      dataIndex: 'quantity',
+      key: 'quantity',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#384ADC]">
           {record.quantity}
@@ -139,10 +139,10 @@ const ReturnWareHouseList = () => {
       ),
     },
     {
-      title: "NV xử lý / Thời gian",
+      title: 'NV xử lý / Thời gian',
       width: 200,
-      dataIndex: "name",
-      key: "name",
+      dataIndex: 'name',
+      key: 'name',
       render: (_, record) => (
         <div className="flex flex-col gap-y-1">
           <span className="text-medium text-[#384ADC] font-semibold">
@@ -150,32 +150,32 @@ const ReturnWareHouseList = () => {
           </span>
           <span className="text-medium text-[#5F5E6B] font-medium">
             {record.createdAt
-              ? format(record.createdAt, "HH:mm - dd/MM/yyyy")
-              : ""}
+              ? format(record.createdAt, 'HH:mm - dd/MM/yyyy')
+              : ''}
           </span>
         </div>
       ),
     },
     {
-      title: "Cập nhật cuối",
+      title: 'Cập nhật cuối',
       width: 185,
-      dataIndex: "updatedAt",
-      key: "updatedAt",
-      align: "center",
+      dataIndex: 'updatedAt',
+      key: 'updatedAt',
+      align: 'center',
       render: (_, record) => (
         <div className="flex flex-col gap-y-1 text-medium text-[#1D1C2D]">
-          <span>{format(record.updatedAt, "HH:mm")}</span>
-          <span>{format(record.updatedAt, "dd/MM/yyyy")}</span>
+          <span>{format(record.updatedAt, 'HH:mm')}</span>
+          <span>{format(record.updatedAt, 'dd/MM/yyyy')}</span>
         </div>
       ),
     },
     {
-      title: "Trạng thái",
+      title: 'Trạng thái',
       width: 185,
-      dataIndex: "status",
-      key: "status",
-      align: "center",
-      fixed: "right",
+      dataIndex: 'status',
+      key: 'status',
+      align: 'center',
+      fixed: 'right',
       render: (_, record) => (
         <span
           className={`text-medium font-semibold text-[${
@@ -227,7 +227,7 @@ const ReturnWareHouseList = () => {
             color="white"
             suffixIcon={<Icon icon="add" size={24} />}
             onClick={() =>
-              (window.location.href = "/warehouse/return-commands/create")
+              (window.location.href = '/warehouse/return-commands/create')
             }
           >
             Thêm mới
@@ -236,7 +236,7 @@ const ReturnWareHouseList = () => {
             variant="no-outlined"
             width={62}
             color="white"
-            icon={<Icon icon="upload" size={16} />}
+            icon={<Icon icon="question" size={16} />}
           >
             Hỗ trợ
           </Button>
@@ -261,7 +261,7 @@ const ReturnWareHouseList = () => {
         onRow={() => {
           return {
             onClick: () => {
-              window.location.href = "/warehouse/return-commands/update/1";
+              window.location.href = '/warehouse/return-commands/update/1';
             },
           };
         }}
@@ -288,4 +288,4 @@ const ReturnWareHouseList = () => {
   );
 };
 
-ReactDOM.render(<ReturnWareHouseList />, document.getElementById("root"));
+ReactDOM.render(<ReturnWareHouseList />, document.getElementById('root'));

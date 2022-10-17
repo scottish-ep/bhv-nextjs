@@ -1,13 +1,13 @@
-import { Table } from "antd";
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import Button from "../../components/Button/Button";
-import Icon from "../../components/Icon/Icon";
-import TitlePage from "../../components/TitlePage/Titlepage";
-import { listTarget } from "../../const/constant";
-import { ITartget } from "./staff.type";
-import type { ColumnsType } from "antd/es/table";
-import { StatusColorEnum, StatusList } from "../../types";
+import { Table } from 'antd';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import Button from '../../components/Button/Button';
+import Icon from '../../components/Icon/Icon';
+import TitlePage from '../../components/TitlePage/Titlepage';
+import { listTarget } from '../../const/constant';
+import { ITartget } from './staff.type';
+import type { ColumnsType } from 'antd/es/table';
+import { StatusColorEnum, StatusList } from '../../types';
 
 const ListTarget = () => {
   const [loading, setIsloading] = useState(false);
@@ -18,28 +18,28 @@ const ListTarget = () => {
 
   const columns: ColumnsType<ITartget> = [
     {
-      title: "Tên chỉ tiêu",
+      title: 'Tên chỉ tiêu',
       width: 690,
-      key: "id",
-      align: "left",
+      key: 'id',
+      align: 'left',
       render: (_, record) => {
         return <div>{record.name}</div>;
       },
     },
     {
-      title: "Thời gian áp dụng",
+      title: 'Thời gian áp dụng',
       width: 300,
-      key: "id",
-      align: "center",
+      key: 'id',
+      align: 'center',
       render: (_, record) => {
         return <div>{record.time}</div>;
       },
     },
     {
-      title: "Trạng thái",
+      title: 'Trạng thái',
       width: 220,
-      key: "id",
-      align: "center",
+      key: 'id',
+      align: 'center',
       render: (_, record) => {
         return (
           <span
@@ -51,10 +51,10 @@ const ListTarget = () => {
       },
     },
     {
-      title: "",
+      title: '',
       width: 50,
-      key: "id",
-      align: "center",
+      key: 'id',
+      align: 'center',
       render: (_, record) => {
         return (
           <span className="cursor-pointer">
@@ -76,7 +76,7 @@ const ListTarget = () => {
             color="white"
             suffixIcon={<Icon icon="add" size={24} />}
             onClick={() =>
-              (window.location.href = "/warehouse/export-commands/update/1")
+              (window.location.href = '/warehouse/export-commands/update/1')
             }
           >
             Thêm mới
@@ -85,7 +85,7 @@ const ListTarget = () => {
             variant="no-outlined"
             width={62}
             color="white"
-            icon={<Icon icon="upload" size={16} />}
+            icon={<Icon icon="question" size={16} />}
           >
             Hỗ trợ
           </Button>
@@ -106,4 +106,4 @@ const ListTarget = () => {
   );
 };
 
-ReactDOM.render(<ListTarget />, document.getElementById("root"));
+ReactDOM.render(<ListTarget />, document.getElementById('root'));

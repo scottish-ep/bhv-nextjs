@@ -12,6 +12,7 @@ import Icon from '../../../components/Icon/Icon';
 import { ColumnsType } from 'antd/es/table';
 import { listDebtDetail } from '../../../const/constant';
 import Upload from '../../../components/Upload/Upload';
+import et from 'date-fns/esm/locale/et/index.js';
 
 interface ModalSettingGroupProps {
   isVisible: boolean;
@@ -25,7 +26,7 @@ interface ModalSettingGroupProps {
   deal?: string;
   method?: string;
   status?: StatusEnum;
-  id?: string;
+  id?: string | number;
 }
 
 const ModalSettingGroup = (props: ModalSettingGroupProps) => {
@@ -55,20 +56,31 @@ const ModalSettingGroup = (props: ModalSettingGroupProps) => {
     },
   ];
 
-  const [itemList, setItemList] = useState([{id: '1', name: 'Nhom 1'}]);
+  const [itemList, setItemList] = useState([{ id: '1', name: 'Nhom 1' }]);
   const [name, setName] = useState('');
 
   const onNameChange = (event) => {
     setName(event.target.value);
   };
   const handleAdd = (e) => {
-    setItemList((current) => [...current, {id: toString(Math.random()), name: name}]);
+    setItemList((current) => [
+      ...current,
+      { id: Math.floor(Math.random() * 10000000).toString(), name: name },
+    ]);
+  };
+  const handleClear = () => {
+    setName('');
   };
   const handleDelete = (id: string) => {
     setItemList((prevItemList) =>
       prevItemList.filter((product) => product.id !== id)
     );
   };
+  const addInput = (e) => {
+    handleAdd(e);
+    handleClear();
+  }
+  
   return (
     <Modal
       isCenterModal
@@ -86,9 +98,12 @@ const ModalSettingGroup = (props: ModalSettingGroupProps) => {
           {Array.isArray(itemList) &&
             itemList.map((item) => (
               <div className="flex justify-between items-center mb-[12px]">
-                <Input width={380} defaultValue={item.name} />
+                <Input width={380} value={item.name} />
                 <div
-                  onClick={() => handleDelete(item.id)}
+                  onClick={() => {
+                    console.log(item.id);
+                    handleDelete(item.id);
+                  }}
                   className="cursor-pointer"
                 >
                   <Icon icon="trash" size={24} />
@@ -101,9 +116,8 @@ const ModalSettingGroup = (props: ModalSettingGroupProps) => {
             placeholder="Thêm mới và nhấn Enter.."
             value={name}
             onChange={onNameChange}
-            
             prefix={
-              <div onClick={ handleAdd} >
+              <div onClick={addInput}>
                 <Icon icon="add-1" size={24} />
               </div>
             }

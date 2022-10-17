@@ -3,6 +3,7 @@ import { StatusEnum } from "../../types";
 export interface IsProduct {
   show: boolean | number;
   id?: string;
+  img?: string;
   name?: string;
   image?: string;
   category?: string;

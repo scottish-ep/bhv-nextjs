@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import { Table } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import get from "lodash/get";
-import { format } from "date-fns";
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { Table } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
+import get from 'lodash/get';
+import { format } from 'date-fns';
 
 import {
   wareHouseList,
   statusOptions,
   warehouses,
-} from "../../../const/constant";
-import { StatusColorEnum, StatusEnum, StatusList } from "../../../types";
-import Tabs from "../../../components/Tabs";
-import TitlePage from "../../../components/TitlePage/Titlepage";
-import Select from "../../../components/Select/Select";
-import Button from "../../../components/Button/Button";
-import Icon from "../../../components/Icon/Icon";
-import Input from "../../../components/Input/Input";
-import DatePicker from "../../../components/DateRangePicker/DateRangePicker";
-import DropdownStatus from "../../../components/DropdownStatus";
-import ModalRemove from "../components/ModalRemove/ModalRemove";
-import { IWareHouses } from "../warehouse.type";
+} from '../../../const/constant';
+import { StatusColorEnum, StatusEnum, StatusList } from '../../../types';
+import Tabs from '../../../components/Tabs';
+import TitlePage from '../../../components/TitlePage/Titlepage';
+import Select from '../../../components/Select/Select';
+import Button from '../../../components/Button/Button';
+import Icon from '../../../components/Icon/Icon';
+import Input from '../../../components/Input/Input';
+import DatePicker from '../../../components/DateRangePicker/DateRangePicker';
+import DropdownStatus from '../../../components/DropdownStatus';
+import ModalRemove from '../components/ModalRemove/ModalRemove';
+import { IWareHouses } from '../warehouse.type';
 
 const ExportWareHouseList = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -41,7 +41,7 @@ const ExportWareHouseList = () => {
   ];
 
   useEffect(() => {
-    const element = document.getElementById("loading__animation");
+    const element = document.getElementById('loading__animation');
     if (element) {
       element.remove();
     }
@@ -70,7 +70,7 @@ const ExportWareHouseList = () => {
   // }, []);
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -81,12 +81,12 @@ const ExportWareHouseList = () => {
 
   const columns: ColumnsType<IWareHouses> = [
     {
-      title: "Mã xuất hàng",
+      title: 'Mã xuất hàng',
       width: 150,
-      dataIndex: "id",
-      key: "ie",
-      fixed: "left",
-      align: "center",
+      dataIndex: 'id',
+      key: 'ie',
+      fixed: 'left',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium text-[#384ADC] font-semibold">
           {record.id}
@@ -94,10 +94,10 @@ const ExportWareHouseList = () => {
       ),
     },
     {
-      title: "NV xử lý / Thời gian",
+      title: 'NV xử lý / Thời gian',
       width: 200,
-      dataIndex: "name",
-      key: "name",
+      dataIndex: 'name',
+      key: 'name',
       render: (_, record) => (
         <div className="flex flex-col gap-y-1">
           <span className="text-medium text-[#384ADC] font-semibold">
@@ -105,18 +105,18 @@ const ExportWareHouseList = () => {
           </span>
           <span className="text-medium text-[#5F5E6B] font-medium">
             {record.createdAt
-              ? format(record.createdAt, "HH:mm - dd/MM/yyyy")
-              : ""}
+              ? format(record.createdAt, 'HH:mm - dd/MM/yyyy')
+              : ''}
           </span>
         </div>
       ),
     },
     {
-      title: "Kho xuất",
+      title: 'Kho xuất',
       width: 200,
-      dataIndex: "export_name",
-      key: "export_name",
-      align: "center",
+      dataIndex: 'export_name',
+      key: 'export_name',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#2E2D3D]">
           {record.export_name}
@@ -124,21 +124,21 @@ const ExportWareHouseList = () => {
       ),
     },
     {
-      title: "Ghi chú",
+      title: 'Ghi chú',
       width: 200,
-      dataIndex: "note",
-      key: "note",
-      align: "center",
+      dataIndex: 'note',
+      key: 'note',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium text-[#4B4B59]">{record.note}</span>
       ),
     },
     {
-      title: "Số lượng",
+      title: 'Số lượng',
       width: 100,
-      dataIndex: "quantity",
-      key: "quantity",
-      align: "center",
+      dataIndex: 'quantity',
+      key: 'quantity',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#1D1C2D]">
           {record.quantity}
@@ -146,11 +146,11 @@ const ExportWareHouseList = () => {
       ),
     },
     {
-      title: "Trọng lượng",
+      title: 'Trọng lượng',
       width: 100,
-      dataIndex: "weight",
-      key: "weight",
-      align: "center",
+      dataIndex: 'weight',
+      key: 'weight',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#1D1C2D]">
           {record.weight} kg
@@ -158,11 +158,11 @@ const ExportWareHouseList = () => {
       ),
     },
     {
-      title: "Tổng tiền sản phẩm",
+      title: 'Tổng tiền sản phẩm',
       width: 260,
-      dataIndex: "totalMoney",
-      key: "totalMoney",
-      align: "center",
+      dataIndex: 'totalMoney',
+      key: 'totalMoney',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium text-[#384ADC] font-medium">
           {record.totalMoney.toLocaleString()} đ
@@ -170,25 +170,25 @@ const ExportWareHouseList = () => {
       ),
     },
     {
-      title: "Cập nhật cuối",
+      title: 'Cập nhật cuối',
       width: 185,
-      dataIndex: "updatedAt",
-      key: "updatedAt",
-      align: "center",
+      dataIndex: 'updatedAt',
+      key: 'updatedAt',
+      align: 'center',
       render: (_, record) => (
         <div className="flex flex-col gap-y-1 text-medium text-[#1D1C2D]">
-          <span>{format(record.updatedAt, "HH:mm")}</span>
-          <span>{format(record.updatedAt, "dd/MM/yyyy")}</span>
+          <span>{format(record.updatedAt, 'HH:mm')}</span>
+          <span>{format(record.updatedAt, 'dd/MM/yyyy')}</span>
         </div>
       ),
     },
     {
-      title: "Trạng thái",
+      title: 'Trạng thái',
       width: 185,
-      dataIndex: "status",
-      key: "status",
-      align: "center",
-      fixed: "right",
+      dataIndex: 'status',
+      key: 'status',
+      align: 'center',
+      fixed: 'right',
       render: (_, record) => (
         <span
           className={`text-medium font-semibold text-[${
@@ -240,7 +240,7 @@ const ExportWareHouseList = () => {
             color="white"
             suffixIcon={<Icon icon="add" size={24} />}
             onClick={() =>
-              (window.location.href = "/warehouse/export-commands/create")
+              (window.location.href = '/warehouse/export-commands/create')
             }
           >
             Thêm mới
@@ -249,7 +249,7 @@ const ExportWareHouseList = () => {
             variant="no-outlined"
             width={62}
             color="white"
-            icon={<Icon icon="upload" size={16} />}
+            icon={<Icon icon="question" size={16} />}
           >
             Hỗ trợ
           </Button>
@@ -274,7 +274,7 @@ const ExportWareHouseList = () => {
         onRow={() => {
           return {
             onClick: () => {
-              window.location.href = "/warehouse/export-commands/update/1";
+              window.location.href = '/warehouse/export-commands/update/1';
             },
           };
         }}
@@ -301,4 +301,4 @@ const ExportWareHouseList = () => {
   );
 };
 
-ReactDOM.render(<ExportWareHouseList />, document.getElementById("root"));
+ReactDOM.render(<ExportWareHouseList />, document.getElementById('root'));

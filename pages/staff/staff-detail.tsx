@@ -237,15 +237,15 @@ const StaffDetail = () => {
           </div>
           <div className="flex justify-between mb-[12px] items-center">
             <p className="text-medium font-medium">Họ và tên</p>
-            <Input width={285} defaultValue={detail.name} />
+            <Input width={285} value={detail.name} />
           </div>
           <div className="flex justify-between mb-[12px] items-center">
             <p className="text-medium font-medium">Số điện thoại</p>
-            <Input width={285} defaultValue={detail.phone} />
+            <Input width={285} value={detail.phone} />
           </div>
           <div className="flex justify-between mb-[12px] items-center">
             <p className="text-medium font-medium">Email</p>
-            <Input width={285} defaultValue={detail.email} />
+            <Input width={285} value={detail.email} />
           </div>
           <div className="flex justify-between mb-[12px] items-center">
             <p className="text-medium font-medium">Giới tính</p>
@@ -266,15 +266,15 @@ const StaffDetail = () => {
           <div className="w-full my-[24px] bg-slate-200 h-[1px]"></div>
           <div className="flex justify-between mb-[12px] items-center items-center mb-[12px] items-center">
             <p className="text-medium font-medium">Chức vụ</p>
-            <Select width={285} defaultValue={detail.role} />
+            <Select width={285} value={detail.role} />
           </div>
           <div className="flex justify-between mb-[12px] items-center items-center mb-[12px] items-center">
             <p className="text-medium font-medium">Nhóm</p>
-            <Select width={285} defaultValue={detail.group} />
+            <Select width={285} value={detail.group} />
           </div>
           <div className="flex justify-between mb-[12px] items-center items-center mb-[12px] items-center">
             <p className="text-medium font-medium">Trực thuộc</p>
-            <Select width={285} defaultValue={detail.store} />
+            <Select width={285} value={detail.store} />
           </div>
           <div className="flex justify-start items-center mb-[12px] items-center">
             <p className="mr-[85px] text-medium font-medium text-[#EF4444]">

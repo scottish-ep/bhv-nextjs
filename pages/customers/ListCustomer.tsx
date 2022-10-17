@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { ReactNode } from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect, useState } from 'react';
+import { ReactNode } from 'react';
+import ReactDOM from 'react-dom';
 
-import { Table, Switch } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import get from "lodash/get";
-import TitlePage from "../../components/TitlePage/Titlepage";
-
-import { formatCustomers } from "../../utils/utils";
-import { LevelCustomer } from "../../enums/enums";
-import Select from "../../components/Select/Select";
-import Button from "../../components/Button/Button";
-import Icon from "../../components/Icon/Icon";
-import Input from "../../components/Input/Input";
-import InputRangePicker from "../../components/DateRangePicker/DateRangePicker";
-import ModalConfirm from "../../components/Modal/ModalConfirm/ModalConfirm";
-import ModalNotice from "../../components/Modal/ModalNotice/ModalConfirm";
-import ModalAddCustomer from "./ModalAddCustomer/ModalAddCustomer";
-import Checkbox from "../../components/CheckboxList/CheckboxList";
+import { Table, Switch } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
+import get from 'lodash/get';
+import TitlePage from '../../components/TitlePage/Titlepage';
+import Image from 'next/image';
+import { formatCustomers } from '../../utils/utils';
+import { LevelCustomer } from '../../enums/enums';
+import Select from '../../components/Select/Select';
+import Button from '../../components/Button/Button';
+import Icon from '../../components/Icon/Icon';
+import Input from '../../components/Input/Input';
+import InputRangePicker from '../../components/DateRangePicker/DateRangePicker';
+import ModalConfirm from '../../components/Modal/ModalConfirm/ModalConfirm';
+import ModalNotice from '../../components/Modal/ModalNotice/ModalConfirm';
+import ModalAddCustomer from './ModalAddCustomer/ModalAddCustomer';
+import Checkbox from '../../components/CheckboxList/CheckboxList';
+import defaultAvatar from '../../assets/default-avatar.svg';
 
 interface DataType {
   key: string | number;
@@ -49,18 +50,18 @@ const ListCustomer = () => {
   const [isShowModalConfirm, setIsShowModalConfirm] = useState(false);
   const [isShowModalNotice, setIsShowModalNotice] = useState(false);
   const [isShowModalAddCustomer, setIsShowModalAddCustomer] = useState(false);
-  const [isShowSettings, setIsShowSettings] = useState(false);
+  const [isShowSettings, setIsShowSettings] = useState(true);
 
   useEffect(() => {
-    const element = document.getElementById("loading__animation");
+    const element = document.getElementById('loading__animation');
     if (element) {
       element.remove();
     }
   }, []);
 
   useEffect(() => {
-    const url = "/api/v1/customer/customer-list/list";
-    console.log("url", url);
+    const url = '/api/v1/customer/customer-list/list';
+    console.log('url', url);
     fetch(url)
       .then((res) => res.json())
       .then((res: any) => {
@@ -91,7 +92,7 @@ const ListCustomer = () => {
   };
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -101,11 +102,11 @@ const ListCustomer = () => {
   };
 
   const onChange = (record?: any) => {
-    console.log("record", record);
+    console.log('record', record);
   };
 
   const handleConfirmDelete = () => {
-    console.log("delete");
+    console.log('delete');
     setIsShowModalConfirm(false);
     setIsShowModalNotice(true);
   };
@@ -127,11 +128,11 @@ const ListCustomer = () => {
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "Chặn",
+      title: 'Chặn',
       width: 82,
-      dataIndex: "block",
-      key: "block",
-      fixed: "left",
+      dataIndex: 'block',
+      key: 'block',
+      fixed: 'left',
       render: (_, record) => {
         return (
           <Switch
@@ -145,98 +146,106 @@ const ListCustomer = () => {
       },
     },
     {
-      title: "ID",
+      title: 'ID',
       width: 100,
-      key: "id",
-      fixed: "left",
-      align: "center",
-      render: (_, record) => <div>{record.id || get(record, "user.id")}</div>,
+      key: 'id',
+      fixed: 'left',
+      align: 'center',
+      render: (_, record) => <div>{record.id || get(record, 'user.id')}</div>,
     },
     {
-      title: "Tên khách hàng",
+      title: 'Tên khách hàng',
       width: 260,
-      dataIndex: "name",
-      key: "name",
-      fixed: "left",
+      dataIndex: 'name',
+      key: 'name',
+      fixed: 'left',
       render: (_, record) => (
-        <div>{record.name || get(record, "user.name")}</div>
+        <div className="flex items-center">
+          <div className="relative w-[36px] h-[36px] mr-[5px]">
+            <Image src={defaultAvatar} layout="fill" />
+          </div>
+          <div className="text-[#384ADC] font-medium text-medium">
+            {record.name || get(record, 'user.name')}
+          </div>
+
+        </div>
       ),
     },
     {
-      title: "Số điện thoại",
+      title: 'Số điện thoại',
       width: 156,
-      dataIndex: "phoneNumer",
-      key: "phoneNumber",
-      align: "center",
+      dataIndex: 'phoneNumer',
+      key: 'phoneNumber',
+      align: 'center',
       render: (_, record) => (
-        <div>{record.phoneNumber || get(record, "user.phone")}</div>
+        <div>{record.phoneNumber || get(record, 'user.phone')}</div>
       ),
     },
     {
-      title: "Cấp độ KH",
+      title: 'Cấp độ KH',
       width: 115,
-      dataIndex: "level",
-      key: "level",
-      align: "center",
+      dataIndex: 'level',
+      key: 'level',
+      align: 'center',
       render: (_, record) => renderLevel(record.customerLvName),
     },
     {
-      title: "Tổng số lượng đơn",
+      title: 'Tổng số lượng đơn',
       width: 126,
-      dataIndex: "order",
-      key: "order",
-      align: "center",
+      dataIndex: 'order',
+      key: 'order',
+      align: 'center',
       render: (_, record) => <div>{record.orderTotalCount}</div>,
     },
     {
-      title: "Đã in",
+      title: 'Đã in',
       width: 88,
-      dataIndex: "printed",
-      key: "printed",
-      align: "center",
+      dataIndex: 'printed',
+      key: 'printed',
+      align: 'center',
     },
     {
-      title: "Đã nhận",
+      title: 'Đã nhận',
       width: 100,
-      dataIndex: "received",
-      key: "received",
-      align: "center",
+      dataIndex: 'received',
+      key: 'received',
+      align: 'center',
     },
     {
-      title: "Đơn hoàn",
+      title: 'Đơn hoàn',
       width: 110,
-      dataIndex: "orderReturn",
-      key: "orderReturn",
-      align: "center",
+      dataIndex: 'orderReturn',
+      key: 'orderReturn',
+      align: 'center',
     },
     {
-      title: "Hoàn 1 phần",
+      title: 'Hoàn 1 phần',
       width: 96,
-      dataIndex: "orderReturnAPart",
-      key: "orderReturnAPart",
-      align: "center",
+      dataIndex: 'orderReturnAPart',
+      key: 'orderReturnAPart',
+      align: 'center',
     },
     {
-      title: "Đã thanh toán",
+      title: 'Đã thanh toán',
       width: 160,
-      dataIndex: "successCost",
-      key: "successCost",
-      align: "center",
-      render: (_, record) => <div>{record.successCost || "0 vnđ"}</div>,
+      dataIndex: 'successCost',
+      key: 'successCost',
+      align: 'center',
+      render: (_, record) => <div>{record.successCost || '0 vnđ'}</div>,
     },
     {
-      title: "Lần mua cuối",
+      title: 'Lần mua cuối',
       width: 140,
-      dataIndex: "lastBuy",
-      key: "lastBuy",
-      align: "center",
+      dataIndex: 'lastBuy',
+      key: 'lastBuy',
+      align: 'center',
     },
     {
-      title: "Thời gian cập nhật",
+      title: 'Thời gian cập nhật',
       width: 185,
-      dataIndex: "updated",
-      key: "updated",
-      align: "center",
+      dataIndex: 'updated',
+      key: 'updated',
+      align: 'center',
       render: (_, record) => <div>{record.lastUpdated}</div>,
     },
   ];
@@ -246,32 +255,32 @@ const ListCustomer = () => {
     value: string;
   }[] = [
     {
-      label: "Nguồn KH",
-      value: "Nguồn KH",
+      label: 'Nguồn KH',
+      value: 'Nguồn KH',
     },
     {
-      label: "App BHV",
-      value: "App BHV",
+      label: 'App BHV',
+      value: 'App BHV',
     },
     {
-      label: "Tại CH",
-      value: "Tại CH",
+      label: 'Tại CH',
+      value: 'Tại CH',
     },
     {
-      label: "Facebook",
-      value: "Facebook",
+      label: 'Facebook',
+      value: 'Facebook',
     },
     {
-      label: "Livestream Facebook",
-      value: "Livestream Facebook",
+      label: 'Livestream Facebook',
+      value: 'Livestream Facebook',
     },
     {
-      label: "Livestream App",
-      value: "Livestream App",
+      label: 'Livestream App',
+      value: 'Livestream App',
     },
     {
-      label: "Zalo",
-      value: "Zalo",
+      label: 'Zalo',
+      value: 'Zalo',
     },
   ];
 
@@ -280,79 +289,729 @@ const ListCustomer = () => {
     value: string;
   }[] = [
     {
-      label: "Chặn",
-      value: "Chặn",
+      label: 'Chặn',
+      value: 'Chặn',
     },
     {
-      label: "ID",
-      value: "ID",
+      label: 'ID',
+      value: 'ID',
     },
     {
-      label: "Tên khách hàng",
-      value: "Tên khách hàng",
+      label: 'Tên khách hàng',
+      value: 'Tên khách hàng',
     },
     {
-      label: "Số điện thoại",
-      value: "Số điện thoại",
+      label: 'Số điện thoại',
+      value: 'Số điện thoại',
     },
     {
-      label: "Cấp độ KH",
-      value: "Cấp độ KH",
+      label: 'Cấp độ KH',
+      value: 'Cấp độ KH',
     },
     {
-      label: "Tổng số lượng đơn",
-      value: "Tổng số lượng đơn",
+      label: 'Tổng số lượng đơn',
+      value: 'Tổng số lượng đơn',
     },
     {
-      label: "Đã in",
-      value: "Đã in",
+      label: 'Đã in',
+      value: 'Đã in',
     },
     {
-      label: "Đã nhận",
-      value: "Đã nhận",
+      label: 'Đã nhận',
+      value: 'Đã nhận',
     },
     {
-      label: "Đơn hoàn",
-      value: "Đơn hoàn",
+      label: 'Đơn hoàn',
+      value: 'Đơn hoàn',
     },
     {
-      label: "Hoàn 1 phần",
-      value: "Hoàn 1 phần",
+      label: 'Hoàn 1 phần',
+      value: 'Hoàn 1 phần',
     },
     {
-      label: "Đã thanh toán",
-      value: "Đã thanh toán",
+      label: 'Đã thanh toán',
+      value: 'Đã thanh toán',
     },
     {
-      label: "Lần mua cuối",
-      value: "Lần mua cuối",
+      label: 'Lần mua cuối',
+      value: 'Lần mua cuối',
     },
     {
-      label: "Thời gian cập nhật",
-      value: "Thời gian cập nhật",
+      label: 'Thời gian cập nhật',
+      value: 'Thời gian cập nhật',
     },
   ];
 
+  const data = [
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+    {
+      id: 'KH0001',
+      name: 'Nguyễn Văn A',
+      phoneNumber: '123123',
+      customerLvName: '1',
+      orderTotalCount: 1,
+      successCost: 1,
+      lastUpdateted: '12321312',
+    },
+  ];
   const styleHiddenSlideToggle = {
     height: 0,
     opacity: 0.75,
-    overflow: "hidden",
-    padding: "0px",
+    overflow: 'hidden',
+    padding: '0px',
     // display: "none",
-    transition: "all 0.3s linear",
+    transition: 'all 0.3s linear',
   };
 
   const styleShowSlideToggle = {
-    height: "fit-content",
+    height: 'fit-content',
     opacity: 1,
     // display: "block",
-    padding: "10px",
-    border: "1px solod #FFCF90",
+    padding: '10px',
+    border: '1px solod #FFCF90',
   };
 
   return (
-    <div className="w-full">
-      <div className="flex items-center justify-between mb-[12px] flex-wrap">
+    <div className="w-full list-customer">
+      <div className="flex items-center justify-between mb-[12px] flex-wrap ">
         <TitlePage title="Khách hàng" />
         <div className="flex gap-[8px] flex-wrap">
           <div className="flex items-center">
@@ -390,13 +1049,13 @@ const ListCustomer = () => {
             variant="no-outlined"
             width={62}
             color="white"
-            icon={<Icon icon="upload" size={16} />}
+            icon={<Icon icon="question" size={16} />}
           >
             Hỗ trợ
           </Button>
         </div>
       </div>
-      <div className="flex items-center flex-wrap gap-[8px] mb-[12px]">
+      <div className="flex items-center flex-wrap gap-[8px] mb-[12px] justify-between">
         <Input
           width={337}
           prefix={<Icon icon="search" color="#FF970D" size={24} />}
@@ -411,7 +1070,7 @@ const ListCustomer = () => {
           placeholder="Nhập tên nhân viên"
         />
         <InputRangePicker
-          placeholder={["Ngày bắt đầu", "Ngày kết thúc"]}
+          placeholder={['Ngày bắt đầu', 'Ngày kết thúc']}
           width={306}
           prevIcon={<Icon size={24} icon="calendar" />}
         />
@@ -437,10 +1096,10 @@ const ListCustomer = () => {
         <Checkbox options={checkboxSettings} />
       </div>
       <Table
-        loading={loading}
+        // loading={loading}
         rowSelection={rowSelection}
         columns={columns}
-        dataSource={customers}
+        dataSource={data}
         pagination={{
           defaultPageSize: pagination.pageSize,
           showSizeChanger: true,
@@ -475,4 +1134,5 @@ const ListCustomer = () => {
   );
 };
 
-ReactDOM.render(<ListCustomer />, document.getElementById("root"));
+export default ListCustomer;
+// ReactDOM.render(<ListCustomer />, document.getElementById('root'));
