@@ -436,7 +436,6 @@ const ListProduct = (props: IsProduct) => {
         <Table
           loading={loading}
           // rowKey={(record) => record.id}
-          
           rowSelection={rowSelection}
           columns={columns}
           dataSource={data}
