@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { Checkbox } from 'antd';
 import Tabs from '../../components/Tabs';
 import TitlePage from '../../components/TitlePage/Titlepage';
+import defaultAvatar from "../../assets/default-avatar.svg"
 import { Popover } from 'antd';
 import Select from '../../components/Select/Select';
 import Button from '../../components/Button/Button';
@@ -44,11 +45,15 @@ const StaffList = () => {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
-
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
   };
+
+  const [pagination, setPagination] = useState({
+    total: 0,
+    pageSize: 10,
+  });
 
   const warehouseData = [
     {
@@ -70,43 +75,29 @@ const StaffList = () => {
 
   const columns: ColumnsType<IStaffListProps> = [
     {
-      title: '',
-      width: 50,
-      key: 'id',
-      fixed: 'left',
+      title: 'ID',
+      width: 125,
+      dataIndex: 'id',
       align: 'center',
-      render: (_, record) => {
-        return <Checkbox className="ml-[4px]" />;
-      },
-    },
-    {
-      title: 'Chặn',
-      width: 70,
-      key: 'id',
-      fixed: 'left',
-      align: 'center',
-      render: (_, record) => {
-        return <Switch />;
-      },
+      render: (_, record) => (
+        <div className="text-medium font-medium">{record.id}</div>
+      ),
     },
     {
       title: 'Tên / mã nhân viên',
-      width: 149,
-      dataIndex: 'id',
+      width: 431,
+      dataIndex: 'name',
       key: 'name',
       fixed: 'left',
       align: 'left',
       render: (_, record) => (
         <div className="w-full flex justify-start">
           <div className="w-[36px] relative mr-[8px]">
-            <Image src={record.img} layout="fill" />
+            <Image src={record.img || defaultAvatar} layout="fill" />
           </div>
           <div className="flex flex-col justify-start">
             <p className="text-medium font-medium text-[#384ADC]">
               {record.name}
-            </p>
-            <p className="text-medium font-medium text-[#5F5E6B]">
-              {record.id}
             </p>
           </div>
         </div>
@@ -114,7 +105,7 @@ const StaffList = () => {
     },
     {
       title: 'SĐT',
-      width: 105,
+      width: 125,
       dataIndex: 'phone',
       key: 'name',
       align: 'center',
@@ -126,7 +117,7 @@ const StaffList = () => {
     },
     {
       title: 'Chức vụ',
-      width: 175,
+      width: 220,
       dataIndex: 'role',
       key: 'name',
       align: 'center',
@@ -138,7 +129,7 @@ const StaffList = () => {
     },
     {
       title: 'Nhóm',
-      width: 110,
+      width: 130,
       dataIndex: 'Fault',
       key: 'name',
       align: 'center',
@@ -150,7 +141,7 @@ const StaffList = () => {
     },
     {
       title: 'Trực thuộc',
-      width: 213,
+      width: 240,
       dataIndex: 'store',
       key: 'name',
       align: 'center',
@@ -173,14 +164,10 @@ const StaffList = () => {
         </div>
       ),
     },
-    {
-      title: '',
-      width: 250,
-    },
   ];
 
-  const data = [
-    {
+  const data = Array(50)
+    .fill({
       show: true,
       img: require('../../assets/staff.svg'),
       name: 'Yến Nhi',
@@ -190,63 +177,8 @@ const StaffList = () => {
       group: 'Sale cấp 1',
       store: 'Tổng kho Linh Dương',
       error: 0,
-    },
-    {
-      show: true,
-      img: require('../../assets/staff.svg'),
-      name: 'Yến Nhi',
-      id: 'NV0001',
-      phone: '0987.654.321',
-      role: 'Nhân viên bán hàng',
-      group: 'Sale cấp 1',
-      store: 'Tổng kho Linh Dương',
-      error: 0,
-    },
-    {
-      show: true,
-      img: require('../../assets/staff.svg'),
-      name: 'Yến Nhi',
-      id: 'NV0001',
-      phone: '0987.654.321',
-      role: 'Nhân viên bán hàng',
-      group: 'Sale cấp 1',
-      store: 'Tổng kho Linh Dương',
-      error: 0,
-    },
-    {
-      show: true,
-      img: require('../../assets/staff.svg'),
-      name: 'Yến Nhi',
-      id: 'NV0001',
-      phone: '0987.654.321',
-      role: 'Nhân viên bán hàng',
-      group: 'Sale cấp 1',
-      store: 'Tổng kho Linh Dương',
-      error: 0,
-    },
-    {
-      show: true,
-      img: require('../../assets/staff.svg'),
-      name: 'Yến Nhi',
-      id: 'NV0001',
-      phone: '0987.654.321',
-      role: 'Nhân viên bán hàng',
-      group: 'Sale cấp 1',
-      store: 'Tổng kho Linh Dương',
-      error: 0,
-    },
-    {
-      show: true,
-      img: require('../../assets/staff.svg'),
-      name: 'Yến Nhi',
-      id: 'NV0001',
-      phone: '0987.654.321',
-      role: 'Nhân viên bán hàng',
-      group: 'Sale cấp 1',
-      store: 'Tổng kho Linh Dương',
-      error: 0,
-    },
-  ];
+    })
+    .map((item, index) => ({ ...item }));
 
   const content = (
     <div className="w-[180px] flex flex-col justify-start">
@@ -269,7 +201,7 @@ const StaffList = () => {
     <div className="w-full target-management">
       <div className="flex items-center justify-between mb-[12px] flex-wrap">
         <div className="flex flex-col justify-start">
-          <TitlePage title="Quản lý chỉ tiêu" href="/user-goal" />
+          <TitlePage title="Danh sách nhân viên bán hàng" href="/user-goal" />
           <div className="flex mt-[8px]">
             <p className="text-medium font-medium mr-[5px]">
               Quản lý nhân viên
@@ -330,7 +262,7 @@ const StaffList = () => {
         <Popover
           placement="bottomRight"
           content={content}
-          trigger="click"
+          trigger="hover"
           overlayStyle={{ width: '180px' }}
           className="relative"
         >
@@ -346,7 +278,17 @@ const StaffList = () => {
         </Popover>
       </div>
       <div className="relative">
-        <Table columns={columns} dataSource={data} scroll={{ x: 50, y: 450 }} />
+        <Table
+          rowKey={(record) => record.id}
+          columns={columns}
+          dataSource={data}
+          pagination={{
+            defaultPageSize: pagination.pageSize,
+            showSizeChanger: true,
+            pageSizeOptions: [10, 20, 50, 100],
+          }}
+          scroll={{y: 400    }}
+        />
       </div>
       <ModalSettingGroup
         title="Cài đặt nhóm nhân viên bán hàng"

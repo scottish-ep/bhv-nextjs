@@ -370,6 +370,29 @@ export const statusOptions: {
   },
 ];
 
+export const statusOptions2: {
+  value: StatusEnum;
+  label: string;
+}[] = [
+  {
+    value: StatusEnum.PENDING,
+    label:
+      StatusList.find((status) => status.value === StatusEnum.PENDING)?.name || "",
+  },
+  {
+    value: StatusEnum.PAY,
+    label:
+      StatusList.find((status) => status.value === StatusEnum.PAY)?.name ||
+      "",
+  },
+  {
+    value: StatusEnum.GET,
+    label:
+      StatusList.find((status) => status.value === StatusEnum.GET)?.name ||
+      "",
+  },
+];
+
 export const productTypeList: {
   label: string;
   value: string;

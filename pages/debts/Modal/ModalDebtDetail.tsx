@@ -1,16 +1,16 @@
-import Icon from "../../../components/Icon/Icon";
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import Modal from "../../../components/Modal/Modal/Modal";
-import Button from "../../../components/Button/Button";
-import { ReactNode } from "react";
-import Select from "../../../components/Select/Select";
-import { Table } from "antd";
-import { ColumnsType } from "antd/es/table";
-import { StatusColorEnum, StatusEnum, StatusList } from "../../../types";
-import { listDebtDetail } from "../../../const/constant";
-import TextArea from "antd/lib/input/TextArea";
-import Upload from "../../../components/Upload/Upload";
+import Icon from '../../../components/Icon/Icon';
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import Modal from '../../../components/Modal/Modal/Modal';
+import Button from '../../../components/Button/Button';
+import { ReactNode } from 'react';
+import Select from '../../../components/Select/Select';
+import { Table } from 'antd';
+import { ColumnsType } from 'antd/es/table';
+import { StatusColorEnum, StatusEnum, StatusList } from '../../../types';
+import { listDebtDetail } from '../../../const/constant';
+import TextArea from 'antd/lib/input/TextArea';
+import Upload from '../../../components/Upload/Upload';
 interface ModalDebtDetailProps {
   isVisible: boolean;
   title?: string;
@@ -38,7 +38,7 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
     id,
     method,
     time,
-    iconClose = "Đóng",
+    iconClose = 'Đóng',
   } = props;
 
   const [listDebt, setListDebt] = useState<ModalDebtDetailProps[]>([
@@ -49,43 +49,43 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
     value: string;
   }[] = [
     {
-      label: "Nguồn KH",
-      value: "Nguồn KH",
+      label: 'Nguồn KH',
+      value: 'Nguồn KH',
     },
     {
-      label: "App BHV",
-      value: "App BHV",
+      label: 'App BHV',
+      value: 'App BHV',
     },
     {
-      label: "Tại CH",
-      value: "Tại CH",
+      label: 'Tại CH',
+      value: 'Tại CH',
     },
     {
-      label: "Facebook",
-      value: "Facebook",
+      label: 'Facebook',
+      value: 'Facebook',
     },
     {
-      label: "Livestream Facebook",
-      value: "Livestream Facebook",
+      label: 'Livestream Facebook',
+      value: 'Livestream Facebook',
     },
     {
-      label: "Livestream App",
-      value: "Livestream App",
+      label: 'Livestream App',
+      value: 'Livestream App',
     },
     {
-      label: "Zalo",
-      value: "Zalo",
+      label: 'Zalo',
+      value: 'Zalo',
     },
   ];
 
   const columns: ColumnsType<ModalDebtDetailProps> = [
     {
-      title: "Thời gian",
+      title: 'Thời gian',
       width: 150,
-      dataIndex: "time",
-      key: "dataIndex",
-      fixed: "left",
-      align: "center",
+      dataIndex: 'time',
+      key: 'dataIndex',
+      fixed: 'left',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium text-[#2E2D3D] font-medium">
           {record.time}
@@ -93,11 +93,11 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
       ),
     },
     {
-      title: "Giao dịch",
+      title: 'Giao dịch',
       width: 110,
-      dataIndex: "deal",
-      key: "dataIndex",
-      align: "left",
+      dataIndex: 'deal',
+      key: 'dataIndex',
+      align: 'left',
       render: (_, record) => (
         <span className="text-medium text-[#F97316] flex  font-medium">
           <Icon icon="debt-arrow" size={24} className="mr-[10px]" />
@@ -106,11 +106,11 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
       ),
     },
     {
-      title: "Hình thức",
+      title: 'Hình thức',
       width: 136,
-      dataIndex: "method",
-      key: "dataIndex",
-      align: "center",
+      dataIndex: 'method',
+      key: 'dataIndex',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium text-[#2E2D3D] font-medium">
           {record.method}
@@ -118,23 +118,23 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
       ),
     },
     {
-      title: "Nội dung",
+      title: 'Nội dung',
       width: 250,
-      dataIndex: "content",
-      key: "dataIndex",
-      align: "left",
+      dataIndex: 'content',
+      key: 'dataIndex',
+      align: 'left',
       render: (_, record) => (
-        <span className="text-medium text-[#2E2D3D] font-medium">
+        <span className="text-medium text-[#2E2D3D] font-normal">
           {record.content}
         </span>
       ),
     },
     {
-      title: "Trạng thái",
+      title: 'Trạng thái',
       width: 136,
-      dataIndex: "status",
-      key: "dataIndex",
-      align: "left",
+      dataIndex: 'status',
+      key: 'dataIndex',
+      align: 'left',
       render: (_, record) => (
         <span
           className={`font-semibold text-[${
@@ -159,10 +159,10 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
       className="modal-debt-detail"
     >
       <div>
-        <div className="flex justify-between w-full mb-[12px]">
+        <div className="flex justify-between w-full mb-[12px] rounded-lg" style={{border: "1px solid #DADADD"}}>
           <div
             className="w-[48%] bg-white rounded-lg"
-            style={{ padding: "12px" }}
+            style={{ padding: '12px' }}
           >
             <div className="flex items-center justify-between mb-[16px]">
               <div className="text-medium font-medium">Mã công nợ</div>
@@ -185,7 +185,7 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
           </div>
           <div
             className="w-[48%] bg-white rounded-lg"
-            style={{ padding: "12px" }}
+            style={{ padding: '12px' }}
           >
             <div className="flex items-center justify-between mb-[16px]">
               <div className="text-medium font-medium">
@@ -207,7 +207,7 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
               </div>
               <div
                 className="text-medium font-medium"
-                style={{ color: "#F97316" }}
+                style={{ color: '#F97316' }}
               >
                 150.000 đ
               </div>
@@ -215,7 +215,12 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
           </div>
         </div>
         <div className="w-full rounded-lg">
-          <Table columns={columns} dataSource={listDebt} />
+          <Table
+            columns={columns}
+            dataSource={listDebt}
+            pagination={false}
+            scroll={{ y: 292 }}
+          />
         </div>
         <div className="w-full flex flex-col p-[12px] bg-white rounded-lg">
           <div className="flex w-full">
@@ -223,18 +228,18 @@ const ModalDebtDetail = (props: ModalDebtDetailProps) => {
               <div className="mb-[12px]">Ghi chú</div>
               <TextArea
                 className="bg-slate-100 !h-[104px]"
-                placeholder="Công nợ theo đơn hoàn"
+                placeholder="Nhập ghi chú"
               />
             </div>
             <div className="mb-[16px]">
               <div className="text-medium font-medium mb-[12px]">
-                Hình ảnh sản phẩm
+                Hình ảnh
               </div>
               <Upload
                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                 listType="picture-card"
                 fileList={[]}
-                onChange={() => console.log("check")}
+                onChange={() => console.log('check')}
               />
             </div>
           </div>

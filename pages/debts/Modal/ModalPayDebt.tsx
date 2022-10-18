@@ -59,7 +59,7 @@ const ModalPayDebt = (props: ModalPayDebtProps) => {
       iconClose={iconClose}
       width={836}
       footer={false}
-      className="p-[16px] "
+      className="p-[16px] mt-[42px]"
     >
       <div>
         <div className="flex justify-between w-full mb-[16px] items-center">
@@ -76,7 +76,7 @@ const ModalPayDebt = (props: ModalPayDebtProps) => {
               <p className="mb-[8px]">Ghi chú</p>
               <TextArea
                 className="bg-slate-100 !h-[104px]"
-                placeholder="Công nợ theo đơn hoàn"
+                placeholder="Nhập nội dung"
               />
             </div>
             <div className="mb-[16px]">

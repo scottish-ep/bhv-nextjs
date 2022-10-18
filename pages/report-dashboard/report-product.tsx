@@ -1,23 +1,25 @@
-import { Checkbox } from "antd";
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import Button from "../../components/Button/Button";
-import DatePicker from "../../components/DatePicker/DatePicker";
-import Icon from "../../components/Icon/Icon";
-import Select from "../../components/Select/Select";
-import TitlePage from "../../components/TitlePage/Titlepage";
-import Break from "../../components/Break/Break";
-import { listDayCompare } from "../../const/constant";
-import classNames from "classnames";
-import { Switch, Table } from "antd";
-import { productTypeList } from "../../const/constant";
-import type { ColumnsType } from "antd/es/table";
-import get from "lodash/get";
+import { Checkbox } from 'antd';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
+import Button from '../../components/Button/Button';
+import DatePicker from '../../components/DatePicker/DatePicker';
+import Icon from '../../components/Icon/Icon';
+import Select from '../../components/Select/Select';
+import TitlePage from '../../components/TitlePage/Titlepage';
+import defaultAvatar from '../../assets/default-avatar.svg';
+import Image from 'next/image'
+import Break from '../../components/Break/Break';
+import { listDayCompare } from '../../const/constant';
+import classNames from 'classnames';
+import { Switch, Table } from 'antd';
+import { productTypeList } from '../../const/constant';
+import type { ColumnsType } from 'antd/es/table';
+import get from 'lodash/get';
 
-import styles from "../../styles/Report.module.css";
-import ReportPieChart from "./ReportChart/PieChart/ReportPieChart";
-import LineChart from "./ReportChart/LineChart/ReportLineChart";
-import { IsProduct } from "../products/product.type";
+import styles from '../../styles/Report.module.css';
+import ReportPieChart from './ReportChart/PieChart/ReportPieChart';
+import LineChart from './ReportChart/LineChart/ReportLineChart';
+import { IsProduct } from '../products/product.type';
 
 const ReportProduct = () => {
   const [isCompare, setIsCompare] = useState(false);
@@ -28,68 +30,68 @@ const ReportProduct = () => {
   });
 
   const data = [
-    { name: "Tại quầy", value: 653326000 },
-    { name: "Onine", value: 225549000 },
-    { name: "Trên app", value: 136500000 },
+    { name: 'Tại quầy', value: 1234 },
+    { name: 'Onine', value: 235 },
+    { name: 'Trên app', value: 362 },
   ];
 
   const warehouseData = [
     {
-      label: "Tổng kho Linh Dương",
-      value: "Tổng kho Linh Dương",
-      totalPrice: "21.000.000 đ",
+      label: 'Tổng kho Linh Dương',
+      value: 'Tổng kho Linh Dương',
+      totalPrice: '12.236',
     },
     {
-      label: "Cửa hàng LD Mart",
-      value: "Cửa hàng LD Mart",
-      totalPrice: "21.000.000 đ",
+      label: 'Cửa hàng LD Mart',
+      value: 'Cửa hàng LD Mart',
+      totalPrice: '245.012',
     },
     {
-      label: "Siêu thị tiện ích LD",
-      value: "Siêu thị tiện ích LD",
-      totalPrice: "21.000.000 đ",
+      label: 'Siêu thị tiện ích LD',
+      value: 'Siêu thị tiện ích LD',
+      totalPrice: '653',
     },
   ];
 
   const dataLineChart = [
     {
-      name: "28",
+      name: '28',
       a: 700,
       b: 600,
       c: 500,
     },
     {
-      name: "29",
+      name: '29',
       a: 1000,
       b: 600,
       c: 500,
     },
     {
-      name: "28",
+      name: '28',
       a: 900,
       b: 600,
       c: 400,
     },
     {
-      name: "30",
+      name: '30',
       a: 700,
       b: 600,
       c: 500,
     },
     {
-      name: "01",
+      name: '01',
       a: 300,
       b: 500,
       c: 500,
     },
     {
-      name: "02",
+      name: '02',
       a: 700,
       b: 900,
       c: 500,
     },
     {
-      name: "03",
+      name: '03',
       a: 1000,
       b: 600,
       c: 500,
@@ -98,61 +100,68 @@ const ReportProduct = () => {
 
   const statusOrder = [
     {
-      label: "Đã nhận",
-      value: "Đã nhận",
+      label: 'Đã nhận',
+      value: 'Đã nhận',
     },
     {
-      label: "Đã huỷ",
-      value: "Đã huỷ",
+      label: 'Đã huỷ',
+      value: 'Đã huỷ',
     },
     {
-      label: "Đã hoàn",
-      value: "Đã hoàn",
+      label: 'Đã hoàn',
+      value: 'Đã hoàn',
     },
   ];
 
   const columns: ColumnsType<IsProduct> = [
     {
-      title: "#",
+      title: '#',
       width: 50,
-      key: "id",
-      align: "center",
+      key: 'id',
+      align: 'center',
       render: (_, record, index) => {
         return <div className="font-medium w-full h-full">{index + 1}</div>;
       },
     },
     {
-      title: "Mã sản phẩm",
+      title: 'Mã sản phẩm',
       width: 133,
-      key: "id",
-      align: "center",
+      key: 'id',
+      align: 'center',
       render: (_, record) => {
         return <div className="font-medium">{record.id}</div>;
       },
     },
     {
-      title: "Tên sản phẩm",
+      title: 'Tên sản phẩm',
       width: 434,
-      key: "name",
-      align: "left",
+      key: 'name',
+      align: 'left',
       render: (_, record) => {
-        return <div className="font-medium">{record.name}</div>;
+        return (
+          <div className="flex justify-start items-center">
+              <div className='mr-[8px] w-[36px] h-[36px] relative'>
+                <Image src={record.img || defaultAvatar} layout="fill"/>
+              </div>
+            <div className="font-medium">{record.name}</div>
+          </div>
+        );
       },
     },
     {
-      title: "Số lượng bán ra",
+      title: 'Số lượng bán ra',
       width: 240,
-      key: "total",
-      align: "center",
+      key: 'total',
+      align: 'center',
       render: (_, record) => {
         return <div className="font-medium">{record.total}</div>;
       },
     },
     {
-      title: "Doanh thu",
+      title: 'Doanh thu',
       width: 434,
-      key: "totalPrice",
-      align: "center",
+      key: 'totalPrice',
+      align: 'center',
       render: (_, record) => {
         return <div className="font-medium">{record.totalPrice}</div>;
       },
@@ -160,17 +169,17 @@ const ReportProduct = () => {
   ];
 
   const dataTable = Array(12).fill({
-    id: "BHV0123",
-    name: "Áo sơ mi nam công sở",
-    image: "",
-    total: "245",
-    totalPrice: "126.000.000 đ",
+    id: 'BHV0123',
+    name: 'Áo sơ mi nam công sở',
+    img: '',
+    total: '245',
+    totalPrice: '126.000.000 đ',
   });
 
   return (
-    <div className="w-full">
+    <div className="w-full report-product">
       <div className="flex items-center justify-between mb-[12px] flex-wrap">
-        <TitlePage title="Báo cáo doanh thu" />
+        <TitlePage title="Báo cáo sản phẩm" />
         <div className="flex items-center gap-[24px]">
           <Button
             variant="outlined"
@@ -208,13 +217,13 @@ const ReportProduct = () => {
               <div className="text-2xl font-bold text-[#384ADC]">20.560</div>
             </div>
             <div className={styles.row}>
-              <div className="font-semibold">Lợi nhuận</div>
+              <div className="font-semibold">Doanh thu </div>
               <div className="text-[#10B981] text-2xl font-bold">
                 865.254.000 đ
               </div>
             </div>
             <Break />
-            <div className={classNames(styles.row, "mt-[16px]")}>
+            <div className={classNames(styles.row, 'mt-[16px]')}>
               <div className="font-semibold">Tổng sản phẩm nhập</div>
               <div className="text-big font-bold">1.426.210</div>
             </div>
@@ -230,21 +239,20 @@ const ReportProduct = () => {
         />
       </div>
       <LineChart
-        statusOrder={statusOrder}
         title="Số lượng sản phẩm bán ra theo kho"
         dataLineChart={dataLineChart}
         data={warehouseData}
         unit="sản phẩm"
       />
-      <div className={classNames(styles.div_container, "mt-[12px]")}>
+      <div className={classNames(styles.div_container, 'mt-[12px]')}>
         <div className="flex items-center justify-between mb-[24px] flex-wrap">
           <div className="text-[#384ADC] font-semibold text-big">
             Top sản phẩm bán chạy
           </div>
           <div className="flex items-center gap-[24px]">
             <div className="flex items-center">
-              <div className="mr-[12px]">Chọn kho</div>
-              <Select options={statusOrder} style={{ width: 248 }} />
+              <div className="mr-[12px] text-medium font-medium">Chọn kho</div>
+              <Select options={warehouseData} defaultValue={warehouseData[0]} style={{ width: 248 }} />
             </div>
             <span className="cursor-pointer">
               <Icon icon="export" />
@@ -256,15 +264,12 @@ const ReportProduct = () => {
           className="table-layout1"
           columns={columns}
           dataSource={dataTable}
-          pagination={{
-            defaultPageSize: pagination.pageSize,
-            showSizeChanger: true,
-            pageSizeOptions: [10, 20, 50, 100],
-          }}
+          pagination={false}
         />
       </div>
     </div>
   );
 };
 
-ReactDOM.render(<ReportProduct />, document.getElementById("root"));
+export default ReportProduct;
+// ReactDOM.render(<ReportProduct />, document.getElementById("root"));

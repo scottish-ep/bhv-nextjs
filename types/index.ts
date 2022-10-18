@@ -16,6 +16,7 @@ export enum StatusEnum {
   LOCK = "LOCK",
   HAPPENING = "HAPPENING",
   NOT_HAPPENDED = "NOT_HAPPENDED",
+  GET = "GET",
 }
 
 export enum StatusColorEnum {
@@ -31,11 +32,12 @@ export enum StatusColorEnum {
   COMPLETED = "#6366F1",
   SELLING = "#384ADC",
   PENDING = "#8B5CF6",
-  PAY = "#EF4444",
+  PAY = "#10B981",
   RECEIVE = "#384ADC",
   LOCK = "#384ADC",
   HAPPENING = "#10B981",
   NOT_HAPPENDED = "#4B4B59",
+  GET = "#6366F1",
 }
 
 export const StatusList = [
@@ -107,4 +109,8 @@ export const StatusList = [
     value: StatusEnum.NOT_HAPPENDED,
     name: "Chưa diễn ra",
   },
+  {
+    value: StatusEnum.GET,
+    name: "Đã nhận",
+  }
 ];

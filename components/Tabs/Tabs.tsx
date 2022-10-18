@@ -26,7 +26,7 @@ const Tabs: React.FC<TabsProps> = ({
     <div className="flex">
       <div
         className={classNames(
-          "flex gap-x-1 border border-b-0 border-[#F0F0F1] rounded-t px-3 py-[7px] font-medium text-[#1D1C2D] bg-[#F0F0F1] cursor-pointer",
+          "flex gap-x-1 border border-b-0 border-[#F0F0F1] rounded-t px-3 py-[7px] font-medium text-[#1D1C2D] cursor-pointer",
           {
             "bg-white font-bold": tabActive === "",
           }
@@ -40,7 +40,7 @@ const Tabs: React.FC<TabsProps> = ({
         <div
           key={index}
           className={classNames(
-            "flex gap-x-1 border border-b-0 border-[#F0F0F1] rounded-t px-3 py-[7px] font-medium text-[#1D1C2D] bg-[#F0F0F1] cursor-pointer",
+            "flex gap-x-1 border border-b-0 border-[#F0F0F1] rounded-t px-3 py-[7px] font-medium text-[#1D1C2D]  cursor-pointer",
             {
               "bg-white font-bold": tab.name === tabActive,
             }

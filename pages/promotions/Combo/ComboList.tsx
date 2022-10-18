@@ -248,4 +248,5 @@ const ComboList = () => {
   );
 };
 
-ReactDOM.render(<ComboList />, document.getElementById('root'));
+export default ComboList;
+// ReactDOM.render(<ComboList />, document.getElementById('root'));

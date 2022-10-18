@@ -180,7 +180,7 @@ const ReportStaff = () => {
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-[12px] flex-wrap">
-        <TitlePage title="Báo cáo doanh thu" />
+        <TitlePage title="Báo cáo nhân viên" />
         <div className="flex items-center gap-[24px]">
           <Button
             variant="outlined"
@@ -308,4 +308,5 @@ const ReportStaff = () => {
   );
 };
 
-ReactDOM.render(<ReportStaff />, document.getElementById("root"));
+export default ReportStaff;
+// ReactDOM.render(<ReportStaff />, document.getElementById("root"));

@@ -494,28 +494,39 @@ textarea {
   background-color: #f5f5f6;
 }
 
-.modal-debt-detail .ant-table {
-  border: 0.5px solid #dadadd;
-  border-radius: 4px;
-}
 
-.ant-modal.modal-debt-detail .ant-table tbody > tr > td {
-  border-bottom: 0.5px solid #dadadd;
-}
-.modal-debt-detail .ant-table-content .ant-table-thead .ant-table-cell {
-  background-color: #f0f0f1 !important;
-}
+
 
 .ant-modal.modal-debt-detail .ant-table thead > tr > th {
   border-bottom: 0.5px solid #dadadd;
 }
 
-.modal-pay-detail .ant-modal-header {
-  background-color: #f5f5f6;
+.modal-debt-detail .ant-table-tbody > tr > td,
+.ant-table-thead > tr > th,
+.ant-table tfoot > tr > td,
+.ant-table tfoot > tr > th {
+  padding: 8px;
 }
 
+.modal-debt-detail .ant-table {
+  border: 0.5px solid #dadadd;
+  border-radius: 4px;
+}
+.modal-debt-detail .ant-table-content .ant-table-thead .ant-table-cell {
+  background-color: #dadadd !important;
+}
+.ant-modal.modal-debt-detail .ant-table tbody > tr > td {
+  border-bottom: 0.5px solid #dadadd;
+}
+.modal-pay-detail .ant-modal-header {
+  background-color: #fff;
+}
+
+.modal-debt-detail .ant-table-thead .ant-table-cell {
+  background-color: #dadadd !important;
+}
 .modal-pay-detail .ant-modal-content {
-  background-color: #f5f5f6;
+  background-color: #fff;
 }
 
 .modal-pay-detail .ant-modal-body {
@@ -560,7 +571,7 @@ textarea {
   height: 43px !important;
 }
 
-.modal-setting-target .ant-modal-header {
+/* .modal-setting-target .ant-modal-header {
   background-color: #f5f5f6;
 }
 
@@ -568,7 +579,8 @@ textarea {
   background-color: #f5f5f6;
 }
 
-.modal-setting-target .ant-modal-body {
+ */
+ .modal-setting-target .ant-modal-body {
   padding: 16px;
 }
 
@@ -628,3 +640,33 @@ textarea {
 /* .ant-popover-inner-content {
   padding: 0px;
 } */
+
+.product-form .ant-table-tbody > tr > td,
+.ant-table-thead > tr > th,
+.ant-table tfoot > tr > td,
+.ant-table tfoot > tr > th {
+  padding: 8px;
+}
+
+.product-form
+  .ant-select-single
+  .ant-select-selector
+  .ant-select-selection-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list-debt .ant-table-container {
+  border: 1px solid #dadadd;
+  border-radius: 0 4px 4px 4px;
+}
+
+.list-payment .ant-table-container {
+  border: 1px solid #dadadd;
+  border-radius: 0 4px 4px 4px;
+}
+
+.report-product .ant-table-tbody>tr>td, .ant-table-thead>tr>th, .ant-table tfoot>tr>td, .ant-table tfoot>tr>th {
+  padding: 8px;
+}

@@ -212,7 +212,7 @@ const ModalAddDebt = (props: ModalAddDebtProps) => {
             <div className="mb-[12px]">Ghi chú</div>
             <TextArea
               className="bg-slate-100 !h-[104px]"
-              placeholder="Công nợ theo đơn hoàn"
+              placeholder="Nhập ghi chú"
             />
           </div>
           <div className="mb-[16px]">
