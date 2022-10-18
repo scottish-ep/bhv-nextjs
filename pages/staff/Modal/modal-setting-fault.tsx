@@ -55,7 +55,7 @@ const ModalSettingFault = (props: ModalSettingFaultProps) => {
     },
   ];
 
-  const [itemList, setItemList] = useState([{ id: '1', name: 'Nhom 1' }]);
+  const [itemList, setItemList] = useState([{ id: '1', name: 'Đi trễ' }]);
   const [name, setName] = useState('');
   const handleDelete = (id: string) => {
     setItemList((prevItemList) =>

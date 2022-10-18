@@ -22,10 +22,10 @@ const ReportPieChart = (props: ReportPieChartProps) => {
         </span>
       </div>
       <div className={styles.row}>
-        <div className="flex-1" style={{ width: 243 }}>
+        <div className="flex-0" style={{ width: 243 }}>
           <PieChart data={data} />
         </div>
-        <div className={classNames(styles.div_container)}>
+        <div className={classNames(styles.div_container, "w-full")}>
           <div className={styles.row}>
             <div className="flex items-center">
               <div className={classNames(styles.block, "bg-[#404FCC]")} />

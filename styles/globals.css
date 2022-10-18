@@ -571,7 +571,7 @@ textarea {
   height: 43px !important;
 }
 
-.modal-setting-target .ant-modal-header {
+/* .modal-setting-target .ant-modal-header {
   background-color: #f5f5f6;
 }
 
@@ -579,7 +579,8 @@ textarea {
   background-color: #f5f5f6;
 }
 
-.modal-setting-target .ant-modal-body {
+ */
+ .modal-setting-target .ant-modal-body {
   padding: 16px;
 }
 
@@ -664,4 +665,8 @@ textarea {
 .list-payment .ant-table-container {
   border: 1px solid #dadadd;
   border-radius: 0 4px 4px 4px;
+}
+
+.report-product .ant-table-tbody>tr>td, .ant-table-thead>tr>th, .ant-table tfoot>tr>td, .ant-table tfoot>tr>th {
+  padding: 8px;
 }

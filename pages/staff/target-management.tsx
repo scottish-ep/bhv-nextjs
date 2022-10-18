@@ -16,7 +16,7 @@ import DatePicker from '../../components/DatePicker/DatePicker';
 import DropdownStatus from '../../components/DropdownStatus';
 import ModalSettingTarget from './Modal/modal-setting-target';
 import { StatusColorEnum, StatusEnum, StatusList } from '../../types';
-
+import defaultAvatar from "../../assets/default-avatar.svg"
 import classNames from 'classnames';
 
 import styles from '../../styles/ListProduct.module.css';
@@ -45,7 +45,10 @@ const TargetManagement = () => {
     console.log('selectedRowKeys changed: ', selectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
-
+  const [pagination, setPagination] = useState({
+    total: 0,
+    pageSize: 10,
+  });
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
@@ -72,7 +75,7 @@ const TargetManagement = () => {
       render: (_, record) => (
         <div className="w-full flex justify-start">
           <div className="w-[36px] relative mr-[8px]">
-            <Image src={record.img} layout="fill" />
+            <Image src={record.img || defaultAvatar} layout="fill" />
           </div>
           <div className="flex flex-col justify-start">
             <p className="text-medium font-medium text-[#384ADC]">
@@ -189,151 +192,19 @@ const TargetManagement = () => {
     },
   ];
 
-  const data = [
-    {
-      show: true,
-      id: 'NV0001',
-      name: 'Yến Nhi',
-      img: require('../../assets/staff.svg'),
-      role: 'Sale cấp 1',
-      order: 150,
-      profit: 13500000,
-      kpiorder: 270,
-      kpiprofit: 30000000,
-    },
-    {
-      show: true,
-      id: 'NV0001',
-      name: 'Yến Nhi',
-      role: 'Sale cấp 1',
-      img: require('../../assets/staff.svg'),
-      category: 'Áo',
-      order: 150,
-      profit: 13500000,
-      kpiorder: 270,
-      kpiprofit: 30000000,
-    },
-    {
-      show: true,
-      id: 'NV0001',
-      name: 'Yến Nhi',
-      role: 'Sale cấp 1',
-      img: require('../../assets/staff.svg'),
-      category: 'Áo',
-      order: 150,
-      profit: 13500000,
-      kpiorder: 270,
-      kpiprofit: 30000000,
-    },
-    {
-      show: true,
-      id: 'NV0001',
-      name: 'Yến Nhi',
-      role: 'Sale cấp 1',
-      img: require('../../assets/staff.svg'),
-      category: 'Áo',
-      order: 150,
-      profit: 13500000,
-      kpiorder: 270,
-      kpiprofit: 30000000,
-    },
-    {
-      show: true,
-      id: 'NV0001',
-      name: 'Yến Nhi',
-      role: 'Sale cấp 1',
-      img: require('../../assets/staff.svg'),
-      category: 'Áo',
-      order: 150,
-      profit: 13500000,
-      kpiorder: 270,
-      kpiprofit: 30000000,
-    },
-    {
-      show: true,
-      id: 'NV0001',
-      name: 'Yến Nhi',
-      role: 'Sale cấp 1',
-      img: require('../../assets/staff.svg'),
-      category: 'Áo',
-      order: 150,
-      profit: 13500000,
-      kpiorder: 270,
-      kpiprofit: 30000000,
-    },
-    {
-      show: true,
-      id: 'NV0001',
-      name: 'Yến Nhi',
-      role: 'Sale cấp 1',
-      img: require('../../assets/staff.svg'),
-      category: 'Áo',
-      order: 150,
-      profit: 13500000,
-      kpiorder: 270,
-      kpiprofit: 30000000,
-    },
-    {
-      show: true,
-      id: 'NV0001',
-      name: 'Yến Nhi',
-      role: 'Sale cấp 1',
-      img: require('../../assets/staff.svg'),
-      category: 'Áo',
-      order: 150,
-      profit: 13500000,
-      kpiorder: 270,
-      kpiprofit: 30000000,
-    },
-    {
-      show: true,
-      id: 'NV0001',
-      name: 'Yến Nhi',
-      role: 'Sale cấp 1',
-      img: require('../../assets/staff.svg'),
-      category: 'Áo',
-      order: 150,
-      profit: 13500000,
-      kpiorder: 270,
-      kpiprofit: 30000000,
-    },
-    {
-      show: true,
-      id: 'NV0001',
-      name: 'Yến Nhi',
-      role: 'Sale cấp 1',
-      img: require('../../assets/staff.svg'),
-      category: 'Áo',
-      order: 150,
-      profit: 13500000,
-      kpiorder: 270,
-      kpiprofit: 30000000,
-    },
-    {
-      show: true,
-      id: 'KH0001',
-      name: 'Yến Nhi',
-      role: 'Sale cấp 1',
-      img: require('../../assets/staff.svg'),
-      category: 'Áo',
-      order: 150,
-      profit: 13500000,
-      kpiorder: 270,
-      kpiprofit: 30000000,
-    },
-    {
-      show: true,
-      id: 'KH0001',
-      name: 'Yến Nhi',
-      role: 'Sale cấp 1',
-      img: require('../../assets/staff.svg'),
-      category: 'Áo',
-      order: 150,
-      profit: 13500000,
-      kpiorder: 270,
-      kpiprofit: 30000000,
-    },
-  ];
+  const data = Array(50)
+  .fill({
+    show: true,
+    id: 'NV0001',
+    name: 'Yến Nhi',
+    img: require('../../assets/staff.svg'),
+    role: 'Sale cấp 1',
+    order: 150,
+    profit: 13500000,
+    kpiorder: 270,
+    kpiprofit: 30000000,
+  })
+  .map((item, index) => ({ ...item, id: `KH${index + 1}` }));
 
   const warehouseData = [
     {
@@ -357,7 +228,7 @@ const TargetManagement = () => {
     <div className="w-full target-management">
       <div className="flex items-center justify-between mb-[12px] flex-wrap">
         <div className="flex flex-col justify-start">
-          <TitlePage title="Quản lý chỉ tiêu" href="/user-goal" />
+          <TitlePage title="Chi tiết chỉ tiêu" href="/user-goal" />
           <div className="flex mt-[8px]">
             <p className="text-medium font-medium mr-[5px]">
               Quản lý nhân viên
@@ -427,7 +298,16 @@ const TargetManagement = () => {
         />
       </div>
       <div className="relative">
-        <Table columns={columns} dataSource={data} scroll={{ x: 50, y: 450 }} />
+        <Table
+          columns={columns}
+          dataSource={data}
+          scroll={{ x: 50, y: 450 }}
+          pagination={{
+            defaultPageSize: pagination.pageSize,
+            showSizeChanger: true,
+            pageSizeOptions: [10, 20, 50, 100],
+          }}
+        />
       </div>
       <ModalSettingTarget
         title="Cài đặt chỉ tiêu"

@@ -225,7 +225,7 @@ const ReportOrder = () => {
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-[12px] flex-wrap">
-        <TitlePage title="Báo cáo doanh thu" />
+        <TitlePage title="Báo cáo đơn hàng" />
         <div className="flex items-center gap-[24px]">
           <Button
             variant="outlined"
@@ -263,14 +263,14 @@ const ReportOrder = () => {
               <div className="text-2xl font-bold">2560</div>
             </div>
             <div className={styles.row}>
-              <div className="font-semibold">Lợi nhuận</div>
+              <div className="font-semibold opacity-50">Đã nhận</div>
               <div className="text-[#10B981] text-2xl font-bold">
-                1.513.000.000 đ
+              956
               </div>
             </div>
             <div className={styles.row}>
-              <div className="font-semibold">Chuyển hoàn</div>
-              <div className="text-[#F97316] text-big font-bold">153</div>
+              <div className="font-semibold ">Chuyển hoàn</div>
+              <div className="text-[#8B5CF6] text-big font-bold">153</div>
             </div>
             <div className={styles.row}>
               <div className="font-semibold">Đơn huỷ</div>
@@ -287,13 +287,13 @@ const ReportOrder = () => {
                   <div className="text-[#10B981] font-semibold">
                     {percentOrder[0].label}
                   </div>
-                  <div>85%</div>
+                  <div className="text-medium font-semibold">85%</div>
                 </div>
                 <div className="flex gap-[12px]">
                   <div className="text-[#8B5CF6] font-semibold">
                     {percentOrder[1].label}
                   </div>
-                  <div>15%</div>
+                  <div className="text-medium font-semibold">15%</div>
                 </div>
               </div>
             </div>
@@ -331,7 +331,7 @@ const ReportOrder = () => {
           </div>
           <div className="flex items-center gap-[24px]">
             <div className="flex items-center">
-              <div className="mr-[12px]">Chọn kho</div>
+              <div className="mr-[12px] font-medium">Chọn kho</div>
               <Select options={statusOrder} style={{ width: 248 }} />
             </div>
             <span className="cursor-pointer">

@@ -8,9 +8,12 @@ import { listTarget } from '../../const/constant';
 import { ITartget } from './staff.type';
 import type { ColumnsType } from 'antd/es/table';
 import { StatusColorEnum, StatusList } from '../../types';
+import ModalSettingTarget from './Modal/modal-setting-target';
 
 const ListTarget = () => {
   const [loading, setIsloading] = useState(false);
+  const [isShowSettingTarget, setIsShowSettingTarget] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const [pagination, setPagination] = useState({
     total: 0,
     pageSize: 10,
@@ -57,7 +60,7 @@ const ListTarget = () => {
       align: 'center',
       render: (_, record) => {
         return (
-          <span className="cursor-pointer">
+          <span className="cursor-pointer" onClick={() => (window.location.href = "/staff/target-management")}>
             <Icon icon="edit-2" />
           </span>
         );
@@ -75,9 +78,10 @@ const ListTarget = () => {
             width={151}
             color="white"
             suffixIcon={<Icon icon="add" size={24} />}
-            onClick={() =>
-              (window.location.href = '/warehouse/export-commands/update/1')
-            }
+            onClick={() => {
+              setIsEdit(true);
+              setIsShowSettingTarget(true);
+            }}
           >
             Thêm mới
           </Button>
@@ -102,8 +106,16 @@ const ListTarget = () => {
         }}
         scroll={{ y: 350 }}
       />
+      <ModalSettingTarget
+        title="Cài đặt chỉ tiêu"
+        isEdit={isEdit}
+        isVisible={isShowSettingTarget}
+        onClose={() => setIsShowSettingTarget(false)}
+        onOpen={() => setIsShowSettingTarget(false)}
+      />
     </div>
   );
 };
 
-ReactDOM.render(<ListTarget />, document.getElementById('root'));
+export default ListTarget;
+// ReactDOM.render(<ListTarget />, document.getElementById('root'));

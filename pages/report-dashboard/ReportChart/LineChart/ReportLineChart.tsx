@@ -1,12 +1,12 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
 
-import styles from "../../../../styles/Report.module.css";
-import Icon from "../../../../components/Icon/Icon";
-import PieChart from "../../../../components/Chart/PieChart";
-import TitlePage from "../../../../components/TitlePage/Titlepage";
-import Select from "../../../../components/Select/Select";
-import LineChart from "../../../../components/Chart/LineChart";
+import styles from '../../../../styles/Report.module.css';
+import Icon from '../../../../components/Icon/Icon';
+import PieChart from '../../../../components/Chart/PieChart';
+import TitlePage from '../../../../components/TitlePage/Titlepage';
+import Select from '../../../../components/Select/Select';
+import LineChart from '../../../../components/Chart/LineChart';
 
 interface LineChartProps {
   data: any[];
@@ -27,6 +27,7 @@ const ReportLineChart = (props: LineChartProps) => {
           style={{ width: 205 }}
           key={index}
         >
+          <span className='w-[52px] h-[3px] bg-slate-400'></span>
           <div className="font-semibold">{item.label}</div>
           <div className="flex items-center gap-[12px]">
             <div className="font-semibold">{item.totalPrice}</div>
@@ -36,7 +37,7 @@ const ReportLineChart = (props: LineChartProps) => {
                 className={classNames(
                   styles.percent,
                   styles.increase,
-                  "ml-[4px]"
+                  'ml-[4px]'
                 )}
               >
                 13.5%
@@ -54,12 +55,12 @@ const ReportLineChart = (props: LineChartProps) => {
         <div className="text-[#384ADC] font-semibold text-big">{title}</div>
         <div className="flex items-center gap-[24px]">
           <div className="flex items-center">
-            <div className="mr-[12px]">Chọn kho</div>
-            <Select options={data} style={{ width: 248 }} />
+            <div className="mr-[12px] font-medium">Chọn kho</div>
+            <Select options={data} defaultValue={data[0]} style={{ width: 248 }} />
           </div>
           {statusOrder && (
             <div className="flex items-center">
-              <div className="mr-[12px]">Trạng thái đơn hàng</div>
+              <div className="mr-[12px] font-medium">Trạng thái đơn hàng</div>
               <Select options={statusOrder} style={{ width: 248 }} />
             </div>
           )}
@@ -72,7 +73,7 @@ const ReportLineChart = (props: LineChartProps) => {
         {renderWareHouse(data)}
       </div>
       <LineChart data={dataLineChart} width="100%" />
-      <div className="flex justify-end text-medium font-medium">
+      <div className="flex justify-end text-medium font-medium text-[#909098] opacity-50 w-[1300px]">
         Đơn vị: {unit}
       </div>
     </div>

@@ -241,18 +241,25 @@ const ProductForms: React.FC<ProductFormProps> = ({
   ];
   const columns: ColumnsType<ProductAttributeProps> = [
     {
-      title: 'Thuộc tính',
-      width: 148,
-      dataIndex: 'attribute',
+      title: '',
+      width: 44,
       align: 'center',
       render: (_, record) => (
-        <div className="flex justify-left w-48">
-          <div
-            className="mr-[20px] cursor-pointer"
-            onClick={() => handleDeleteProduct(record.id)}
-          >
-            <Icon icon="cancel" size={24} />
-          </div>
+        <div
+          className="mr-[20px] cursor-pointer"
+          onClick={() => handleDeleteProduct(record.id)}
+        >
+          <Icon icon="cancel" size={24} color="#DADADD" />
+        </div>
+      ),
+    },
+    {
+      title: 'Thuộc tính',
+      width: 110,
+      dataIndex: 'attribute',
+      align: 'left',
+      render: (_, record) => (
+        <div className="flex justify-left w-48 items-center">
           <span className="text-sm text-[#4B4B59] font-medium pd-[9px]">
             {record.attribute}
           </span>
@@ -422,7 +429,11 @@ const ProductForms: React.FC<ProductFormProps> = ({
       align: 'center',
       render: (_, record) => {
         return (
-          <Select width={297} defaultValue={record.typeAttribute[0]} options={record.typeAttribute}/>
+          <Select
+            width={297}
+            defaultValue={record.typeAttribute[0]}
+            options={record.typeAttribute}
+          />
         );
       },
     },
@@ -434,10 +445,10 @@ const ProductForms: React.FC<ProductFormProps> = ({
       render: (_, record) => {
         return (
           <Input
-          className="text-medium font-medium text-[#4B4B59]"
-          defaultValue={record.saleNum}
-          suffix="kg"
-        />
+            className="text-medium font-medium text-[#4B4B59]"
+            defaultValue={record.saleNum}
+            suffix="kg"
+          />
         );
       },
     },
@@ -589,9 +600,12 @@ const ProductForms: React.FC<ProductFormProps> = ({
                   // onChange={() => handleChange(checkboxSettings.value)}
                 />
                 <div className="flex items-center gap-[5px] ml-[25px] mt-[15px]">
-                  <Switch 
+                  <Switch
                     checked={isSync}
-                    onChange={() => {setIsSync((isSync) => !isSync); isSync && setIsShowPrices(isSync)}}
+                    onChange={() => {
+                      setIsSync((isSync) => !isSync);
+                      isSync && setIsShowPrices(isSync);
+                    }}
                   />
                   <span>Đồng giá trên tất cả kênh bán</span>
                 </div>
@@ -658,7 +672,10 @@ const ProductForms: React.FC<ProductFormProps> = ({
               />
             </div>
           </div>
-          <div className="p-[12px] bg-white rounded h-[554px]">
+          <div
+            className="p-[12px] bg-white rounded h-[695px]"
+            style={{ border: '1px solid #DADADD' }}
+          >
             <div className={styles.row}>
               <div className="text-[#384ADC] font-semibold text-medium">
                 Danh sách thuộc tính
@@ -674,21 +691,24 @@ const ProductForms: React.FC<ProductFormProps> = ({
                 />
               </div>
             </div>
-            <Table
-              columns={columns}
-              rowSelection={rowSelection}
-              dataSource={
-                typeAttributeList.length ? [...typeAttributeList] : []
-              }
-            />
-          </div>
-          <div className="w-full flex justify-end mt-[16px]">
-            <Button
-              variant="secondary"
-              text="Tạo mẫu mã"
-              width={155}
-              height={44}
-            />
+            <div className="h-[554px]">
+              <Table
+                columns={columns}
+                pagination={false}
+                className="attribute-table"
+                dataSource={
+                  typeAttributeList.length ? [...typeAttributeList] : []
+                }
+              />
+            </div>
+            <div className="w-full flex justify-end mt-[16px]">
+              <Button
+                variant="secondary"
+                text="Tạo mẫu mã"
+                width={155}
+                height={44}
+              />
+            </div>
           </div>
         </div>
       </div>

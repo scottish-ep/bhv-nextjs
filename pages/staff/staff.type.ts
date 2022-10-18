@@ -27,7 +27,7 @@ export interface IStaffListProps {
   show?: boolean | number;
   img: string;
   name?: string;
-  id?: string;
+  id: string;
   phone?: string;
   role?: string;
   group?: string;
