@@ -238,7 +238,7 @@ textarea {
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
-  font-feature-settings: "salt" on;
+  font-feature-settings: 'salt' on;
   color: #000000;
 }
 
@@ -608,3 +608,23 @@ textarea {
   padding: 16px;
 }
 
+.list-customer .ant-table-wrapper .ant-table-header {
+  height: 58px;
+}
+
+.list-customer .ant-pagination-disabled .ant-pagination-item-link,
+.ant-pagination-disabled:hover .ant-pagination-item-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list-customer .ant-pagination-next .ant-pagination-item-link,
+.ant-pagination-prev .ant-pagination-item-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* .ant-popover-inner-content {
+  padding: 0px;
+} */

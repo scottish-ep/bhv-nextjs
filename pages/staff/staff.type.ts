@@ -1,4 +1,4 @@
-import { StatusEnum } from "../../types";
+import { StatusEnum } from '../../types';
 
 export interface ITartget {
   name: string;
@@ -37,7 +37,12 @@ export interface IStaffListProps {
 }
 
 export interface IFaultDetailProps {
+  id: string;
   name?: string;
   fault?: number;
   update?: string;
+}
+
+export interface GroupList {
+  list: any[];
 }

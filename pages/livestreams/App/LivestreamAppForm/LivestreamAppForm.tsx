@@ -1,15 +1,15 @@
-import classNames from "classnames";
-import { format } from "date-fns";
-import React, { useEffect, useState } from "react";
-import Button from "../../../../components/Button/Button";
-import Icon from "../../../../components/Icon/Icon";
-import Input from "../../../../components/Input/Input";
-import Select from "../../../../components/Select/Select";
-import TitlePage from "../../../../components/TitlePage/Titlepage";
-import { filterCommentList } from "../../../../const/constant";
-import { ILivestreamAppDetail } from "../livestream-app.type";
-import CommentTable from "./CommentTable";
-import ProductTable from "./ProductTable";
+import classNames from 'classnames';
+import { format } from 'date-fns';
+import React, { useEffect, useState } from 'react';
+import Button from '../../../../components/Button/Button';
+import Icon from '../../../../components/Icon/Icon';
+import Input from '../../../../components/Input/Input';
+import Select from '../../../../components/Select/Select';
+import TitlePage from '../../../../components/TitlePage/Titlepage';
+import { filterCommentList } from '../../../../const/constant';
+import { ILivestreamAppDetail } from '../livestream-app.type';
+import CommentTable from './CommentTable';
+import ProductTable from './ProductTable';
 
 interface LivestreamAppFormProps {
   detail?: ILivestreamAppDetail;
@@ -25,7 +25,7 @@ const LivestreamAppForm: React.FC<LivestreamAppFormProps> = ({ detail }) => {
   ]);
 
   useEffect(() => {
-    const element = document.getElementById("loading__animation");
+    const element = document.getElementById('loading__animation');
     if (element) {
       element.remove();
     }
@@ -36,7 +36,7 @@ const LivestreamAppForm: React.FC<LivestreamAppFormProps> = ({ detail }) => {
       <div className="flex justify-between mb-5 flex-wrap gap-2">
         <TitlePage
           href="/livestream/app"
-          title={detail ? "Chi tiết livestream" : "Tạo livestream"}
+          title={detail ? 'Chi tiết livestream' : 'Tạo livestream'}
           description="Bán hàng Livestream / Livestream trên App"
         />
         <div className="flex gap-2 flex-wrap">
@@ -52,14 +52,14 @@ const LivestreamAppForm: React.FC<LivestreamAppFormProps> = ({ detail }) => {
               <Button
                 variant="secondary"
                 width={166}
-                style={{ fontWeight: "bold" }}
+                style={{ fontWeight: 'bold' }}
               >
                 Lưu (F12)
               </Button>
               <Button
                 variant="primary"
                 width={229}
-                style={{ fontWeight: "bold" }}
+                style={{ fontWeight: 'bold' }}
               >
                 Bắt đầu Livestream
               </Button>
@@ -69,7 +69,7 @@ const LivestreamAppForm: React.FC<LivestreamAppFormProps> = ({ detail }) => {
             variant="no-outlined"
             width={62}
             color="white"
-            icon={<Icon icon="upload" size={16} />}
+            icon={<Icon icon="question" size={16} />}
           >
             Hỗ trợ
           </Button>
@@ -81,9 +81,9 @@ const LivestreamAppForm: React.FC<LivestreamAppFormProps> = ({ detail }) => {
           <div className="flex gap-x-9 h-max">
             <span
               className={classNames(
-                "text-medium font-semibold text-[#909098] cursor-pointer",
+                'text-medium font-semibold text-[#909098] cursor-pointer',
                 {
-                  "border-b-2 border-b-[#FF970D] text-[#FF970D]": isInfo,
+                  'border-b-2 border-b-[#FF970D] text-[#FF970D]': isInfo,
                 }
               )}
               onClick={() => setIsInfo(true)}
@@ -92,9 +92,9 @@ const LivestreamAppForm: React.FC<LivestreamAppFormProps> = ({ detail }) => {
             </span>
             <span
               className={classNames(
-                "text-medium font-semibold text-[#909098] cursor-pointer",
+                'text-medium font-semibold text-[#909098] cursor-pointer',
                 {
-                  "border-b-2 border-b-[#FF970D] text-[#FF970D]": !isInfo,
+                  'border-b-2 border-b-[#FF970D] text-[#FF970D]': !isInfo,
                 }
               )}
               onClick={() => setIsInfo(false)}
@@ -144,7 +144,7 @@ const LivestreamAppForm: React.FC<LivestreamAppFormProps> = ({ detail }) => {
                   Thời gian diễn ra
                 </span>
                 <span className="font-medium text-[#2E2D3D] text-medium">
-                  {format(detail.createdAt, "HH:mm - dd/MM/yyyy")}
+                  {format(detail.createdAt, 'HH:mm - dd/MM/yyyy')}
                 </span>
               </div>
             </div>

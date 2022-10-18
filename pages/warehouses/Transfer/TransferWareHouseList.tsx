@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import { Table } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import get from "lodash/get";
-import { format } from "date-fns";
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { Table } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
+import get from 'lodash/get';
+import { format } from 'date-fns';
 
 import {
   wareHouseList,
   statusOptions,
   warehouses,
-} from "../../../const/constant";
-import { StatusColorEnum, StatusEnum, StatusList } from "../../../types";
-import Tabs from "../../../components/Tabs";
-import TitlePage from "../../../components/TitlePage/Titlepage";
-import Select from "../../../components/Select/Select";
-import Button from "../../../components/Button/Button";
-import Icon from "../../../components/Icon/Icon";
-import Input from "../../../components/Input/Input";
-import DatePicker from "../../../components/DateRangePicker/DateRangePicker";
-import DropdownStatus from "../../../components/DropdownStatus";
-import ModalRemove from "../components/ModalRemove/ModalRemove";
-import { IWareHouses } from "../warehouse.type";
+} from '../../../const/constant';
+import { StatusColorEnum, StatusEnum, StatusList } from '../../../types';
+import Tabs from '../../../components/Tabs';
+import TitlePage from '../../../components/TitlePage/Titlepage';
+import Select from '../../../components/Select/Select';
+import Button from '../../../components/Button/Button';
+import Icon from '../../../components/Icon/Icon';
+import Input from '../../../components/Input/Input';
+import DatePicker from '../../../components/DateRangePicker/DateRangePicker';
+import DropdownStatus from '../../../components/DropdownStatus';
+import ModalRemove from '../components/ModalRemove/ModalRemove';
+import { IWareHouses } from '../warehouse.type';
 
 const TransferWareHouseList = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -41,7 +41,7 @@ const TransferWareHouseList = () => {
   ];
 
   useEffect(() => {
-    const element = document.getElementById("loading__animation");
+    const element = document.getElementById('loading__animation');
     if (element) {
       element.remove();
     }
@@ -70,7 +70,7 @@ const TransferWareHouseList = () => {
   // }, []);
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -81,12 +81,12 @@ const TransferWareHouseList = () => {
 
   const columns: ColumnsType<IWareHouses> = [
     {
-      title: "Mã chuyển kho",
+      title: 'Mã chuyển kho',
       width: 150,
-      dataIndex: "id",
-      key: "id",
-      fixed: "left",
-      align: "center",
+      dataIndex: 'id',
+      key: 'id',
+      fixed: 'left',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium text-[#384ADC] font-semibold">
           {record.id}
@@ -94,10 +94,10 @@ const TransferWareHouseList = () => {
       ),
     },
     {
-      title: "NV xử lý / Thời gian",
+      title: 'NV xử lý / Thời gian',
       width: 200,
-      dataIndex: "name",
-      key: "name",
+      dataIndex: 'name',
+      key: 'name',
       render: (_, record) => (
         <div className="flex flex-col gap-y-1">
           <span className="text-medium text-[#384ADC] font-semibold">
@@ -105,18 +105,18 @@ const TransferWareHouseList = () => {
           </span>
           <span className="text-medium text-[#5F5E6B] font-medium">
             {record.createdAt
-              ? format(record.createdAt, "HH:mm - dd/MM/yyyy")
-              : ""}
+              ? format(record.createdAt, 'HH:mm - dd/MM/yyyy')
+              : ''}
           </span>
         </div>
       ),
     },
     {
-      title: "Kho chuyển",
+      title: 'Kho chuyển',
       width: 200,
-      dataIndex: "transfer_name",
-      key: "transfer_name",
-      align: "center",
+      dataIndex: 'transfer_name',
+      key: 'transfer_name',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#2E2D3D]">
           {record.transfer_name}
@@ -124,11 +124,11 @@ const TransferWareHouseList = () => {
       ),
     },
     {
-      title: "Kho nhập",
+      title: 'Kho nhập',
       width: 200,
-      dataIndex: "export_name",
-      key: "export_name",
-      align: "center",
+      dataIndex: 'export_name',
+      key: 'export_name',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#2E2D3D]">
           {record.export_name}
@@ -136,21 +136,21 @@ const TransferWareHouseList = () => {
       ),
     },
     {
-      title: "Ghi chú",
+      title: 'Ghi chú',
       width: 200,
-      dataIndex: "note",
-      key: "note",
-      align: "center",
+      dataIndex: 'note',
+      key: 'note',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium text-[#4B4B59]">{record.note}</span>
       ),
     },
     {
-      title: "Tổng số SP chuyển kho",
+      title: 'Tổng số SP chuyển kho',
       width: 150,
-      dataIndex: "total_transfer_product",
-      key: "total_transfer_product",
-      align: "center",
+      dataIndex: 'total_transfer_product',
+      key: 'total_transfer_product',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#384ADC]">
           {record.total_transfer_product}
@@ -158,11 +158,11 @@ const TransferWareHouseList = () => {
       ),
     },
     {
-      title: "Tổng số lượng chuyển",
+      title: 'Tổng số lượng chuyển',
       width: 150,
-      dataIndex: "total_transfer",
-      key: "total_transfer",
-      align: "center",
+      dataIndex: 'total_transfer',
+      key: 'total_transfer',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#1D1C2D]">
           {record.total_transfer}
@@ -170,11 +170,11 @@ const TransferWareHouseList = () => {
       ),
     },
     {
-      title: "Tổng trọng lượng chuyển",
+      title: 'Tổng trọng lượng chuyển',
       width: 150,
-      dataIndex: "total_transfer_weight",
-      key: "total_transfer_weight",
-      align: "center",
+      dataIndex: 'total_transfer_weight',
+      key: 'total_transfer_weight',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#1D1C2D]">
           {record.total_transfer_weight} kg
@@ -182,25 +182,25 @@ const TransferWareHouseList = () => {
       ),
     },
     {
-      title: "Cập nhật cuối",
+      title: 'Cập nhật cuối',
       width: 185,
-      dataIndex: "updatedAt",
-      key: "updatedAt",
-      align: "center",
+      dataIndex: 'updatedAt',
+      key: 'updatedAt',
+      align: 'center',
       render: (_, record) => (
         <div className="flex flex-col gap-y-1 text-medium text-[#1D1C2D]">
-          <span>{format(record.updatedAt, "HH:mm")}</span>
-          <span>{format(record.updatedAt, "dd/MM/yyyy")}</span>
+          <span>{format(record.updatedAt, 'HH:mm')}</span>
+          <span>{format(record.updatedAt, 'dd/MM/yyyy')}</span>
         </div>
       ),
     },
     {
-      title: "Trạng thái",
+      title: 'Trạng thái',
       width: 185,
-      dataIndex: "status",
-      key: "status",
-      align: "center",
-      fixed: "right",
+      dataIndex: 'status',
+      key: 'status',
+      align: 'center',
+      fixed: 'right',
       render: (_, record) => (
         <span
           className={`text-medium font-semibold text-[${
@@ -252,7 +252,7 @@ const TransferWareHouseList = () => {
             color="white"
             suffixIcon={<Icon icon="add" size={24} />}
             onClick={() =>
-              (window.location.href = "/warehouse/transfer-commands/create")
+              (window.location.href = '/warehouse/transfer-commands/create')
             }
           >
             Thêm mới
@@ -261,7 +261,7 @@ const TransferWareHouseList = () => {
             variant="no-outlined"
             width={62}
             color="white"
-            icon={<Icon icon="upload" size={16} />}
+            icon={<Icon icon="question" size={16} />}
           >
             Hỗ trợ
           </Button>
@@ -286,7 +286,7 @@ const TransferWareHouseList = () => {
         onRow={() => {
           return {
             onClick: () => {
-              window.location.href = "/warehouse/transfer-commands/update/1";
+              window.location.href = '/warehouse/transfer-commands/update/1';
             },
           };
         }}
@@ -313,4 +313,4 @@ const TransferWareHouseList = () => {
   );
 };
 
-ReactDOM.render(<TransferWareHouseList />, document.getElementById("root"));
+ReactDOM.render(<TransferWareHouseList />, document.getElementById('root'));

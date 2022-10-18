@@ -27,7 +27,7 @@ const Select = (props: SelectProps) => {
       )}
       {prefix && <div className={styles.icon_prefix}>{prefix}</div>}
       <SelectAntd
-        suffixIcon={<Icon icon="arrow-down-1" size={16} color="#5F5E6B" />}
+        suffixIcon={<Icon icon="arrow-down-1" size={16} color="#909098" />}
         style={{
           width: width,
         }}

@@ -1,27 +1,27 @@
-import { format } from "date-fns";
-import React, { useState } from "react";
-import Button from "../../../components/Button/Button";
-import Icon from "../../../components/Icon/Icon";
-import Input from "../../../components/Input/Input";
-import ModalConfirm from "../../../components/Modal/ModalConfirm/ModalConfirm";
-import { Popover } from "antd";
-import Select from "../../../components/Select/Select";
-import TextArea from "../../../components/TextArea";
-import DatePicker from "../../../components/DatePicker/DatePicker";
-import TitlePage from "../../../components/TitlePage/Titlepage";
-import Upload from "../../../components/Upload/Upload";
-import { productTypeList, productAttributes } from "../../../const/constant";
-import type { ColumnsType } from "antd/es/table";
-import styles from "../../../styles/DetailCustomer.module.css";
+import { format } from 'date-fns';
+import React, { useState } from 'react';
+import Button from '../../../components/Button/Button';
+import Icon from '../../../components/Icon/Icon';
+import Input from '../../../components/Input/Input';
+import ModalConfirm from '../../../components/Modal/ModalConfirm/ModalConfirm';
+import { Popover } from 'antd';
+import Select from '../../../components/Select/Select';
+import TextArea from '../../../components/TextArea';
+import DatePicker from '../../../components/DatePicker/DatePicker';
+import TitlePage from '../../../components/TitlePage/Titlepage';
+import Upload from '../../../components/Upload/Upload';
+import { productTypeList, productAttributes } from '../../../const/constant';
+import type { ColumnsType } from 'antd/es/table';
+import styles from '../../../styles/DetailCustomer.module.css';
 import type {
   ProductAttributeProps,
   ProductDetailProps,
-} from "../product.type";
-import type { CustomTagProps } from "rc-select/lib/BaseSelect";
-import { Checkbox, Switch, Tag } from "antd";
-import CheckboxList from "../../../components/CheckboxList/CheckboxList";
-import classNames from "classnames";
-import { Table } from "antd";
+} from '../product.type';
+import type { CustomTagProps } from 'rc-select/lib/BaseSelect';
+import { Checkbox, Switch, Tag } from 'antd';
+import CheckboxList from '../../../components/CheckboxList/CheckboxList';
+import classNames from 'classnames';
+import { Table } from 'antd';
 interface ProductFormProps {
   detail?: any;
   type_attr_list?: ProductAttributeProps[];
@@ -31,67 +31,88 @@ const ProductForms: React.FC<ProductFormProps> = ({
   detail,
   type_attr_list = [],
 }) => {
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [isOnApp, setIsOnApp] = useState(false);
   const data = [
     {
-      id: "1",
-      attribute: "Màu sắc",
+      id: '1',
+      attribute: 'Màu sắc',
       typeAttribute: [
         {
-          label: "TRANG",
-          value: "TRANG",
+          label: 'TRANG',
+          value: 'TRANG',
         },
         {
-          label: "TRANG",
-          value: "TRANG",
+          label: 'TRANG',
+          value: 'TRANG',
         },
       ],
     },
     {
-      id: "2",
-      attribute: "Màu sắc",
+      id: '2',
+      attribute: 'Màu sắc',
       typeAttribute: [
         {
-          label: "TRANG1",
-          value: "TRANG",
+          label: 'TRANG1',
+          value: 'TRANG',
         },
         {
-          label: "TRANG1",
-          value: "TRANG1",
+          label: 'TRANG1',
+          value: 'TRANG1',
         },
       ],
     },
   ];
   const [typeAttributeList, setTypeAttributeList] = useState([...data]);
 
+  const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
+
   const handleDeleteProduct = (id: string) => {
     setTypeAttributeList((prevTypeAttributeList) =>
       prevTypeAttributeList.filter((product) => product.id !== id)
     );
   };
+
+  const handleChange = (value: string) => {
+    const list = checkboxSettings.map((item) => {
+      if (item.value === 'App') {
+        setIsOnApp(true);
+      }
+    });
+  };
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: onSelectChange,
+  };
+
   const [isShowModalConfirm, setIsShowModalConfirm] = useState(false);
   const [fileList, setFileList] = useState([]);
 
   const handleConfirmDelete = () => {
-    console.log("delete");
+    console.log('delete');
     setIsShowModalConfirm(false);
   };
 
   const tags = [
     {
-      label: "Tất cả kho",
-      value: "Tất cả kho",
+      label: 'Tất cả kho',
+      value: 'Tất cả kho',
     },
     {
-      label: "Tổng kho Linh Dương",
-      value: "Tổng kho Linh Dương",
+      label: 'Tổng kho Linh Dương',
+      value: 'Tổng kho Linh Dương',
     },
     {
-      label: "Siêu thị tiện ích Linh Dương",
-      value: "Siêu thị tiện ích Linh Dương",
+      label: 'Siêu thị tiện ích Linh Dương',
+      value: 'Siêu thị tiện ích Linh Dương',
     },
     {
-      label: "LD Mart",
-      value: "LD Mart",
+      label: 'LD Mart',
+      value: 'LD Mart',
     },
   ];
 
@@ -117,20 +138,35 @@ const ProductForms: React.FC<ProductFormProps> = ({
   );
 
   const content1 = (
-    <div className="flex flex-col w-full p-[12px]">
+    <div className="flex flex-col w-full">
       <div className="flex justify-between w-full items-center mb-[8px]">
         <div className="text-medium font-medium mb-[4px]">Giá nhập</div>
-        <Input className="rounded-lg" placeholder="Nhập" />
+        <Input
+          width={154}
+          className="rounded-lg"
+          placeholder="Nhập"
+          suffix={<p className="text-medium font-normal text-[#DADADD]">đ</p>}
+        />
       </div>
       <div className="flex justify-between w-full items-center mb-[8px]">
         <div className="text-medium font-medium mb-[4px]">Giá bán</div>
-        <Input className="rounded-lg" placeholder="Nhập" />
+        <Input
+          width={154}
+          className="rounded-lg"
+          placeholder="Nhập"
+          suffix={<p className="text-medium font-normal text-[#DADADD]">đ</p>}
+        />
       </div>
       <div className="flex justify-between w-full items-center ">
         <div className="text-medium font-medium mb-[4px]">Trọng lượng SP</div>
-        <Input className="rounded-lg" placeholder="Nhập" />
+        <Input
+          width={154}
+          className="rounded-lg"
+          placeholder="Nhập"
+          suffix={<p className="text-medium font-normal text-[#DADADD]">kg</p>}
+        />
       </div>
-      <div className="mt-[32px] bg-[#384ADC] text-[#fff] w-[297px] h-[39px] rounded-lg flex justify-center items-center cursor-pointer">
+      <div className="mt-[16px] bg-[#384ADC] text-[#fff] w-[297px] h-[39px] rounded-lg flex justify-center items-center cursor-pointer">
         Đồng bộ
       </div>
     </div>
@@ -142,12 +178,14 @@ const ProductForms: React.FC<ProductFormProps> = ({
       <Select
         className="rounded-lg mb-[8px]
         mb-[8px]"
+        defaultValue={tags[0]}
         options={tags}
       />
       <div className="text-medium font-medium mb-[8px]">Chọn kho nhập</div>
       <Select
         className="rounded-lg mb-[8px]
         mb-[8px]"
+        defaultValue={tags[0]}
         options={tags}
       />
       <div className="mt-[16px] bg-[#384ADC] text-[#fff] w-full h-[39px] rounded-lg flex justify-center items-center cursor-pointer">
@@ -178,20 +216,20 @@ const ProductForms: React.FC<ProductFormProps> = ({
   const data2 = [
     {
       show: true,
-      sku: "555501S",
+      sku: '555501S',
       inputNum: 55.0,
       saleNum: 150.0,
-      type: "Trắng - S",
+      type: 'Trắng - S',
       weight: 1,
       negative: true,
     },
   ];
   const columns: ColumnsType<ProductAttributeProps> = [
     {
-      title: "Thuộc tính",
+      title: 'Thuộc tính',
       width: 148,
-      dataIndex: "attribute",
-      align: "center",
+      dataIndex: 'attribute',
+      align: 'center',
       render: (_, record) => (
         <div className="flex justify-left w-48">
           <div
@@ -207,18 +245,18 @@ const ProductForms: React.FC<ProductFormProps> = ({
       ),
     },
     {
-      title: "Kiểu thuộc tính",
+      title: 'Kiểu thuộc tính',
       width: 551,
-      dataIndex: "typeAttribute",
-      align: "left",
+      dataIndex: 'typeAttribute',
+      align: 'left',
       render: (_, record) => (
-        <span className="w-[551px] flex items-center justify-between text-sm text-[#4B4B59] font-medium pd-[9px]">
+        <span className="w-full flex items-center justify-between text-sm text-[#4B4B59] font-medium pd-[9px]">
           <span className="w-11/12">
             <Select
               mode="multiple"
               showArrow
-              defaultValue={["TRẮNG", "ĐEN"]}
-              style={{ width: "100%" }}
+              defaultValue={['TRẮNG', 'ĐEN']}
+              style={{ width: '100%' }}
               options={record.typeAttribute}
             />
           </span>
@@ -228,7 +266,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
             title="Thêm kiểu thuộc tính mới"
             trigger="click"
             overlayStyle={{
-              width: "309px",
+              width: '309px',
             }}
           >
             <Button width={24} height={24} className="p-0">
@@ -242,38 +280,30 @@ const ProductForms: React.FC<ProductFormProps> = ({
 
   const columns2: ColumnsType<ProductDetailProps> = [
     {
-      title: "",
+      title: 'Hiện',
       width: 82,
-      fixed: "left",
-      align: "center",
-      render: (_, record) => {
-        return <Checkbox />;
-      },
-    },
-    {
-      title: "Hiện",
-      width: 82,
-      key: "id",
-      dataIndex: "show",
-      fixed: "left",
-      align: "center",
+      key: 'id',
+      dataIndex: 'show',
+      fixed: 'left',
+      align: 'center',
       render: (_, record) => {
         return (
           <Switch
+            checked={true}
             className="button-switch"
             defaultChecked={
               record.show ? (record.show === 1 ? true : false) : false
             }
-            onChange={() => console.log("check")}
+            onChange={() => console.log('check')}
           />
         );
       },
     },
     {
-      title: "Mã SKU",
+      title: 'Mã SKU',
       width: 145,
-      dataIndex: "sku",
-      align: "center",
+      dataIndex: 'sku',
+      align: 'center',
       render: (_, record) => {
         return (
           <div className="text-medium font-medium text-[#4B4B59]">
@@ -283,15 +313,15 @@ const ProductForms: React.FC<ProductFormProps> = ({
       },
     },
     {
-      title: "Giá nhập",
+      title: 'Giá nhập',
       width: 145,
-      dataIndex: "sku",
-      align: "center",
+      dataIndex: 'sku',
+      align: 'center',
       render: (_, record) => {
         return (
           <div
             className="flex justify-between items-center px-[12px] py-[7px] rounded-lg"
-            style={{ border: "1px solid #DADADD" }}
+            style={{ border: '1px solid #DADADD' }}
           >
             <div className="text-medium font-medium text-[#4B4B59]">
               {record.inputNum}
@@ -302,15 +332,15 @@ const ProductForms: React.FC<ProductFormProps> = ({
       },
     },
     {
-      title: "Giá bán",
+      title: 'Giá bán',
       width: 145,
-      dataIndex: "sku",
-      align: "center",
+      dataIndex: 'sku',
+      align: 'center',
       render: (_, record) => {
         return (
           <div
             className="flex justify-between items-center px-[12px] py-[7px] rounded-lg"
-            style={{ border: "1px solid #DADADD" }}
+            style={{ border: '1px solid #DADADD' }}
           >
             <div className="text-medium font-medium text-[#4B4B59]">
               {record.saleNum}
@@ -321,15 +351,15 @@ const ProductForms: React.FC<ProductFormProps> = ({
       },
     },
     {
-      title: "Mẫu mã",
+      title: 'Mẫu mã',
       width: 500,
-      dataIndex: "sku",
-      align: "center",
+      dataIndex: 'sku',
+      align: 'center',
       render: (_, record) => {
         return (
           <div
             className="flex justify-center items-center px-[12px] py-[7px] rounded-lg"
-            style={{ border: "1px solid #DADADD" }}
+            style={{ border: '1px solid #DADADD' }}
           >
             <div className="text-medium font-medium text-[#4B4B59]">
               {record.type}
@@ -339,15 +369,15 @@ const ProductForms: React.FC<ProductFormProps> = ({
       },
     },
     {
-      title: "Trọng lượng SP",
+      title: 'Trọng lượng SP',
       width: 180,
-      dataIndex: "weight",
-      align: "center",
+      dataIndex: 'weight',
+      align: 'center',
       render: (_, record) => {
         return (
           <div
             className="flex items-center justify-between px-[12px] py-[7px] rounded-lg"
-            style={{ border: "1px solid #DADADD" }}
+            style={{ border: '1px solid #DADADD' }}
           >
             <div className="text-medium font-medium text-[#4B4B59]">
               {record.weight}
@@ -358,18 +388,18 @@ const ProductForms: React.FC<ProductFormProps> = ({
       },
     },
     {
-      title: "Bán âm",
+      title: 'Bán âm',
       width: 80,
-      dataIndex: "negative",
-      align: "center",
+      dataIndex: 'negative',
+      align: 'center',
       render: (_, record) => {
         return <Checkbox />;
       },
     },
     {
-      title: "",
+      title: '',
       width: 20,
-      align: "center",
+      align: 'center',
       render: (_, record) => {
         return (
           <div className="cursor-pointer">
@@ -380,23 +410,37 @@ const ProductForms: React.FC<ProductFormProps> = ({
     },
   ];
 
-  const checkboxSettings: {
-    label: string;
-    value: string;
-  }[] = [
+  const checkboxSettings = [
     {
-      label: "Tại quầy",
-      value: "Tại quầy",
+      label: 'Tại quầy',
+      value: 'Tại quầy',
     },
     {
-      label: "Online",
-      value: "Online",
+      label: 'Online',
+      value: 'Online',
     },
     {
-      label: "App",
-      value: "App",
+      label: 'App',
+      value: 'App',
     },
   ];
+  // const checkboxSettings: {
+  //   label: string;
+  //   value: string;
+  // }[] = [
+  //   {
+  //     label: 'Tại quầy',
+  //     value: 'Tại quầy',
+  //   },
+  //   {
+  //     label: 'Online',
+  //     value: 'Online',
+  //   },
+  //   {
+  //     label: 'App',
+  //     value: 'App',
+  //   },
+  // ];
 
   return (
     <div className="w-full">
@@ -404,7 +448,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
       <div className="flex justify-between mb-5">
         <TitlePage
           href="/warehouse/export-commands"
-          title={detail ? "Chi tiết sản phẩm" : "Tạo sản phẩm"}
+          title={detail ? 'Chi tiết sản phẩm' : 'Tạo sản phẩm'}
         />
         <div className="flex gap-x-2">
           <Button
@@ -418,7 +462,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
           <Button
             variant="secondary"
             width={148}
-            style={{ fontWeight: "bold" }}
+            style={{ fontWeight: 'bold' }}
           >
             LƯU (F12)
           </Button>
@@ -484,9 +528,12 @@ const ProductForms: React.FC<ProductFormProps> = ({
               />
             </div>
             <div className={styles.row}>
-              <div className="text-medium font-medium">Kênh bán</div>
+              <div className="text-medium font-medium mb-[30px]">Kênh bán</div>
               <div style={{ width: 285 }}>
-                <CheckboxList options={checkboxSettings} />
+                <CheckboxList
+                  options={checkboxSettings}
+                  onChange={() => handleChange(checkboxSettings.value)}
+                />
                 <div className="flex items-center gap-[5px] ml-[25px] mt-[15px]">
                   <Switch />
                   <span>Đồng giá trên tất cả kênh bán</span>
@@ -501,7 +548,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                 listType="picture-card"
                 fileList={fileList}
-                onChange={() => console.log("check")}
+                onChange={() => console.log('check')}
               />
             </div>
             <div className="mb-[16px]">
@@ -512,41 +559,51 @@ const ProductForms: React.FC<ProductFormProps> = ({
             </div>
           </div>
           <div className="w-full bg-white rounded p-3">
-            <div className={styles.row}>
+            <div className="flex justify-start mb-[24px]">
               <Switch />
-              <span className="ml-[4px]">Tính tiền theo cân nặng</span>
+              <span className="ml-[8px] text-medium font-medium">
+                Tính tiền theo cân nặng
+              </span>
             </div>
             <div className={styles.row}>
               <div>
-                <Checkbox className="ml-[4px]">Thông báo khi hết hàng</Checkbox>
+                <Checkbox className="text-medium font-medium">
+                  Thông báo khi hết hàng
+                </Checkbox>
               </div>
               <Input width={285} placeholder="Số lượng: Nhập" />
             </div>
             <div className={styles.row}>
-              <Checkbox>Bán âm (vẫn bán khi hết hàng)</Checkbox>
+              <Checkbox className="text-medium font-medium">
+                Bán âm (vẫn bán khi hết hàng)
+              </Checkbox>
             </div>
           </div>
         </div>
-        <div className="flex flex-col flex-1 gap-[4px]">
-          <div className="w-full flex gap-[16px] bg-white rounded p-3">
+        <div className="flex flex-col flex-1 gap-[4px] w-[795px]">
+          <div className="w-full flex gap-[16px] bg-white rounded p-3 mb-[12px]">
             <div className="w-1/2">
               <div className="mb-[16px]">
                 <div className="text-medium font-medium mb-[4px]">
                   Thời điểm tạo
                 </div>
                 <div className="text-medium font-medium">
-                  {detail?.createAt ? detail?.createAt : "20/09/2022"}
+                  {detail?.createAt ? detail?.createAt : '20/09/2022'}
                 </div>
               </div>
               <Input label="Nguồn hàng" placeholder="nhập" />
             </div>
             <div className="w-1/2">
-              <TextArea label="Ghi chú" placeholder="Nhập nội dung" />
+              <TextArea
+                label="Ghi chú"
+                placeholder="Nhập nội dung"
+                className="!h-[110px]"
+              />
             </div>
           </div>
           <div className="p-[12px] bg-white rounded h-[554px]">
             <div className={styles.row}>
-              <div className="text-[#384ADC] font-semibold">
+              <div className="text-[#384ADC] font-semibold text-medium">
                 Danh sách thuộc tính
               </div>
               <div className="w-1/2 flex justify-end items-center">
@@ -562,6 +619,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
             </div>
             <Table
               columns={columns}
+              rowSelection={rowSelection}
               dataSource={
                 typeAttributeList.length ? [...typeAttributeList] : []
               }
@@ -578,12 +636,12 @@ const ProductForms: React.FC<ProductFormProps> = ({
         </div>
       </div>
       {/* Filter */}
-      <div className="flex gap-x-2 mt-4 mb-3">
+      <div className="flex gap-x-2 mt-4 mb-3 w-[795px]">
         <Popover
           placement="bottomRight"
           content={content1}
           trigger="click"
-          overlayStyle={{ width: "354px" }}
+          overlayStyle={{ width: '354px' }}
           className="relative"
         >
           <Button width={195} height={45} className="p-0">
@@ -600,7 +658,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
           placement="bottomRight"
           content={content2}
           trigger="click"
-          overlayStyle={{ width: "354px" }}
+          overlayStyle={{ width: '354px' }}
           className="relative"
         >
           <Button width={195} height={45} className="p-0">
@@ -620,7 +678,13 @@ const ProductForms: React.FC<ProductFormProps> = ({
         ></Button>
       </div>
       <div className="w-full">
-        <Table columns={columns2} dataSource={data2} pagination={false} />
+        <Table
+          // rowKey={(record)⇒ record.sku}
+          rowSelection={rowSelection}
+          columns={columns2}
+          dataSource={data2}
+          pagination={false}
+        />
       </div>
       <div className="w-full flex justify-left mt-[20px] items-center">
         <div className="mr-[14px]">

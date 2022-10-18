@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import { Switch, Table } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import { format } from "date-fns";
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { Switch, Table } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
+import { format } from 'date-fns';
 
-import { warehouses, comboList } from "../../../const/constant";
-import TitlePage from "../../../components/TitlePage/Titlepage";
-import Select from "../../../components/Select/Select";
-import Button from "../../../components/Button/Button";
-import Icon from "../../../components/Icon/Icon";
-import Input from "../../../components/Input/Input";
-import DatePicker from "../../../components/DateRangePicker/DateRangePicker";
-import { ICombo } from "../promotion.type";
-import ModalRemove from "../../../components/ModalRemove/ModalRemove";
-import ModalAddCombo from "./ModalAddCombo";
+import { warehouses, comboList } from '../../../const/constant';
+import TitlePage from '../../../components/TitlePage/Titlepage';
+import Select from '../../../components/Select/Select';
+import Button from '../../../components/Button/Button';
+import Icon from '../../../components/Icon/Icon';
+import Input from '../../../components/Input/Input';
+import DatePicker from '../../../components/DateRangePicker/DateRangePicker';
+import { ICombo } from '../promotion.type';
+import ModalRemove from '../../../components/ModalRemove/ModalRemove';
+import ModalAddCombo from './ModalAddCombo';
 
 const ComboList = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -28,14 +28,14 @@ const ComboList = () => {
   const [rowSelected, setRowSelected] = useState<ICombo>();
 
   useEffect(() => {
-    const element = document.getElementById("loading__animation");
+    const element = document.getElementById('loading__animation');
     if (element) {
       element.remove();
     }
   }, []);
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -46,26 +46,26 @@ const ComboList = () => {
 
   const columns: ColumnsType<ICombo> = [
     {
-      title: "Áp dụng",
+      title: 'Áp dụng',
       width: 100,
-      key: "apply",
-      align: "center",
+      key: 'apply',
+      align: 'center',
       render: (_, record) => {
         return (
           <Switch
             className="button-switch"
             defaultChecked={record.apply}
-            onChange={() => console.log("check")}
+            onChange={() => console.log('check')}
           />
         );
       },
     },
     {
-      title: "Mã combo",
+      title: 'Mã combo',
       width: 150,
-      dataIndex: "id",
-      key: "ie",
-      align: "center",
+      dataIndex: 'id',
+      key: 'ie',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium text-[#384ADC] font-semibold">
           {record.id}
@@ -73,74 +73,74 @@ const ComboList = () => {
       ),
     },
     {
-      title: "Tên combo",
+      title: 'Tên combo',
       width: 200,
-      dataIndex: "name",
-      key: "name",
+      dataIndex: 'name',
+      key: 'name',
       render: (_, record) => (
         <span className="text-medium text-[#2E2D3d] font-medium">
-          {record.name || "--"}
+          {record.name || '--'}
         </span>
       ),
     },
     {
-      title: "Kênh bán",
+      title: 'Kênh bán',
       width: 100,
-      dataIndex: "channel",
-      key: "channel",
-      align: "center",
+      dataIndex: 'channel',
+      key: 'channel',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#1D1C2D]">
-          {record.channel || "--"}
+          {record.channel || '--'}
         </span>
       ),
     },
     {
-      title: "Giá combo",
+      title: 'Giá combo',
       width: 100,
-      dataIndex: "price",
-      key: "price",
-      align: "center",
+      dataIndex: 'price',
+      key: 'price',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium text-[#4B4B59]">
-          {record.price ? record.price.toLocaleString() : "--"} đ
+          {record.price ? record.price.toLocaleString() : '--'} đ
         </span>
       ),
     },
     {
-      title: "Số sản phẩm",
+      title: 'Số sản phẩm',
       width: 100,
-      dataIndex: "quantity",
-      key: "quantity",
-      align: "center",
+      dataIndex: 'quantity',
+      key: 'quantity',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#1D1C2D]">
-          {record.quantity || "--s"}
+          {record.quantity || '--s'}
         </span>
       ),
     },
     {
-      title: "Thời gian áp dụng",
+      title: 'Thời gian áp dụng',
       width: 150,
-      dataIndex: "createdAt",
-      key: "createdAt",
-      align: "center",
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#1D1C2D]">{`${format(
           record.createdAt,
-          "dd/MM/yy"
-        )} - ${format(record.updatedAt, "dd/MM/yy")}`}</span>
+          'dd/MM/yy'
+        )} - ${format(record.updatedAt, 'dd/MM/yy')}`}</span>
       ),
     },
     {
-      title: "Cập nhật cuối",
+      title: 'Cập nhật cuối',
       width: 150,
-      dataIndex: "updatedAt",
-      key: "updatedAt",
-      align: "center",
+      dataIndex: 'updatedAt',
+      key: 'updatedAt',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium text-[#1D1C2D]">
-          {format(record.updatedAt, "dd/MM/yyyy - HH:mm")}
+          {format(record.updatedAt, 'dd/MM/yyyy - HH:mm')}
         </span>
       ),
     },
@@ -179,7 +179,7 @@ const ComboList = () => {
             variant="no-outlined"
             width={62}
             color="white"
-            icon={<Icon icon="upload" size={16} />}
+            icon={<Icon icon="question" size={16} />}
           >
             Hỗ trợ
           </Button>
@@ -241,11 +241,11 @@ const ComboList = () => {
           setRowSelected(undefined);
           setIsShowModalAddEditCombo(false);
         }}
-        title={`${rowSelected ? "Chi tiết" : "Tạo mới"} combo`}
+        title={`${rowSelected ? 'Chi tiết' : 'Tạo mới'} combo`}
         onRemove={() => setIsShowModalRemoveCombo(true)}
       />
     </div>
   );
 };
 
-ReactDOM.render(<ComboList />, document.getElementById("root"));
+ReactDOM.render(<ComboList />, document.getElementById('root'));

@@ -1,38 +1,38 @@
-import Select from "../../../components/Select/Select";
-import Input from "../../../components/Input/Input";
-import TextArea from "../../../components/TextArea";
-import React, { useEffect, useState, ReactNode } from "react";
-import ReactDOM from "react-dom";
-import Button from "../../../components/Button/Button";
-import { StatusColorEnum, StatusEnum, StatusList } from "../../../types";
-import DatePicker from "../../../components/DatePicker/DatePicker";
-import Modal from "../../../components/Modal/Modal/Modal";
-import { Table } from "antd";
-import Icon from "../../../components/Icon/Icon";
-import { ColumnsType } from "antd/es/table";
-import { listDebtDetail } from "../../../const/constant";
-import Upload from "../../../components/Upload/Upload";
+import Select from '../../../components/Select/Select';
+import Input from '../../../components/Input/Input';
+import TextArea from '../../../components/TextArea';
+import React, { useEffect, useState, ReactNode } from 'react';
+import ReactDOM from 'react-dom';
+import Button from '../../../components/Button/Button';
+import { StatusColorEnum, StatusEnum, StatusList } from '../../../types';
+import DatePicker from '../../../components/DatePicker/DatePicker';
+import Modal from '../../../components/Modal/Modal/Modal';
+import { Table } from 'antd';
+import Icon from '../../../components/Icon/Icon';
+import { ColumnsType } from 'antd/es/table';
+import { listDebtDetail } from '../../../const/constant';
+import Upload from '../../../components/Upload/Upload';
 
 interface ModalSettingFaultProps {
-    isVisible: boolean;
-    title?: string;
-    iconClose?: ReactNode;
-    onClose?: (event?: any) => void;
-    onOpen?: (event?: any) => void;
-    content?: string | ReactNode;
-    titleBody?: string;
-    time?: string;
-    deal?: string;
-    method?: string;
-    status?: StatusEnum;
-    id?: string;
+  isVisible: boolean;
+  title?: string;
+  iconClose?: ReactNode;
+  onClose?: (event?: any) => void;
+  onOpen?: (event?: any) => void;
+  content?: string | ReactNode;
+  titleBody?: string;
+  time?: string;
+  deal?: string;
+  method?: string;
+  status?: StatusEnum;
+  id?: string;
 }
 
 const ModalSettingFault = (props: ModalSettingFaultProps) => {
   const {
     isVisible,
     title,
-    iconClose = "Đóng",
+    iconClose = 'Đóng',
     onClose,
     onOpen,
     content,
@@ -44,38 +44,40 @@ const ModalSettingFault = (props: ModalSettingFaultProps) => {
     id,
   } = props;
 
-  const store = [
+  const data = [
     {
-      label: "Tổng kho Linh Dương",
-      value: "Tổng kho Linh Dương"
+      id: '1',
+      name: 'Đi trễ',
     },
     {
-      label: "Tổng kho Linh Dương",
-      value: "Tổng kho Linh Dương"
-    }
-  ]
+      id: '2',
+      name: 'Quên ghi địa chỉ khách hàng',
+    },
+  ];
 
-  const group = [
-    {
-      label: "Sale cấp 1",
-      value: "Sale cấp 1"
-    },
-    {
-      label: "Sale cấp 1",
-      value: "Sale cấp 1"
-    }
-  ]
-
-  const staff = [
-    {
-      label: "Nguyễn Văn A",
-      value: "Nguyễn Văn A"
-    },
-    {
-      label: "Nguyễn Văn B",
-      value: "Nguyễn Văn B"
-    }
-  ]
+  const [itemList, setItemList] = useState([{ id: '1', name: 'Nhom 1' }]);
+  const [name, setName] = useState('');
+  const handleDelete = (id: string) => {
+    setItemList((prevItemList) =>
+      prevItemList.filter((product) => product.id !== id)
+    );
+  };
+  const onNameChange = (event) => {
+    setName(event.target.value);
+  };
+  const handleAdd = (e) => {
+    setItemList((current) => [
+      ...current,
+      { id: Math.floor(Math.random() * 10000000).toString(), name: name },
+    ]);
+  };
+  const handleClear = () => {
+    setName('');
+  };
+  const addInput = (e) => {
+    handleAdd(e);
+    handleClear();
+  };
 
   return (
     <Modal
@@ -85,47 +87,55 @@ const ModalSettingFault = (props: ModalSettingFaultProps) => {
       onClose={onClose}
       onOpen={onOpen}
       iconClose={iconClose}
-      width={648}
+      width={504}
       footer={false}
-      className="p-[16px] modal-setting-fault rounded-lg"
+      className="p-[16px] modal-setting-group rounded-lg"
     >
       <div>
-        <div className="w-full">
         <div className="w-full flex flex-col rounded-lg bg-white p-[12px] mb-[32px]">
-          <div className="flex justify-between items-center mb-[12px]">
-            <p className="text-medium font-medium">Chọn kho trực thuộc</p>
-            <Select 
-              width={385}
-              defaultValue={store[0]}
-              options={store}
-            />
-          </div>
-          <div className="flex justify-between items-center mb-[12px]">
-            <p className="text-medium font-medium">Chọn nhóm sale</p>
-            <Select 
-              width={385}
-              defaultValue={group[0]}
-              options={group}
-            />
-          </div>
-          <div className="flex justify-between items-center mb-[12px]">
-            <p className="text-medium font-medium">Chọn nhân viên</p>
-            <Select 
-              width={385}
-              defaultValue={["Nguyễn Văn A", "Nguyễn Thị B"]}
-              options={staff}
-            />
-          </div>
-        <div className="w-full flex justify-between">
-          <Button width={270} height={44} text="HUỶ BỎ" className="font-medium" variant="outlined" onClick={onClose}/>
-          <Button variant="secondary" text="LƯU" width={270} height={44}/>
+          {Array.isArray(itemList) &&
+            itemList.map((item) => (
+              <div className="flex justify-between items-center mb-[12px]">
+                <Input width={380} value={item.name} />
+                <div
+                  onClick={() => handleDelete(item.id)}
+                  className="cursor-pointer"
+                >
+                  <Icon icon="trash" size={24} />
+                </div>
+              </div>
+            ))}
+          <div className="w-full bg-slate-100"></div>
+          <Input
+            className="w-full"
+            placeholder="Thêm mới và nhấn Enter.."
+            value={name}
+            onChange={onNameChange}
+            prefix={
+              <div onClick={addInput}>
+                <Icon icon="add-1" size={24} />
+              </div>
+            }
+          />
         </div>
-      </div>
+        <div className="w-full flex justify-between">
+          <Button
+            width={210}
+            height={44}
+            text="HUỶ BỎ"
+            variant="outlined"
+            onClick={onClose}
+          />
+          <Button
+            variant="secondary"
+            text="LƯU (F12)"
+            width={210}
+            height={44}
+          />
         </div>
       </div>
     </Modal>
-  )
-  
-}
+  );
+};
 
 export default ModalSettingFault;

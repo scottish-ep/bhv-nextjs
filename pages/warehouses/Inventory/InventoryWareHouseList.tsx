@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import { Table } from "antd";
-import type { ColumnsType } from "antd/es/table";
-import get from "lodash/get";
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { Table } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
+import get from 'lodash/get';
 
 import {
   warehouses,
   productList,
   productTypeList,
-} from "../../../const/constant";
-import { StatusColorEnum, StatusList } from "../../../types";
-import TitlePage from "../../../components/TitlePage/Titlepage";
-import Select from "../../../components/Select/Select";
-import Button from "../../../components/Button/Button";
-import Icon from "../../../components/Icon/Icon";
-import Input from "../../../components/Input/Input";
-import DatePicker from "../../../components/DateRangePicker/DateRangePicker";
-import { IInventoryWareHouses, IWareHouses } from "../warehouse.type";
+} from '../../../const/constant';
+import { StatusColorEnum, StatusList } from '../../../types';
+import TitlePage from '../../../components/TitlePage/Titlepage';
+import Select from '../../../components/Select/Select';
+import Button from '../../../components/Button/Button';
+import Icon from '../../../components/Icon/Icon';
+import Input from '../../../components/Input/Input';
+import DatePicker from '../../../components/DateRangePicker/DateRangePicker';
+import { IInventoryWareHouses, IWareHouses } from '../warehouse.type';
 
 const InventoryWareHouseList = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
@@ -30,7 +30,7 @@ const InventoryWareHouseList = () => {
   });
 
   useEffect(() => {
-    const element = document.getElementById("loading__animation");
+    const element = document.getElementById('loading__animation');
     if (element) {
       element.remove();
     }
@@ -59,7 +59,7 @@ const InventoryWareHouseList = () => {
   // }, []);
 
   const onSelectChange = (newSelectedRowKeys: React.Key[]) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    console.log('selectedRowKeys changed: ', selectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
   };
 
@@ -70,12 +70,12 @@ const InventoryWareHouseList = () => {
 
   const columns: ColumnsType<IInventoryWareHouses> = [
     {
-      title: "Mã sản phẩm",
+      title: 'Mã sản phẩm',
       width: 150,
-      dataIndex: "id",
-      key: "id",
-      fixed: "left",
-      align: "center",
+      dataIndex: 'id',
+      key: 'id',
+      fixed: 'left',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium text-[#384ADC] font-semibold">
           {record.id}
@@ -83,11 +83,11 @@ const InventoryWareHouseList = () => {
       ),
     },
     {
-      title: "Mã SKU",
+      title: 'Mã SKU',
       width: 150,
-      dataIndex: "sku",
-      key: "sku",
-      align: "center",
+      dataIndex: 'sku',
+      key: 'sku',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium text-[#384ADC] font-semibold">
           {record.sku}
@@ -95,11 +95,11 @@ const InventoryWareHouseList = () => {
       ),
     },
     {
-      title: "Tên sản phẩm",
+      title: 'Tên sản phẩm',
       width: 250,
-      dataIndex: "name",
-      key: "name",
-      align: "center",
+      dataIndex: 'name',
+      key: 'name',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#2E2D3D]">
           {record.name}
@@ -107,11 +107,11 @@ const InventoryWareHouseList = () => {
       ),
     },
     {
-      title: "Danh mục",
+      title: 'Danh mục',
       width: 150,
-      dataIndex: "category_id",
-      key: "category_id",
-      align: "center",
+      dataIndex: 'category_id',
+      key: 'category_id',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#2E2D3D]">
           {record.category_id}
@@ -119,11 +119,11 @@ const InventoryWareHouseList = () => {
       ),
     },
     {
-      title: "Giá nhập",
+      title: 'Giá nhập',
       width: 150,
-      dataIndex: "import_price",
-      key: "import_price",
-      align: "center",
+      dataIndex: 'import_price',
+      key: 'import_price',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#2E2D3D]">
           {record.import_price}
@@ -131,11 +131,11 @@ const InventoryWareHouseList = () => {
       ),
     },
     {
-      title: "Giá bán",
+      title: 'Giá bán',
       width: 150,
-      dataIndex: "sale_price",
-      key: "sale_price",
-      align: "center",
+      dataIndex: 'sale_price',
+      key: 'sale_price',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#2E2D3D]">
           {record.sale_price}
@@ -143,11 +143,11 @@ const InventoryWareHouseList = () => {
       ),
     },
     {
-      title: "SL tồn kho",
+      title: 'SL tồn kho',
       width: 150,
-      dataIndex: "quantity",
-      key: "quantity",
-      align: "center",
+      dataIndex: 'quantity',
+      key: 'quantity',
+      align: 'center',
       render: (_, record) => (
         <span className="text-medium font-medium text-[#2E2D3D]">
           {record.quantity}
@@ -155,12 +155,12 @@ const InventoryWareHouseList = () => {
       ),
     },
     {
-      title: "Trạng thái",
+      title: 'Trạng thái',
       width: 185,
-      dataIndex: "status",
-      key: "status",
-      align: "center",
-      fixed: "right",
+      dataIndex: 'status',
+      key: 'status',
+      align: 'center',
+      fixed: 'right',
       render: (_, record) => (
         <span
           className={`text-medium font-semibold text-[${
@@ -218,7 +218,7 @@ const InventoryWareHouseList = () => {
             variant="no-outlined"
             width={62}
             color="white"
-            icon={<Icon icon="upload" size={16} />}
+            icon={<Icon icon="question" size={16} />}
           >
             Hỗ trợ
           </Button>
@@ -268,4 +268,4 @@ const InventoryWareHouseList = () => {
   );
 };
 
-ReactDOM.render(<InventoryWareHouseList />, document.getElementById("root"));
+ReactDOM.render(<InventoryWareHouseList />, document.getElementById('root'));
