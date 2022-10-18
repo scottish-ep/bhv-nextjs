@@ -232,6 +232,7 @@ const ListPayment = () => {
       <Tabs countTotal={999} tabs={TabStatus} />
       <Table
         rowKey={(record) => record.id}
+        scroll={{ y: 500 }} 
         onRow={() => {
           return {
             onClick: () => {

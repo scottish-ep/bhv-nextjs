@@ -301,7 +301,7 @@ const TargetManagement = () => {
         <Table
           columns={columns}
           dataSource={data}
-          scroll={{ x: 50, y: 450 }}
+          scroll={{ x: 50, y: 500 }}
           pagination={{
             defaultPageSize: pagination.pageSize,
             showSizeChanger: true,

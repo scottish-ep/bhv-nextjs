@@ -208,7 +208,7 @@ const ListDebt = () => {
           showSizeChanger: true,
           pageSizeOptions: [10, 20, 50, 100],
         }}
-        scroll={{ x: 50 }}
+        scroll={{ y: 500 }} 
       />
       <div className={classNames("flex items-center", styles.total_wrapper)}>
         <div className={styles.row}>
