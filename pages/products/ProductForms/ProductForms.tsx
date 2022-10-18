@@ -34,6 +34,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
   type_attr_list = [],
 }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  const [filtered, setFiltered] = useState(true)
   const [isOnApp, setIsOnApp] = useState(false);
   const [isShowPrices, setIsShowPrices] = useState(false);
   const [isSwitch, setIsSwitch] = useState(false);
@@ -81,12 +82,11 @@ const ProductForms: React.FC<ProductFormProps> = ({
     );
   };
 
-  const handleChange = (value: string) => {
-    const list = checkboxSettings.map((item) => {
-      if (item.value === 'App') {
-        setIsOnApp(true);
-      }
-    });
+
+  const handleChange = (e) => {
+    if (e.target.checked) {
+
+    }
   };
 
   const rowSelection = {
@@ -124,18 +124,18 @@ const ProductForms: React.FC<ProductFormProps> = ({
   const content = (
     <div className="flex flex-col w-full">
       <div className="text-medium font-medium mb-[4px]">Mã</div>
-      <Input className="rounded-lg" placeholder="nhập" />
+      <Input className="rounded-lg mb-[8px]" placeholder="nhập" />
       <div className="text-medium font-medium mb-[4px]">Thuộc tính</div>
-      <Input className="rounded-lg" placeholder="nhập" />
+      <Input className="rounded-lg mb-[8px]" placeholder="nhập" />
       <div className="flex justify-between w-full">
         <Button
           variant="outlined"
-          className="mt-[32px]"
+          className="mt-[16px]"
           text="Huỷ bỏ"
           width={134}
           height={45}
         />
-        <div className="mt-[32px] bg-[#384ADC] text-[#fff] w-[134px] h-[45px] rounded-lg flex justify-center items-center cursor-pointer">
+        <div className="mt-[16px] bg-[#384ADC] text-[#fff] w-[134px] h-[45px] rounded-lg flex justify-center items-center cursor-pointer">
           Thêm mới
         </div>
       </div>
@@ -474,7 +474,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
       },
     },
   ];
-
+  const filterColumn = columns2.filter(col => col.title !== "Giá bán quầy"  && col.title !== "Giá bán online" && col.title !== "Giá bán trên app")
   const checkboxSettings = [
     {
       label: 'Tại quầy',
@@ -506,7 +506,9 @@ const ProductForms: React.FC<ProductFormProps> = ({
   //     value: 'App',
   //   },
   // ];
-
+  const handleChangeRow = () => {
+    setFiltered(filtered =>  !filtered)
+  }
   return (
     <div className="w-full product-form">
       {/* Header */}
@@ -587,6 +589,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
                 style={{ width: 285 }}
                 mode="multiple"
                 showArrow
+                defaultValue={tags[0]}
                 tagRender={tagRender}
                 options={tags}
                 maxTagCount="responsive"
@@ -601,11 +604,8 @@ const ProductForms: React.FC<ProductFormProps> = ({
                 />
                 <div className="flex items-center gap-[5px] ml-[25px] mt-[15px]">
                   <Switch
-                    checked={isSync}
-                    onChange={() => {
-                      setIsSync((isSync) => !isSync);
-                      isSync && setIsShowPrices(isSync);
-                    }}
+                    checked={filtered}
+                    onChange={handleChangeRow}
                   />
                   <span>Đồng giá trên tất cả kênh bán</span>
                 </div>
@@ -758,7 +758,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
         <Table
           // rowKey={(record)⇒ record.sku}
           rowSelection={rowSelection}
-          columns={columns2}
+          columns={filtered ? filterColumn : columns2}
           dataSource={data2}
           pagination={false}
         />
