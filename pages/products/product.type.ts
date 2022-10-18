@@ -49,6 +49,8 @@ export interface ProductAttributeProps {
 }
 
 export interface ProductDetailProps {
+  id: string;
+  typeAttribute: any;
   show?: boolean | number;
   sku?: string;
   inputNum?: number;

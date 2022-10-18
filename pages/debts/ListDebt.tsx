@@ -27,7 +27,7 @@ const ListDebt = () => {
   ];
   const [pagination, setPagination] = useState({
     total: 0,
-    pageSize: 6,
+    pageSize: 10,
   });
   const [isShowModalDebtDetail, setIsShowModalDebtDetail] = useState(false);
   const [isShowModalAddDebt, setIsShowModalAddDebt] = useState(false);
@@ -51,7 +51,7 @@ const ListDebt = () => {
       align: "center",
       render: (_, record) => (
         <span
-          className="text-medium text-[#2E2D3D] font-medium"
+          className="text-medium text-[#2E2D3D] font-normal"
           onClick={() => setIsShowModalDebtDetail(true)}
         >
           {record.id}
@@ -72,7 +72,7 @@ const ListDebt = () => {
           <span className="text-medium font-medium text-[#384ADC]">
             {record.name}
           </span>
-          <span className="text-medium font-medium text-[#1D1C2D]">
+          <span className="text-medium font-normal text-[#1D1C2D]">
             {record.code}
           </span>
         </div>
@@ -116,7 +116,7 @@ const ListDebt = () => {
       align: "left",
       render: (_, record) => (
         <span
-          className="cursor-pointer text-medium font-medium text-[#1D1C2D]"
+          className="cursor-pointer text-medium font-normal text-[#1D1C2D]"
           onClick={() => setIsShowModalDebtDetail(true)}
         >
           {record.note}
@@ -131,7 +131,7 @@ const ListDebt = () => {
       align: "center",
       render: (_, record) => (
         <span
-          className={`cursor-pointer font-semibold text-[${
+          className={`cursor-pointer font-medium text-[${
             StatusColorEnum[record.status]
           }]`}
           onClick={() => setIsShowModalDebtDetail(true)}
@@ -149,7 +149,7 @@ const ListDebt = () => {
       fixed: "right",
       render: (_, record) => (
         <span
-          className={`cursor-pointer text-medium font-semibold text-[]`}
+          className={`cursor-pointer text-medium font-normal text-[]`}
           onClick={() => setIsShowModalDebtDetail(true)}
         >
           {record.update_time}
@@ -158,7 +158,7 @@ const ListDebt = () => {
     },
   ];
   return (
-    <div className="w-full">
+    <div className="w-full list-debt">
       <div className="flex items-center justify-between mb-[12px] flex-wrap">
         <TitlePage title="Quản lý công nợ" />
         <div className="flex gap-[8px] flex-wrap">
@@ -194,7 +194,7 @@ const ListDebt = () => {
           prefix={<Icon icon="search" color="#FF970D" size={24} />}
           placeholder="Tìm ID / Tên, mã KH / Số điện thoại"
         />
-        <DatePicker width={306} />
+        <DatePicker width={306} placeholder="Ngày/tháng/năm"/>
       </div>
       <Tabs countTotal={999} tabs={TabStatus} />
       <Table
@@ -206,7 +206,7 @@ const ListDebt = () => {
         pagination={{
           defaultPageSize: pagination.pageSize,
           showSizeChanger: true,
-          pageSizeOptions: [6, 20, 50, 100],
+          pageSizeOptions: [10, 20, 50, 100],
         }}
         scroll={{ x: 50 }}
       />

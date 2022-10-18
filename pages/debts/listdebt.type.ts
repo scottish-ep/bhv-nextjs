@@ -13,6 +13,7 @@ export interface ListDebtProps {
 }
 
 export interface ListPaymentProps {
+    id: string;
     code: string;
     deal_name: string;
     employee: string;

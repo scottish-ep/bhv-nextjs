@@ -25,14 +25,19 @@ import { Table } from 'antd';
 interface ProductFormProps {
   detail?: any;
   type_attr_list?: ProductAttributeProps[];
+  typeAttribute: any;
 }
 
 const ProductForms: React.FC<ProductFormProps> = ({
   detail,
+  typeAttribute,
   type_attr_list = [],
 }) => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [isOnApp, setIsOnApp] = useState(false);
+  const [isShowPrices, setIsShowPrices] = useState(false);
+  const [isSwitch, setIsSwitch] = useState(false);
+  const [isSync, setIsSync] = useState(false);
   const data = [
     {
       id: '1',
@@ -222,6 +227,16 @@ const ProductForms: React.FC<ProductFormProps> = ({
       type: 'Trắng - S',
       weight: 1,
       negative: true,
+      typeAttribute: [
+        {
+          label: 'TRANG',
+          value: 'TRANG',
+        },
+        {
+          label: 'TRANG',
+          value: 'TRANG',
+        },
+      ],
     },
   ];
   const columns: ColumnsType<ProductAttributeProps> = [
@@ -281,7 +296,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
   const columns2: ColumnsType<ProductDetailProps> = [
     {
       title: 'Hiện',
-      width: 82,
+      width: 40,
       key: 'id',
       dataIndex: 'show',
       fixed: 'left',
@@ -289,19 +304,22 @@ const ProductForms: React.FC<ProductFormProps> = ({
       render: (_, record) => {
         return (
           <Switch
-            checked={true}
+            checked={isSwitch}
             className="button-switch"
             defaultChecked={
               record.show ? (record.show === 1 ? true : false) : false
             }
-            onChange={() => console.log('check')}
+            onChange={() => {
+              setIsSwitch((isSwitch) => !isSwitch);
+              !isSwitch && handleDeleteProduct(record.id);
+            }}
           />
         );
       },
     },
     {
       title: 'Mã SKU',
-      width: 145,
+      width: 80,
       dataIndex: 'sku',
       align: 'center',
       render: (_, record) => {
@@ -314,57 +332,97 @@ const ProductForms: React.FC<ProductFormProps> = ({
     },
     {
       title: 'Giá nhập',
-      width: 145,
+      width: 80,
       dataIndex: 'sku',
       align: 'center',
       render: (_, record) => {
         return (
-          <div
-            className="flex justify-between items-center px-[12px] py-[7px] rounded-lg"
-            style={{ border: '1px solid #DADADD' }}
-          >
-            <div className="text-medium font-medium text-[#4B4B59]">
-              {record.inputNum}
-            </div>
-            <span>đ</span>
-          </div>
+          <Input
+            width={122}
+            height={36}
+            className="text-medium font-medium text-[#4B4B59]"
+            defaultValue={record.inputNum}
+            suffix="đ"
+          />
         );
       },
     },
     {
       title: 'Giá bán',
-      width: 145,
+      width: 80,
       dataIndex: 'sku',
       align: 'center',
       render: (_, record) => {
         return (
-          <div
-            className="flex justify-between items-center px-[12px] py-[7px] rounded-lg"
-            style={{ border: '1px solid #DADADD' }}
-          >
-            <div className="text-medium font-medium text-[#4B4B59]">
-              {record.saleNum}
-            </div>
-            <span>đ</span>
-          </div>
+          <Input
+            width={122}
+            height={36}
+            className="text-medium font-medium text-[#4B4B59]"
+            defaultValue={record.saleNum}
+            suffix="đ"
+          />
+        );
+      },
+    },
+    {
+      title: 'Giá bán quầy',
+      width: 80,
+      dataIndex: 'sku',
+      align: 'center',
+      render: (_, record) => {
+        return (
+          <Input
+            width={122}
+            height={36}
+            className="text-medium font-medium text-[#4B4B59]"
+            defaultValue={record.saleNum}
+            suffix="đ"
+          />
+        );
+      },
+    },
+    {
+      title: 'Giá bán online',
+      width: 80,
+      dataIndex: 'sku',
+      align: 'center',
+      render: (_, record) => {
+        return (
+          <Input
+            width={122}
+            height={36}
+            className="text-medium font-medium text-[#4B4B59]"
+            defaultValue={record.saleNum}
+            suffix="đ"
+          />
+        );
+      },
+    },
+    {
+      title: 'Giá bán trên app',
+      width: 80,
+      dataIndex: 'sku',
+      align: 'center',
+      render: (_, record) => {
+        return (
+          <Input
+            width={122}
+            height={36}
+            className="text-medium font-medium text-[#4B4B59]"
+            defaultValue={record.saleNum}
+            suffix="đ"
+          />
         );
       },
     },
     {
       title: 'Mẫu mã',
-      width: 500,
+      width: 297,
       dataIndex: 'sku',
       align: 'center',
       render: (_, record) => {
         return (
-          <div
-            className="flex justify-center items-center px-[12px] py-[7px] rounded-lg"
-            style={{ border: '1px solid #DADADD' }}
-          >
-            <div className="text-medium font-medium text-[#4B4B59]">
-              {record.type}
-            </div>
-          </div>
+          <Select width={297} defaultValue={record.typeAttribute[0]} options={record.typeAttribute}/>
         );
       },
     },
@@ -375,15 +433,11 @@ const ProductForms: React.FC<ProductFormProps> = ({
       align: 'center',
       render: (_, record) => {
         return (
-          <div
-            className="flex items-center justify-between px-[12px] py-[7px] rounded-lg"
-            style={{ border: '1px solid #DADADD' }}
-          >
-            <div className="text-medium font-medium text-[#4B4B59]">
-              {record.weight}
-            </div>
-            <span>kg</span>
-          </div>
+          <Input
+          className="text-medium font-medium text-[#4B4B59]"
+          defaultValue={record.saleNum}
+          suffix="kg"
+        />
         );
       },
     },
@@ -443,7 +497,7 @@ const ProductForms: React.FC<ProductFormProps> = ({
   // ];
 
   return (
-    <div className="w-full">
+    <div className="w-full product-form">
       {/* Header */}
       <div className="flex justify-between mb-5">
         <TitlePage
@@ -532,10 +586,13 @@ const ProductForms: React.FC<ProductFormProps> = ({
               <div style={{ width: 285 }}>
                 <CheckboxList
                   options={checkboxSettings}
-                  onChange={() => handleChange(checkboxSettings.value)}
+                  // onChange={() => handleChange(checkboxSettings.value)}
                 />
                 <div className="flex items-center gap-[5px] ml-[25px] mt-[15px]">
-                  <Switch />
+                  <Switch 
+                    checked={isSync}
+                    onChange={() => {setIsSync((isSync) => !isSync); isSync && setIsShowPrices(isSync)}}
+                  />
                   <span>Đồng giá trên tất cả kênh bán</span>
                 </div>
               </div>

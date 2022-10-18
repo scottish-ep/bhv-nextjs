@@ -7,7 +7,7 @@ import type { RcFile, UploadProps as UploadAntdProps } from "antd/es/upload";
 import { Upload as UploadAntd } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
-interface UploadProps extends UploadAntdProps {
+export interface UploadProps extends UploadAntdProps {
   className?: string;
   children?: ReactNode;
   images?: any[];
